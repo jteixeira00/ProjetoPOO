@@ -29,7 +29,7 @@ public class Projeto extends CISUC implements Serializable{
     Projeto(String nome, String acronimo, GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
-        this.data_inicio = data_final;
+        
         this.duracao = duracao;
         
     }
@@ -43,9 +43,10 @@ public class Projeto extends CISUC implements Serializable{
     }
     
     
-    void CriarInformatica(){
+    public Tarefa CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
+        Tarefa taref;
         
-        
+        return taref;
     }
     
     public int EliminarTarefa(Tarefa temp){
@@ -106,11 +107,19 @@ public class Projeto extends CISUC implements Serializable{
         return nConcluida;
     }
     
-    void CustoP(){
-        
+    public int CustoP(){
+        int custoMensal =0;
+        int custoFinal = 0;
+        for (Pessoa temp: pessoa){
+            custoMensal += temp.getCusto();
+        }
+        custoFinal = custoMensal * this.duracao;
+        return custoFinal;
     }
     
-    void TerminarP(){
+    void TerminarP(GregorianCalendar dataHoje){
+        this.data_final = dataHoje;
+        this.completo = true;     
         
     }
 
