@@ -5,12 +5,19 @@
  */
 package com.mycompany.projetopoo;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author dinis
  */
 public class Design extends Tarefa{
     double esforco = 0.5;
+
+    
+    Design(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+        
+    }
     
     public double getEsforco() {
         return esforco;

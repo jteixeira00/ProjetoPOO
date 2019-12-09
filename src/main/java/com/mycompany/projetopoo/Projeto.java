@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
 /**
  *
  * @author dinis
@@ -45,11 +46,45 @@ public class Projeto extends CISUC implements Serializable{
     
     
 
-    public Tarefa CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
-        Tarefa taref;
-
+    public int CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
+       double carga =0;
+        if(tipo == 1){
+            //Desenvolvimento
+            
+            carga = 1;
+            
+        }
+        if(tipo == 2){
+            
+            carga = 0.25;
+        }
+        else{
+            
+            carga = 0.5;
+        }
         
-        return taref;
+        
+        
+        if((responsavel.getCarga() + carga) > 1 ){
+            return 0; //sobracarregado
+        }
+        if(tipo == 1){
+            //Desenvolvimento
+            Desenvolvimento taref;
+            
+            
+        }
+        if(tipo == 2){
+            Documentacao taref;
+            
+        }
+        else{
+            Design taref = new Design(dataI,duracaoEstimada,responsavel);
+            
+        }
+        
+        
+        return 1;
     }
     
 
@@ -114,7 +149,7 @@ public class Projeto extends CISUC implements Serializable{
 
     public int CustoP(){
         int custoMensal =0;
-        int custoFinal = 0;
+        int custoFinal;
         for (Pessoa temp: pessoa){
             custoMensal += temp.getCusto();
         }

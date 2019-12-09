@@ -35,10 +35,39 @@ public class Pessoa implements Serializable{
     public String getEmail() {
         return email;
     }
+    
+    public ArrayList<Tarefa> listarTarefas(){
+        return tarefa;
+    }
+    void adicionarTarefa(Tarefa temp){
+        tarefa.add(temp);
+    }
+    
+    public int removerTarefa(Tarefa temp){
+        
+        if (tarefa.indexOf(temp) == -1){
+            return 0;                       
+        }
+
+        else{
+            tarefa.remove(temp);
+            return 1;
+        }
+    }
+    
+    public double getCarga(){
+        double carga = 0;
+        for(Tarefa temp: tarefa){
+            carga+= temp.getEsforco();
+        }
+        return carga;
+    }
 
     public int getCusto() {
         return custo;
     }
+
+   
     
     
     

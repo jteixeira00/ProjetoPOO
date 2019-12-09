@@ -16,9 +16,9 @@ public class Tarefa implements Serializable{
 
     private GregorianCalendar inicioD;
     private GregorianCalendar finalD;
-    private GregorianCalendar dataEstimada;
+    private int duracaoEstimada;
     private double taxa;
-    private int duracao;
+    
     private Pessoa responsavel;
     private double esforco;
 
@@ -26,7 +26,7 @@ public class Tarefa implements Serializable{
     
     
     
-    void Tarefa(GregorianCalendar inicioD,GregorianCalendar finalD,int duracao,Pessoa responsavel){
+    void Tarefa(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
     
     }
     
@@ -46,13 +46,19 @@ public class Tarefa implements Serializable{
         return finalD;
     }
     
-    public GregorianCalendar getDataEstimada(){
-        return dataEstimada;
+    public int getDuracaoEstimada(){
+        return duracaoEstimada;
     }
 
-    public int getDuracao() {
-        return duracao;
+    public GregorianCalendar getDataEstimada(){
+        GregorianCalendar data;
+        data = (GregorianCalendar)inicioD.clone();
+        
+        
+        data.add((GregorianCalendar.MONTH), duracaoEstimada);
+        return data;
     }
+    
 
     public Pessoa getResponsavel() {
         return responsavel;
