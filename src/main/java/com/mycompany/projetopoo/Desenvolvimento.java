@@ -5,12 +5,18 @@
  */
 package com.mycompany.projetopoo;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author dinis
  */
 public class Desenvolvimento extends Tarefa{
     double esforco = 1;
+
+    public Desenvolvimento(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
+        super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
+    }
     
     public double getEsforco() {
         return esforco;

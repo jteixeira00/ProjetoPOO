@@ -34,7 +34,11 @@ public class Projeto extends CISUC implements Serializable{
         this.duracao = duracao;
         
     }
+   
     
+    public void addTarefa(Tarefa t){
+        tarefa.add(t);
+    }
     
 
     public ArrayList<Tarefa> ListarTarefas(){
@@ -47,7 +51,7 @@ public class Projeto extends CISUC implements Serializable{
     
 
 
-    public int CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
+    public int CriarTarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel,int tipo){
        double carga =0;
         if(tipo == 1){
             //Desenvolvimento

@@ -147,6 +147,92 @@ public void leFicheiroPessoas(){
     }
 }
 
+public void leFicheiroTarefas(){
+    File f = new File("Tarefas.txt");
+    String DataI[];
+    String DataF[];
+
+
+    if(f.exists() && f.isFile()) { 
+        try { 
+            FileReader fr = new FileReader(f); 
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            Pessoa responsavel = null;
+         
+            while((line = br.readLine()) != null) {
+                switch (line.split("/")[0]) {
+                    case "DOCU":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[5]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        for(Pessoa ps:bolseiro){
+                            if((ps.getNome().equals(line.split("/")[6])) == true){
+                                responsavel = ps;
+                            }
+                        }
+                        Tarefa t = new Documentacao(line.split("/")[2],datai,Integer.parseInt(line.split("/")[4]),dataf,responsavel);
+                        for(Projeto p:projeto){
+                            if(p.getNome().equals(t.getNome())==true){
+                                p.addTarefa(t);                            
+                            }                            
+                        }
+                        
+                            break;
+                        }
+                    case "DESI":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[5]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        for(Pessoa ps:bolseiro){
+                            if((ps.getNome().equals(line.split("/")[6])) == true){
+                                responsavel = ps;
+                            }
+                        }
+                        Tarefa t = new Documentacao(line.split("/")[2],datai,Integer.parseInt(line.split("/")[4]),dataf,responsavel);
+                        for(Projeto p:projeto){
+                            if(p.getNome().equals(t.getNome())==true){
+                                p.addTarefa(t);                            
+                            }                            
+                        }
+                        
+                            break;
+                        }                      
+                    case "DOU":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[5]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        for(Pessoa ps:bolseiro){
+                            if((ps.getNome().equals(line.split("/")[6])) == true){
+                                responsavel = ps;
+                            }
+                        }
+                        Tarefa t = new Documentacao(line.split("/")[2],datai,Integer.parseInt(line.split("/")[4]),dataf,responsavel);
+                        for(Projeto p:projeto){
+                            if(p.getNome().equals(t.getNome())==true){
+                                p.addTarefa(t);                            
+                            }                            
+                        }
+                        
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }                  
+            br.close();
+        }catch (FileNotFoundException ex) { 
+            System.out.println("Erro a abrir ficheiro de texto: pessoas"); 
+        } catch (IOException ex) { 
+            System.out.println("Erro a ler ficheiro de texto: pessoas."); 
+        } 
+    } else { 
+        System.out.println("Ficheiro não existe: pessoas."); 
+    }
+}
 
     
     /*public void leFicheiroProjetos(){
@@ -301,7 +387,7 @@ public void leFicheiroPessoas(){
         CISUC cisuc = new CISUC();
         cisuc.leFicheiroProjetos();
         cisuc.leFicheiroPessoas();
-        cisuc.leFicheiroObjPessoa();
+
         
               
         

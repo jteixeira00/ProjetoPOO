@@ -15,8 +15,8 @@ public class Design extends Tarefa{
     double esforco = 0.5;
 
     
-    Design(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
-        
+    public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
+        super(nome,inicioD,duracaoEstimada,finalD,responsavel);        
     }
     
     public double getEsforco() {
