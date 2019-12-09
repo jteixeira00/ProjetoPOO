@@ -10,6 +10,11 @@ package com.mycompany.projetopoo;
  * @author dinis
  */
 public class Docente extends Pessoa{
-    int numM;
-    String area;    
+    private int numM;
+    private String area;
+    public Docente(String nome,String email,int numM,String area){
+        super(nome,email);
+        this.numM = numM;
+        this.area = area;
+    }
 }

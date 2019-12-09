@@ -14,19 +14,19 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Projeto extends CISUC implements Serializable{
-    String nome;
-    String acronimo;
-    GregorianCalendar data_inicio;
-    GregorianCalendar data_final;
-    int duracao;
-    ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
-    ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
-    Pessoa investigadorP;
-    boolean completo;
-    boolean fPrazo;
-    int custo;
+    private String nome;
+    private String acronimo;
+    private GregorianCalendar data_inicio;
+    private GregorianCalendar data_final;
+    private int duracao;
+    protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
+    protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
+    private Pessoa investigadorP;
+    private boolean completo;
+    private boolean fPrazo;
+    private int custo;
     
-    Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
+    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.data_inicio = data_final;
@@ -35,35 +35,35 @@ public class Projeto extends CISUC implements Serializable{
     }
     
     
-    void ListarTarefas(){
+    public void ListarTarefas(){
                 
     }
     
-    void CriarInformatica(){
+    public void CriarInformatica(){
         
     }
     
-    void EliminarTarefa(){
+    public void EliminarTarefa(){
         
     }
     
-    void ListarNaoIniciadas(){
+    public void ListarNaoIniciadas(){
        
     }
     
-    void ListarFPrazo(){
+    public void ListarFPrazo(){
         
     }
     
-    void ListarConcluidas(){
+    public void ListarConcluidas(){
         
     }
     
-    void CustoP(){
+    public void CustoP(){
         
     }
     
-    void TerminarP(){
+    public void TerminarP(){
         
     }
 

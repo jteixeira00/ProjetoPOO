@@ -12,12 +12,13 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-abstract class Bolseiro implements Serializable {
-    GregorianCalendar InicioB;
-    GregorianCalendar FimB;
-    int custo;
+abstract class Bolseiro extends Pessoa implements Serializable {
+    private GregorianCalendar InicioB;
+    private GregorianCalendar FimB;
+    private int custo;
     
-    Bolseiro(GregorianCalendar InicioB,GregorianCalendar FimB){
+    public Bolseiro(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
+        super(nome,email);
         this.InicioB = InicioB; 
         this.FimB = FimB;
     }
