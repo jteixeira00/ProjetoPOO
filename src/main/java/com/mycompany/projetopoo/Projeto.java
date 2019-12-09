@@ -45,12 +45,11 @@ public class Projeto extends CISUC implements Serializable{
     
     
 
-    public Tarefa CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
+   /* public Tarefa CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
         Tarefa taref;
-
-        
+    
         return taref;
-    }
+    }*/
     
 
     public int EliminarTarefa(Tarefa temp){
@@ -172,14 +171,6 @@ public class Projeto extends CISUC implements Serializable{
     public int getCusto() {
         return custo;
     }
-    
-        
-    
-    
-    
-    
-    
-    
     
     
     
