@@ -5,13 +5,14 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author dinis
  */
-public class Pessoa{
+public class Pessoa implements Serializable{
     String nome;
     String email;
     int custo;

@@ -5,6 +5,7 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-public class Projeto extends CISUC{
+public class Projeto extends CISUC implements Serializable{
     String nome;
     String acronimo;
     GregorianCalendar data_inicio;

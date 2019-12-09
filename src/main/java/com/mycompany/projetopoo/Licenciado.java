@@ -5,6 +5,7 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-public class Licenciado extends Bolseiro{
+public class Licenciado extends Bolseiro implements Serializable{
     int custo = 800;
     ArrayList<Docente> tarefa = new ArrayList<Docente>();
     

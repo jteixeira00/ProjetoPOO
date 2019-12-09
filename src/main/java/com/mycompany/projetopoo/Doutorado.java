@@ -5,6 +5,7 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
@@ -13,7 +14,7 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-public class Doutorado extends Bolseiro{
+public class Doutorado extends Bolseiro implements Serializable{
     
     int custo = 1000;
     

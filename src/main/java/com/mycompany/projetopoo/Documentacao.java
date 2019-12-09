@@ -5,11 +5,13 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author dinis
  */
-public class Documentacao extends Tarefa{
+public class Documentacao extends Tarefa implements Serializable{
     double esforco = 0.25;
     
     public double getEsforco() {

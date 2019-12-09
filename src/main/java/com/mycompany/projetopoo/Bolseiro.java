@@ -5,13 +5,14 @@
  */
 package com.mycompany.projetopoo;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
  *
  * @author dinis
  */
-public class Bolseiro {
+abstract class Bolseiro implements Serializable {
     GregorianCalendar InicioB;
     GregorianCalendar FimB;
     int custo;
