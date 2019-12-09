@@ -26,11 +26,15 @@ public class Tarefa implements Serializable{
     
     
     
-    void Tarefa(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+    Tarefa(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+        this.inicioD = inicioD;
+        this.duracaoEstimada = duracaoEstimada;
+        this.responsavel = responsavel;
     
     }
     
     public void atualizarTaxa(int i){
+        taxa = i;
         
     }
     
@@ -66,10 +70,5 @@ public class Tarefa implements Serializable{
 
     public double getEsforco() {
         return esforco;
-    }
-    
-    
-    
-    
-    
+    } 
 }

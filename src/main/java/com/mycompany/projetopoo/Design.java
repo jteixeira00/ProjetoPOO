@@ -16,9 +16,9 @@ public class Design extends Tarefa{
 
     
     Design(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
-        
+        super(inicioD, duracaoEstimada,responsavel);
     }
-    
+    @Override
     public double getEsforco() {
         return esforco;
     } 

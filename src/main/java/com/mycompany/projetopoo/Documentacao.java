@@ -6,6 +6,7 @@
 package com.mycompany.projetopoo;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -13,6 +14,10 @@ import java.io.Serializable;
  */
 public class Documentacao extends Tarefa implements Serializable{
     double esforco = 0.25;
+    Documentacao(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+        super(inicioD, duracaoEstimada,responsavel);
+    }
+    @Override
     
     public double getEsforco() {
         return esforco;
