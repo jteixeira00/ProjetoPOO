@@ -14,11 +14,10 @@ import java.util.GregorianCalendar;
 public class Design extends Tarefa{
     double esforco = 0.5;
 
-    
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);        
     }
-    
+    @Override
     public double getEsforco() {
         return esforco;
     } 

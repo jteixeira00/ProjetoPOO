@@ -18,6 +18,7 @@ public class Desenvolvimento extends Tarefa{
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
     }
     
+    @Override
     public double getEsforco() {
         return esforco;
     } 

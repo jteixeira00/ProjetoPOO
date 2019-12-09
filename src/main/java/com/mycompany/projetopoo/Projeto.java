@@ -76,8 +76,6 @@ public class Projeto extends CISUC implements Serializable{
         if(tipo == 1){
             //Desenvolvimento
             Desenvolvimento taref;
-            
-            
         }
         if(tipo == 2){
             Documentacao taref;
