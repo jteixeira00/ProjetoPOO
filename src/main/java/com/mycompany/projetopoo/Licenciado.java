@@ -14,11 +14,11 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Licenciado extends Bolseiro implements Serializable{
-    int custo = 800;
-    ArrayList<Docente> tarefa = new ArrayList<Docente>();
+    private int custo = 800;
+    protected ArrayList<Docente> tarefa = new ArrayList<Docente>();
     
-    Licenciado(GregorianCalendar InicioB,GregorianCalendar FimB){
-        super(InicioB,FimB);
+    public Licenciado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
+        super(nome,email,InicioB,FimB);
     }
             
     @Override

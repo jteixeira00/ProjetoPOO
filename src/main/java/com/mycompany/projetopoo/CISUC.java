@@ -9,11 +9,13 @@ import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -46,15 +48,15 @@ public class CISUC implements Serializable{
     }
     public void foraPrazo(){
         for(Projeto temp:projeto){
-            if(temp.fPrazo == true)
-                System.out.println(temp.nome);
+            if(temp.isfPrazo() == true)
+                System.out.println(temp.getNome());
         }    
     }
     
     public void listaConcluidos(){
         for(Projeto temp:projeto){
-            if(temp.completo == true)
-                System.out.println(temp.nome);
+            if(temp.isCompleto() == true)
+                System.out.println(temp.getNome());
         }        
         
     }
@@ -104,38 +106,126 @@ public class CISUC implements Serializable{
         try { 
             FileReader fr = new FileReader(f); 
             BufferedReader br = new BufferedReader(fr);
-            String line; 
+            String line;
+            try{
+            FileOutputStream fos = new FileOutputStream(proj); 
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             while((line = br.readLine()) != null) {
                 DataI = (line.split("/")[1]).split("-");
                 DataF = (line.split("/")[3]).split("-");
                 GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                 GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                //Projeto p = new Projeto(line.split("/")[0],datai,Integer.parseInt(line.split("/")[2]),dataf);
-                Projeto p = new Projeto("A",datai,5,dataf);
-                try { 
-                    FileOutputStream fos = new FileOutputStream(proj); 
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(p);
-                    oos.close();
-                    
-                } catch (FileNotFoundException ex) { 
-                    System.out.println("Erro a criar ficheiro."); 
-                } catch (IOException ex) { 
-                    System.out.println("Erro a escrever para o ficheiro objeto."); 
-                }
-                
-
+                Projeto p = new Projeto(line.split("/")[0],datai,Integer.parseInt(line.split("/")[2]),dataf);
+                oos.writeObject(p);
             }
-            br.close(); 
-        } catch (FileNotFoundException ex) { 
-            System.out.println("Erro a abrir ficheiro de texto."); 
+            oos.close();                   
+            } catch (FileNotFoundException ex) { 
+                System.out.println("Erro a criar ficheiro de objetos: projetos."); 
+            } catch (IOException ex) { 
+                System.out.println("Erro a escrever para o ficheiro objeto: projetos.");
+            }
+            br.close();
+        }catch (FileNotFoundException ex) { 
+            System.out.println("Erro a abrir ficheiro de texto: projetos:"); 
         } catch (IOException ex) { 
-            System.out.println("Erro a ler ficheiro de texto."); 
+            System.out.println("Erro a ler ficheiro de texto: projetos."); 
         } 
     } else { 
-        System.out.println("Ficheiro não existe."); 
+        System.out.println("Ficheiro não existe: projetos."); 
     }
    }
+    
+public void leFicheiroPessoas(){
+    File f = new File("Pessoas.txt");
+    File proj = new File("Pessoas.obj");
+    String DataI[];
+    String DataF[];  
+
+    if(f.exists() && f.isFile()) { 
+        try { 
+            FileReader fr = new FileReader(f); 
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            try{
+            FileOutputStream fos = new FileOutputStream(proj); 
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            while((line = br.readLine()) != null) {
+                if(null != line.split("/")[0])switch (line.split("/")[0]) {
+                    case "DOC":{
+                        System.out.println(line.split("/")[4]);
+                        System.out.println(line.split("/")[2]);
+                        System.out.println(123);
+                        System.out.println(line.split("/")[4]);
+                        Pessoa p = new Docente(line.split("/")[1],line.split("/")[2],Integer.parseInt(line.split("/")[3]),line.split("/")[4]);
+                        
+                        oos.writeObject(p);
+                            break;
+                        }
+                    case "LIC":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[4]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        Pessoa p = new Licenciado(line.split("/")[1],line.split("/")[2],datai,dataf);
+                        oos.writeObject(p);
+                            break;
+                        }
+                    case "MES":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[4]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        Pessoa p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
+                        oos.writeObject(p);
+                            break;
+                        }
+                    case "DOU":{
+                        DataI = (line.split("/")[3]).split("-");
+                        DataF = (line.split("/")[4]).split("-");
+                        GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        Pessoa p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
+                        oos.writeObject(p);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+            oos.close();                   
+            } catch (FileNotFoundException ex) { 
+                System.out.println("Erro a criar ficheiro de objetos: pessoas."); 
+            } catch (IOException ex) { 
+                System.out.println("Erro a escrever para o ficheiro objeto: pessoas.");
+            }
+            br.close();
+        }catch (FileNotFoundException ex) { 
+            System.out.println("Erro a abrir ficheiro de texto: pessoas"); 
+        } catch (IOException ex) { 
+            System.out.println("Erro a ler ficheiro de texto: pessoas."); 
+        } 
+    } else { 
+        System.out.println("Ficheiro não existe: pessoas."); 
+    }
+}
+
+public void leFicheiroObjPessoa(){
+    File f = new File("Pessoas.obj");
+    try { 
+        FileInputStream fis = new FileInputStream(f); 
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Pessoa person = (Pessoa)ois.readObject(); 
+        System.out.println(person);
+        ois.close(); 
+    } catch (FileNotFoundException ex) { 
+        System.out.println("Erro a abrir ficheiro: pessoas."); 
+    } catch (IOException ex) { 
+        System.out.println("Erro a ler ficheiro:pessoas."); 
+    } catch (ClassNotFoundException ex) 
+    { System.out.println("Erro a converter objeto: pessoas."); 
+    }
+
+}
   
     
     
@@ -149,6 +239,8 @@ public class CISUC implements Serializable{
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
         cisuc.leFicheiroProjetos();
+        cisuc.leFicheiroPessoas();
+        cisuc.leFicheiroObjPessoa();
         
         /*GregorianCalendar dataAtual = new GregorianCalendar(2018,01,01);
         GregorianCalendar dataInicio = new GregorianCalendar(2018,03,02);

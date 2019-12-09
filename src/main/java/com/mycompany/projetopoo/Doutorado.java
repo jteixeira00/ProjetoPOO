@@ -16,10 +16,10 @@ import java.util.GregorianCalendar;
  */
 public class Doutorado extends Bolseiro implements Serializable{
     
-    int custo = 1000;
+    private int custo = 1000;
     
-    Doutorado(GregorianCalendar InicioB,GregorianCalendar FimB){
-        super(InicioB,FimB);
+    public Doutorado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
+        super(nome,email,InicioB,FimB);
     }
             
     @Override

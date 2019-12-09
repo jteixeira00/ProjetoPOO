@@ -17,8 +17,8 @@ public class Mestre extends Bolseiro implements Serializable{
     int custo = 1000;
     ArrayList<Docente> tarefa = new ArrayList<Docente>();
     
-    Mestre(GregorianCalendar InicioB,GregorianCalendar FimB){
-        super(InicioB,FimB);
+    Mestre(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
+        super(nome,email,InicioB,FimB);
     }
             
     @Override

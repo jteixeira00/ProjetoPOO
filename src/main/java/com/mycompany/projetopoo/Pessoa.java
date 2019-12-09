@@ -13,16 +13,18 @@ import java.util.ArrayList;
  * @author dinis
  */
 public class Pessoa implements Serializable{
-    String nome;
-    String email;
-    int custo;
-    ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
+    private String nome;
+    private String email;
+    private int custo;
+    protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
     
-    void addTarefa(Tarefa t){
+    public void addTarefa(Tarefa t){
         
     }   
     
-    void Pessoa(String nome,String email){
+    public Pessoa(String nome,String email){
+        this.nome = nome;
+        this.email = email;
         
     }
 

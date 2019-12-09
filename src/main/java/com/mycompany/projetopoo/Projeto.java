@@ -14,19 +14,19 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Projeto extends CISUC implements Serializable{
-    String nome;
-    String acronimo;
-    GregorianCalendar data_inicio;
-    GregorianCalendar data_final;
-    int duracao;
-    ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
-    ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
-    Pessoa investigadorP;
-    boolean completo;
-    boolean fPrazo;
-    int custo;
+    private String nome;
+    private String acronimo;
+    private GregorianCalendar data_inicio;
+    private GregorianCalendar data_final;
+    private int duracao;
+    protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
+    protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
+    private Pessoa investigadorP;
+    private boolean completo;
+    private boolean fPrazo;
+    private int custo;
     
-    Projeto(String nome, String acronimo, GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
+    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
         
@@ -35,6 +35,7 @@ public class Projeto extends CISUC implements Serializable{
     }
     
     
+
     public ArrayList<Tarefa> ListarTarefas(){
         for(Tarefa temp: tarefa){
             System.out.println(temp);
@@ -43,12 +44,15 @@ public class Projeto extends CISUC implements Serializable{
     }
     
     
+
     public Tarefa CriarTarefa( GregorianCalendar dataI, int duracaoEstimada, Pessoa responsavel, int tipo){
         Tarefa taref;
+
         
         return taref;
     }
     
+
     public int EliminarTarefa(Tarefa temp){
         if (tarefa.indexOf(temp) == -1){
             return 0;                       
@@ -107,6 +111,7 @@ public class Projeto extends CISUC implements Serializable{
         return nConcluida;
     }
     
+
     public int CustoP(){
         int custoMensal =0;
         int custoFinal = 0;
@@ -120,6 +125,7 @@ public class Projeto extends CISUC implements Serializable{
     void TerminarP(GregorianCalendar dataHoje){
         this.data_final = dataHoje;
         this.completo = true;     
+
         
     }
 
