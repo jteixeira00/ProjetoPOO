@@ -26,7 +26,7 @@ public class Projeto extends CISUC implements Serializable{
     boolean fPrazo;
     int custo;
     
-    Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
+    Projeto(String nome, String acronimo, GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.data_inicio = data_final;
@@ -35,28 +35,75 @@ public class Projeto extends CISUC implements Serializable{
     }
     
     
-    void ListarTarefas(){
-                
+    public ArrayList<Tarefa> ListarTarefas(){
+        for(Tarefa temp: tarefa){
+            System.out.println(temp);
+        }
+        return tarefa;
     }
+    
     
     void CriarInformatica(){
         
-    }
-    
-    void EliminarTarefa(){
         
     }
     
-    void ListarNaoIniciadas(){
+    public int EliminarTarefa(Tarefa temp){
+        if (tarefa.indexOf(temp) == -1){
+            return 0;                       
+        }
+        
+        else{
+            tarefa.remove(temp);
+            return 1;
+        }
+        
+    }
+    
+    public ArrayList<Tarefa> ListarNaoIniciadas(){
+        ArrayList<Tarefa> nIniciadas = new ArrayList<>();
+        for(Tarefa temp: tarefa){
+            if(temp.getTaxa()==0){
+                nIniciadas.add(temp);
+            }
+        }
+        return nIniciadas;
        
     }
     
-    void ListarFPrazo(){
+    public ArrayList<Tarefa> ListarFPrazo(GregorianCalendar dataHoje){
+        ArrayList<Tarefa> fprazo = new ArrayList<>();
+        
+        for(Tarefa temp: tarefa){
+            if(dataHoje.after(temp.getDataEstimada()) && (temp.getTaxa()!=100)){
+                fprazo.add(temp);
+            }
+            else if(temp.getFinalD().after(temp.getDataEstimada())){
+                fprazo.add(temp);
+            }
+        }
+        return fprazo;            
+    }
+    
+    public ArrayList<Tarefa> ListarConcluidas(){
+        ArrayList<Tarefa> Concluidas = new ArrayList<>();
+        for(Tarefa temp: tarefa){
+            if(temp.getTaxa()!=100){
+                Concluidas.add(temp);
+            }
+        }
+        return Concluidas;
         
     }
     
-    void ListarConcluidas(){
-        
+    public ArrayList<Tarefa> NaoConcluidas(){
+        ArrayList<Tarefa> nConcluida = new ArrayList<>();
+        for(Tarefa temp: tarefa){
+            if(temp.getTaxa()!=100){
+                nConcluida.add(temp);
+            }
+        }
+        return nConcluida;
     }
     
     void CustoP(){

@@ -15,17 +15,27 @@ import java.util.GregorianCalendar;
 public class Tarefa implements Serializable{
     GregorianCalendar inicioD;
     GregorianCalendar finalD;
+    GregorianCalendar dataEstimada;
+    double taxa;
     int duracao;
     Pessoa responsavel;
     double esforco;
+    
+    
     
     
     void Tarefa(GregorianCalendar inicioD,GregorianCalendar finalD,int duracao,Pessoa responsavel){
     
     }
     
+    
+    
     void atualizarTaxa(int i){
         
+    }
+    
+    public double getTaxa(){
+        return taxa;
     }
 
     public GregorianCalendar getInicioD() {
@@ -34,6 +44,10 @@ public class Tarefa implements Serializable{
 
     public GregorianCalendar getFinalD() {
         return finalD;
+    }
+    
+    public GregorianCalendar getDataEstimada(){
+        return dataEstimada;
     }
 
     public int getDuracao() {
