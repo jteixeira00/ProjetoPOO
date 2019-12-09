@@ -14,15 +14,12 @@ import java.util.GregorianCalendar;
  */
 public class Documentacao extends Tarefa implements Serializable{
     double esforco = 0.25;
-    Documentacao(GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
-        super(inicioD, duracaoEstimada,responsavel);
-    }
-    @Override
     
     public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
     }
     
+    @Override
     public double getEsforco() {
         return esforco;
     } 
