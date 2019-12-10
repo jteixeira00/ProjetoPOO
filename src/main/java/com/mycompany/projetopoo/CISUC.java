@@ -448,7 +448,7 @@ public ArrayList<Projeto> getListaProjeto(){
         cisuc.leFicheiroProjetos(); 
         ArrayList<Projeto> a = cisuc.getListaProjeto();
         Projeto p = a.get(0);
-        System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
+        //System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
         
         
     }
