@@ -12,7 +12,9 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
+
 public abstract class Tarefa implements Serializable{
+
 
     private GregorianCalendar inicioD;
     private GregorianCalendar finalD;
@@ -72,4 +74,6 @@ public abstract class Tarefa implements Serializable{
     public double getEsforco() {
         return esforco;
     } 
+    //abstract double esforço();
+    
 }

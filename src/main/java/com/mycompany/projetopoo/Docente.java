@@ -17,8 +17,17 @@ public class Docente extends Pessoa{
         this.numM = numM;
         this.area = area;
     }
+
+
+    public int getNumM() {
+        return numM;
+    }
+
+    public String getArea() {
+        return area;
+    }
     
     
-   
+
 }
 

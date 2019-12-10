@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Design extends Tarefa{
+
     
 
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
@@ -21,5 +22,11 @@ public class Design extends Tarefa{
     public double getEsforco() {
         return 0.5;
     } 
+
     
+   
+    /*public double esforço(){
+    return 0.5;*/
 }
+    
+
