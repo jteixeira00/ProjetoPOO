@@ -1,4 +1,13 @@
-com\mycompany\projetopoo\Bolseiro.class
-com\mycompany\projetopoo\Pessoa.class
-com\mycompany\projetopoo\Doutorado.class
+com\mycompany\projetopoo\CISUC$botaoCriarProjetoListener.class
+com\mycompany\projetopoo\Projeto.class
 com\mycompany\projetopoo\Tarefa.class
+com\mycompany\projetopoo\Documentacao.class
+com\mycompany\projetopoo\Licenciado.class
+com\mycompany\projetopoo\Desenvolvimento.class
+com\mycompany\projetopoo\Mestre.class
+com\mycompany\projetopoo\CISUC.class
+com\mycompany\projetopoo\Bolseiro.class
+com\mycompany\projetopoo\Doutorado.class
+com\mycompany\projetopoo\Docente.class
+com\mycompany\projetopoo\Pessoa.class
+com\mycompany\projetopoo\Design.class
