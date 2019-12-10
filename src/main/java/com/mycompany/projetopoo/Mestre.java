@@ -14,8 +14,8 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Mestre extends Bolseiro implements Serializable{
-    int custo = 1000;
-    ArrayList<Docente> tarefa = new ArrayList<Docente>();
+    
+    
     
     Mestre(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);
@@ -23,7 +23,7 @@ public class Mestre extends Bolseiro implements Serializable{
             
     @Override
     public int getCusto() {
-        return custo;
+        return 1200;
     }
         
 }

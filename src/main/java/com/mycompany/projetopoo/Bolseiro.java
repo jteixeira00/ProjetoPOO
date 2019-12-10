@@ -12,21 +12,19 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-abstract class Bolseiro extends Pessoa implements Serializable {
+public abstract class Bolseiro extends Pessoa implements Serializable {
     private GregorianCalendar InicioB;
     private GregorianCalendar FimB;
     private int custo;
     
-    public Bolseiro(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
+    Bolseiro(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email);
         this.InicioB = InicioB; 
-        this.FimB = FimB;
-        
+        this.FimB = FimB;    
     }
 
-    public int getCusto() {
-        return custo;
-    }
+    @Override
+    public abstract int getCusto();
     
     
     

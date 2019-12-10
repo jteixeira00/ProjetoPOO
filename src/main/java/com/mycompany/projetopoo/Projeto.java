@@ -22,22 +22,30 @@ public class Projeto extends CISUC implements Serializable{
     private int duracao;
     protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
     protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
+    protected ArrayList<Docente> docente = new ArrayList<Docente>();    
     private Pessoa investigadorP;
-    private boolean completo;
-    private boolean fPrazo;
+    private boolean completo = false;
+    private boolean fPrazo = false;
     private int custo;
     
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
-        
         this.duracao = duracao;
-        
+       
     }
    
     
     public void addTarefa(Tarefa t){
         tarefa.add(t);
+    }
+    
+    public void addDocente(Docente d){
+        docente.add(d);       
+    }
+    
+    public void setIP(Docente d){
+        this.investigadorP = d;       
     }
     
 
@@ -190,11 +198,11 @@ public class Projeto extends CISUC implements Serializable{
         return duracao;
     }
 
-    public ArrayList<Tarefa> getTarefa() {
+    public ArrayList<Tarefa> getTarefas() {
         return tarefa;
     }
 
-    public ArrayList<Pessoa> getPessoa() {
+    public ArrayList<Pessoa> getPessoas() {
         return pessoa;
     }
 
@@ -206,7 +214,34 @@ public class Projeto extends CISUC implements Serializable{
         return completo;
     }
 
+    public GregorianCalendar getDataEstimada(){
+        GregorianCalendar data;
+        data = (GregorianCalendar)data_inicio.clone();
+        
+        
+        data.add((GregorianCalendar.MONTH), duracao);
+        return data;
+        
+        
+    }
     public boolean isfPrazo() {
+        
+        GregorianCalendar dataHoje = new GregorianCalendar();
+        
+        
+            if(dataHoje.after(this.getDataEstimada()) && (this.isCompleto()==false)){
+                fPrazo = true;
+                return fPrazo;
+                
+                
+            }
+            else if(this.getData_final().after(this.getDataEstimada())){
+                fPrazo = true;
+            }
+        
+        
+        
+        fPrazo=true;
         return fPrazo;
     }
     

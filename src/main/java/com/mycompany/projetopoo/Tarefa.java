@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-public class Tarefa implements Serializable{
+public abstract class Tarefa implements Serializable{
 
     private GregorianCalendar inicioD;
     private GregorianCalendar finalD;
@@ -22,9 +22,6 @@ public class Tarefa implements Serializable{
     private Pessoa responsavel;
     private double esforco;
 
-    
-    
-    
     
 
     public Tarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
@@ -63,8 +60,6 @@ public class Tarefa implements Serializable{
     public GregorianCalendar getDataEstimada(){
         GregorianCalendar data;
         data = (GregorianCalendar)inicioD.clone();
-        
-        
         data.add((GregorianCalendar.MONTH), duracaoEstimada);
         return data;
     }

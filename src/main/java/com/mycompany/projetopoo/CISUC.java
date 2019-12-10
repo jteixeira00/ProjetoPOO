@@ -33,29 +33,24 @@ public class CISUC extends JFrame implements Serializable {
     
     
     //interface
+    JFrame mainFrame;
     JPanel mainPanel;
     JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
     
     
     
     public CISUC(){
-        
         //interface
-        super("Gestor de Projetos");
+        //mainFrame = new JFrame();
+        super("Cenas");
         setResizable(false);
-        
-    }
-    
-    
-    
-    public void addComponents(){
-        
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,3));
         
         criarProjeto = new JButton("Criar Projeto");
         mainPanel.add(criarProjeto);
-        criarProjeto.addActionListener(new botaoCriarProjetoListener());
+        
+        //criarProjeto.addActionListener(new botaoCriarProjetoListener());
     
         gerirProjeto = new JButton("Gerir Projeto");
         mainPanel.add(gerirProjeto);  
@@ -68,10 +63,14 @@ public class CISUC extends JFrame implements Serializable {
         
         listaConcluidos = new JButton("Listar Projetos Concluídos");
         mainPanel.add(listaConcluidos);
-        
-        
+        setSize(800, 500);
+        add(mainPanel);
+        setVisible(true);
         
     }
+    
+    
+  
     
     private class botaoCriarProjetoListener implements ActionListener{
         @Override
@@ -441,6 +440,7 @@ public void leFicheiroTarefas(){
      */
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
+       
         cisuc.leFicheiroProjetos();
         cisuc.leFicheiroPessoas();
         

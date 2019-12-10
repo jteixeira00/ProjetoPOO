@@ -12,15 +12,16 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Desenvolvimento extends Tarefa{
-    double esforco = 1;
+    
 
     public Desenvolvimento(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
-        super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
+        super(nome,inicioD,duracaoEstimada,finalD,responsavel);   
+        
     }
     
     @Override
     public double getEsforco() {
-        return esforco;
+        return 1;
     } 
     
 }

@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  * @author dinis
  */
 public class Documentacao extends Tarefa implements Serializable{
-    double esforco = 0.25;
+    
     
     public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
@@ -21,7 +21,7 @@ public class Documentacao extends Tarefa implements Serializable{
     
     @Override
     public double getEsforco() {
-        return esforco;
+        return 0.25;
     } 
     
 }

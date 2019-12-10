@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author dinis
  */
-public class Pessoa implements Serializable{
+public abstract class Pessoa implements Serializable{
     private String nome;
     private String email;
     private int custo;

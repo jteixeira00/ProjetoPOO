@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
  */
 public class Doutorado extends Bolseiro implements Serializable{
     
-    private int custo = 1000;
+    
     
     public Doutorado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);
@@ -24,7 +24,7 @@ public class Doutorado extends Bolseiro implements Serializable{
             
     @Override
     public int getCusto() {
-        return custo;
+        return 1000;
     }
     
 }
