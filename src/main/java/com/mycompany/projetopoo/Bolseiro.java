@@ -25,10 +25,5 @@ public abstract class Bolseiro extends Pessoa implements Serializable {
 
     @Override
     public abstract int getCusto();
-    
-    
-    
-    
-    
-    
+
 }
