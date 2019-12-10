@@ -67,11 +67,4 @@ public class Pessoa implements Serializable{
         return custo;
     }
 
-   
-    
-    
-    
-    
-    
-    
 }

@@ -5,6 +5,9 @@
  */
 
 package com.mycompany.projetopoo;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,20 +17,73 @@ import java.io.Serializable;
 import java.util.GregorianCalendar; 
 import java.util.ArrayList;
 
+import javax.swing.*;
+
         
 
 /**
  *
  * @author dinis
  */
-public class CISUC implements Serializable{
+public class CISUC extends JFrame implements Serializable {
     private GregorianCalendar dataAtual;
     ArrayList<Projeto> projeto = new ArrayList<>();
     ArrayList<Pessoa> docente = new ArrayList<>();
     ArrayList<Pessoa> bolseiro = new ArrayList<>();
     
     
-    void CISUC(){
+    //interface
+    JPanel mainPanel;
+    JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
+    
+    
+    
+    public CISUC(){
+        
+        //interface
+        super("Gestor de Projetos");
+        setResizable(false);
+        
+    }
+    
+    
+    
+    public void addComponents(){
+        
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(2,3));
+        
+        criarProjeto = new JButton("Criar Projeto");
+        mainPanel.add(criarProjeto);
+        criarProjeto.addActionListener(new botaoCriarProjetoListener());
+    
+        gerirProjeto = new JButton("Gerir Projeto");
+        mainPanel.add(gerirProjeto);  
+        
+        listaAtivos = new JButton("Listar Projetos Ativos");
+        mainPanel.add(listaAtivos); 
+        
+        listaIncompletos = new JButton("Listar Projetos por Concluir");
+        mainPanel.add(listaIncompletos);
+        
+        listaConcluidos = new JButton("Listar Projetos Concluídos");
+        mainPanel.add(listaConcluidos);
+        
+        
+        
+    }
+    
+    private class botaoCriarProjetoListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            JFrame frame = new JFrame("Criar Projeto");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
+            
+            
+        }
+        
+        
         
     }
     
@@ -387,7 +443,9 @@ public void leFicheiroTarefas(){
         CISUC cisuc = new CISUC();
         cisuc.leFicheiroProjetos();
         cisuc.leFicheiroPessoas();
-
+        
+        
+        
         
               
         

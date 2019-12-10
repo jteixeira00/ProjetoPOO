@@ -115,8 +115,9 @@ public class Projeto extends CISUC implements Serializable{
        
     }
     
-    public ArrayList<Tarefa> ListarFPrazo(GregorianCalendar dataHoje){
+    public ArrayList<Tarefa> ListarFPrazo(){
         ArrayList<Tarefa> fprazo = new ArrayList<>();
+        GregorianCalendar dataHoje = new GregorianCalendar();
         
         for(Tarefa temp: tarefa){
             if(dataHoje.after(temp.getDataEstimada()) && (temp.getTaxa()!=100)){
@@ -161,7 +162,8 @@ public class Projeto extends CISUC implements Serializable{
         return custoFinal;
     }
     
-    void TerminarP(GregorianCalendar dataHoje){
+    void TerminarP(){
+        GregorianCalendar dataHoje = new GregorianCalendar();
         this.data_final = dataHoje;
         this.completo = true;     
 
