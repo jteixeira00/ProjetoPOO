@@ -18,14 +18,16 @@ public class Pessoa implements Serializable{
     private int custo;
     protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
     
-    public void addTarefa(Tarefa t){
-        
-    }   
+       
     
-    public Pessoa(String nome,String email){
+    Pessoa(String nome,String email){
         this.nome = nome;
         this.email = email;
         
+    }
+    public void addTarefa(Tarefa t){
+       tarefa.add(t);
+       
     }
 
     public String getNome() {

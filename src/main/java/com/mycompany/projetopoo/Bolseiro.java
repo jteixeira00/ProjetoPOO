@@ -21,6 +21,7 @@ abstract class Bolseiro extends Pessoa implements Serializable {
         super(nome,email);
         this.InicioB = InicioB; 
         this.FimB = FimB;
+        
     }
 
     public int getCusto() {
