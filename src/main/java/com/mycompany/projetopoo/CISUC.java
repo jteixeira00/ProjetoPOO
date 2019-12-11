@@ -48,6 +48,8 @@ public class CISUC extends JFrame implements Serializable {
         
     }
     
+    
+      
     public int BolseiroInProjetos(Bolseiro b){
          ArrayList<Bolseiro> ListaB;
          for(Projeto proj:projeto){
@@ -59,6 +61,16 @@ public class CISUC extends JFrame implements Serializable {
              }
          }
          return 0;         
+    }
+    
+    public Projeto ProjetoGetter(String nome){
+        Projeto P_Null = new Projeto(null,null,0,null,null);
+         for(Projeto p:projeto){
+            if(nome.equals(p.getNome()) == true){
+                return p;
+            }
+        }
+        return P_Null;              
     }
     
     public ArrayList<String> getNomesProjetos(){
@@ -436,7 +448,7 @@ public void SaveObjectFilesDocentes(){
         CISUC cisuc = new CISUC();
         
         try {
-            GUI gui = new GUI(cisuc);
+            //GUI gui = new GUI(cisuc);
            if(cisuc.ObjectCheck() == false){
                 cisuc.leFicheiroPessoas();
                 cisuc.leFicheiroProjetos();  
