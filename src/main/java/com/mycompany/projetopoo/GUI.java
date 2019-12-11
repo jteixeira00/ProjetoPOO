@@ -39,9 +39,9 @@ public class GUI{
     JTextField ano;
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
-    
-    JList listaPessoas;
-           
+    JComboBox ComboBoxProjetos;
+    JList listaPessoas, listaDocentes;
+    Projeto currentProjeto;
     CISUC cisuc;
     
     
@@ -52,19 +52,15 @@ public class GUI{
         
         mainFrame.setSize(800, 600);
         
-        
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,3));
         
-        
         criarProjeto = new JButton("Criar Projeto");
         criarProjeto.addActionListener(new botaoListener());
         mainPanel.add(criarProjeto);
         
-        
-    
         gerirProjeto = new JButton("Gerir Projeto");
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
@@ -154,6 +150,10 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
+                ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
+                
+                
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
                 
@@ -168,7 +168,7 @@ public class GUI{
                 
                 regressaMainDaGestao = new JButton("Ecrã Principal");
                 regressaMainDaGestao.addActionListener(new botaoListenerEcras());
-                
+                panelGerirProjeto.add(ComboBoxProjetos);
                 panelGerirProjeto.add(addPessoa);
                 panelGerirProjeto.add(listTarefas);
                 panelGerirProjeto.add(calculaCusto);
@@ -251,19 +251,26 @@ public class GUI{
                 selecionarPessoas.addActionListener(new botaoListenerEcras2());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
                 frameAdicionarPessoa.setSize(600,800);
-                newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 
-                listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
+                listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
                 JScrollPane listScroller = new JScrollPane(listaPessoas);
                 
+                listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
+                JScrollPane listScroller2 = new JScrollPane(listaDocentes);
+                
                 newPanel2.add(listScroller);
-                newPanel2.add(selecionarPessoas);
+                newPanel2.add(selecionarPessoas, "cell 1 1");
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
                 frameGerirProjeto.setVisible(false);
                 
        
                 
+            }
+            
+            else if(e.getSource() == ComboBoxProjetos){
+                currentProjeto = cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem());
             }
             
             
@@ -287,10 +294,10 @@ public class GUI{
                         BolseirosRejeitados.add(bol);
                     }
                     else{
-                        projeto.addBolseiro(bol);
+                        currentProjeto.addBolseiro(bol);
                     }
                  for(Docentes dol:listaDocentes){
-                     projeto.addDocentes(dol);
+                     currentProjeto.addDocentes(dol);
                  }
                     
                 }*/
