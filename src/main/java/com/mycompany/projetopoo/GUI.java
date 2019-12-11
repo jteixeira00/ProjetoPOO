@@ -202,7 +202,7 @@ public class GUI{
                 int anoT = Integer.parseInt((String)ano.getText());
                 int etaT = Integer.parseInt((String)eta.getText());
                 GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
-                Projeto temp = new Projeto(nomeText, acronimoText, dataIT, etaT);
+                Projeto temp = new Projeto(nomeText, dataIT, etaT, acronimoText);
                 cisuc.projeto.add(temp);
                 
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
