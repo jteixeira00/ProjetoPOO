@@ -28,11 +28,11 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameEscolherProjeto, frameGerirProjeto, frameAdicionarPessoa;
-    JPanel mainPanel, panelTarefas;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa;
+    JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
-    JButton confirm, selecionarPessoas,regressaMainDaEscolhaProjeto, regressaMainDaGestao;
-    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGesta, gerirProjetoNEXT, escolherProjeto;
+    JButton confirm, selecionarPessoas;
+    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
@@ -40,7 +40,7 @@ public class GUI{
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
     
-    JList listaPessoas, listaProjetos;
+    JList listaPessoas;
            
     CISUC cisuc;
     
@@ -146,27 +146,37 @@ public class GUI{
             }
             else if(e.getSource() == gerirProjeto){
                 
-                regressaMainDaEscolhaProjeto= new JButton("Ecrã Principal");
-                regressaMainDaEscolhaProjeto.addActionListener(new botaoListenerEcras());
                 
-                frameEscolherProjeto = new JFrame("Escolher Projeto");        
-                frameEscolherProjeto.setSize(600,800);
+                frameGerirProjeto = new JFrame("Gerir Projeto");
+                frameGerirProjeto.setSize(600,800);
                 frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                JPanel panelGerirProjeto = new JPanel();
+                panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                frameGerirProjeto.setResizable(false);
                 
-                escolherProjeto = new JButton("Escolher");
-                escolherProjeto.addActionListener(new botaoListenerEcras());
+                addPessoa = new JButton("Associar Pessoa");
+                addPessoa.addActionListener(new botaoListenerEcras2());
                 
-                JPanel panel = new JPanel(new MigLayout("align 50% 50%, wrap 1"));
-                listaProjetos = new JList(cisuc.getNomesProjetos().toArray());
-                JScrollPane listScrollerProjetos = new JScrollPane(listaProjetos);
+                listTarefas = new JButton("Listar Tarefas");
+                listTarefas.addActionListener(new botaoListenerEcras());
                 
-                panel.add(listScrollerProjetos, "span 2 4");
-                panel.add(escolherProjeto);
+                calculaCusto = new JButton("Calcular Custo");
+                calculaCusto.addActionListener(new botaoListenerEcras());
                 
+                terminaProjeto = new JButton("Concluir Projeto");
+                terminaProjeto.addActionListener(new botaoListenerEcras());
                 
+                regressaMainDaGestao = new JButton("Ecrã Principal");
+                regressaMainDaGestao.addActionListener(new botaoListenerEcras());
                 
-                
-                
+                panelGerirProjeto.add(addPessoa);
+                panelGerirProjeto.add(listTarefas);
+                panelGerirProjeto.add(calculaCusto);
+                panelGerirProjeto.add(terminaProjeto);
+                panelGerirProjeto.add(regressaMainDaGestao, "cell 0 6");
+                frameGerirProjeto.add(panelGerirProjeto);
+                frameGerirProjeto.setVisible(true);
+                mainFrame.setVisible(false);
                 
             }
             
@@ -206,25 +216,7 @@ public class GUI{
  
             }
             
-            else if(e.getSource() ==escolherProjeto){
-                
-                
-                String Projeto = (String)listaProjetos.getSelectedValue();
-                listaProjetos = new JList(cisuc.getNomesProjetos().toArray());
-                JScrollPane projectScroller = new JScrollPane(listaProjetos);
-                
-                
-                
-                
-                
-                
-                
-                
-            }
-            
             else if(e.getSource() == listTarefas){
-                
-                panelTarefas = new JPanel();
                 
                 eliminaTarefa = new JButton("Eliminar Tarefa");
                 eliminaTarefa.addActionListener(new botaoListenerEcras2());
@@ -237,23 +229,11 @@ public class GUI{
                 
                 
                 
-                
-                
             }
             
             else if(e.getSource() == regressaMainDaGestao){
-            
+                
                 frameGerirProjeto.setVisible(false);
-                mainFrame.setVisible(true);
-                
-                
-            }
-            else if(e.getSource() == regressaMainDaEscolhaProjeto){
-                
-                
-                
-                
-                frameEscolherProjeto.setVisible(false);
                 mainFrame.setVisible(true);
                 
                 
@@ -268,7 +248,7 @@ public class GUI{
             JPanel newPanel2 = new JPanel();
             if(e.getSource() == addPessoa ){
                 selecionarPessoas = new JButton("Selecionar Pessoas");
-                selecionarPessoas.addActionListener(new botaoListenerEcras3());
+                selecionarPessoas.addActionListener(new botaoListenerEcras2());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
                 frameAdicionarPessoa.setSize(600,800);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 1"));
@@ -287,49 +267,11 @@ public class GUI{
             }
             
             
-            if(e.getSource() == gerirProjetoNEXT){
-                
-                frameGerirProjeto = new JFrame("Gerir Projeto");
-                frameGerirProjeto.setSize(600,800);
-                frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                
-                JPanel panelGerirProjeto = new JPanel();
-                panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
-                frameGerirProjeto.setResizable(false);
-                
-                addPessoa = new JButton("Associar Pessoa");
-                addPessoa.addActionListener(new botaoListenerEcras2());
-                
-                listTarefas = new JButton("Listar Tarefas");
-                listTarefas.addActionListener(new botaoListenerEcras());
-                
-                calculaCusto = new JButton("Calcular Custo");
-                calculaCusto.addActionListener(new botaoListenerEcras());
-                
-                terminaProjeto = new JButton("Concluir Projeto");
-                terminaProjeto.addActionListener(new botaoListenerEcras());
-                
-                regressaMainDaGestao = new JButton("Ecrã Principal");
-                regressaMainDaGestao.addActionListener(new botaoListenerEcras());
-                
-                panelGerirProjeto.add(addPessoa);
-                panelGerirProjeto.add(listTarefas);
-                panelGerirProjeto.add(calculaCusto);
-                panelGerirProjeto.add(terminaProjeto);
-                panelGerirProjeto.add(regressaMainDaGestao, "cell 0 6");
-                frameGerirProjeto.add(panelGerirProjeto);
-                frameGerirProjeto.setVisible(true);
-                mainFrame.setVisible(false);
-                
-                
-                
-                
-                
-            }
-            
         } 
         
      }
+ 
+      
       private class botaoListenerEcras3 implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -339,6 +281,7 @@ public class GUI{
                 listaNomesPessoas.addAll(lista);
                 
                 //CODIGO PARA ADICIONAR A PESSOA
+                
                 
                 frameAdicionarPessoa.setVisible(false);
                 frameGerirProjeto.setVisible(true);
