@@ -415,6 +415,7 @@ public void SaveObjectFilesDocentes(){
      */
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
+        
         try {
             //GUI gui = new GUI(cisuc);
            if(cisuc.ObjectCheck() == false){

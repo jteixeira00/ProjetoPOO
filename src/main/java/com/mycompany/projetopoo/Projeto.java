@@ -76,11 +76,11 @@ public class Projeto extends CISUC implements Serializable{
             }
         }
         if(check==1){
-            return 0;
+            return 1;
         }
         else{
             pessoa.add(p);
-            return 1;
+            return 0;
         }
      
     }

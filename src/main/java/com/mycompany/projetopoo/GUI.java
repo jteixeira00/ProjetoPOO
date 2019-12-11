@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -259,7 +260,7 @@ public class GUI{
                 newPanel2.add(selecionarPessoas);
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
-                mainFrame.setVisible(false);
+                frameGerirProjeto.setVisible(false);
                 
        
                 
@@ -273,6 +274,14 @@ public class GUI{
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == selecionarPessoas){
+                List<String> lista = listaPessoas.getSelectedValuesList();
+                ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
+                listaNomesPessoas.addAll(lista);
+                
+                //CODIGO PARA ADICIONAR A PESSOA
+                
+                frameAdicionarPessoa.setVisible(false);
+                frameGerirProjeto.setVisible(true);
                 
                 
                 
