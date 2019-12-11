@@ -147,7 +147,7 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
-                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray()); //incompletos
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
                 
                 
