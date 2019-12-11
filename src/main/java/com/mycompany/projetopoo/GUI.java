@@ -40,7 +40,7 @@ public class GUI{
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
     JComboBox ComboBoxProjetos;
-    JList listaPessoas;
+    JList listaPessoas, listaDocentes;
     Projeto currentProjeto;
     CISUC cisuc;
     
@@ -251,13 +251,16 @@ public class GUI{
                 selecionarPessoas.addActionListener(new botaoListenerEcras2());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
                 frameAdicionarPessoa.setSize(600,800);
-                newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 
-                listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
+                listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
                 JScrollPane listScroller = new JScrollPane(listaPessoas);
                 
+                listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
+                JScrollPane listScroller2 = new JScrollPane(listaDocentes);
+                
                 newPanel2.add(listScroller);
-                newPanel2.add(selecionarPessoas);
+                newPanel2.add(selecionarPessoas, "cell 1 1");
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
                 frameGerirProjeto.setVisible(false);
@@ -267,7 +270,7 @@ public class GUI{
             }
             
             else if(e.getSource() == ComboBoxProjetos){
-                
+                currentProjeto = cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem());
             }
             
             
@@ -291,10 +294,10 @@ public class GUI{
                         BolseirosRejeitados.add(bol);
                     }
                     else{
-                        projeto.addBolseiro(bol);
+                        currentProjeto.addBolseiro(bol);
                     }
                  for(Docentes dol:listaDocentes){
-                     projeto.addDocentes(dol);
+                     currentProjeto.addDocentes(dol);
                  }
                     
                 }*/
