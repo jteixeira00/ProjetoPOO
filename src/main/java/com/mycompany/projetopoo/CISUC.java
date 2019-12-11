@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.GregorianCalendar; 
 import java.util.ArrayList;
@@ -92,7 +94,12 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                        p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf);
+                        if(dataf.get(GregorianCalendar.YEAR) == 0000 & dataf.get(GregorianCalendar.MONTH) == 00 & dataf.get(GregorianCalendar.DAY_OF_MONTH) == 0){
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5]);
+                        } 
+                        else{
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5]);
+                        }
                         projeto.add(p);
 
                         break;
@@ -401,6 +408,17 @@ public ArrayList<String> getNomesPessoas(){
     }
 
 }*/
+
+public boolean ObjectCheck(){
+        try{
+            File f = new File("Pessoas.obj");
+            FileInputStream fis = new FileInputStream(f);
+        }catch(FileNotFoundException ex){
+            return false; 
+        }
+        return true;
+        
+}
   
     
     
@@ -412,14 +430,15 @@ public ArrayList<String> getNomesPessoas(){
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CISUC cisuc = new CISUC();
-        GUI gui = new GUI(cisuc);
+        //CISUC cisuc = new CISUC();
+        //GUI gui = new GUI(cisuc);
+        //System.out.println(cisuc.ObjectCheck()+);
+        
+        
+        
+      //  cisuc.leFicheiroPessoas();
+        //cisuc.leFicheiroProjetos(); 
 
-        cisuc.leFicheiroPessoas();
-        cisuc.leFicheiroProjetos(); 
-        ArrayList<Projeto> a = cisuc.getListaProjeto();
-        Projeto p = a.get(0);
-        //System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
         
         
     }

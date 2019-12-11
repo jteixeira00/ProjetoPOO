@@ -10,6 +10,7 @@
             <groupId>group.id</groupId>
             <artifactId>artifact.id</artifactId>
             <version>1.0</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>
