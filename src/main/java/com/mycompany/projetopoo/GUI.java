@@ -16,7 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
@@ -25,17 +27,19 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
-    JButton confirm;
+    JButton confirm, selecionarPessoas;
     JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
     JTextField ano;
     JTextField eta;
-    JComboBox listaInvestigadoresPrinc; 
+    JComboBox listaInvestigadoresPrinc;
+    
+    JList listaPessoas;
            
     CISUC cisuc;
     
@@ -44,7 +48,8 @@ public class GUI{
     GUI(CISUC cisuc){
         this.cisuc = cisuc;
         mainFrame = new JFrame("Cenas");
-        mainFrame.setSize(800, 500);
+        mainFrame.setSize(800, 600);
+        
         
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +64,7 @@ public class GUI{
         
     
         gerirProjeto = new JButton("Gerir Projeto");
-        gerirProjeto.addActionListener(new botaoListenerEcras());
+        gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
         
         listaAtivos = new JButton("Listar Projetos Ativos");
@@ -84,10 +89,9 @@ public class GUI{
             JPanel newPanel = new JPanel();
             
             if (e.getSource() == criarProjeto){ 
-                frameCreateProject = new JFrame();
-                frameCreateProject.setSize(100, 300);
+                frameCreateProject = new JFrame();       
                 frameCreateProject.setResizable(false);
-                
+
                 confirm = new JButton("Confirmar");
                 confirm.addActionListener(new botaoListenerEcras());
                 newPanel.setLayout(new MigLayout("align 50% 50%, wrap 2"));
@@ -125,7 +129,7 @@ public class GUI{
                 newPanel.add(labelIP);
                 newPanel.add(listaInvestigadoresPrinc);
                 frameCreateProject.add(newPanel);               
-                frameCreateProject.setSize(800, 500);
+                
                 frameCreateProject.add(newPanel);
                 newPanel.add(confirm, "cell 1 6");
                 mainFrame.setVisible(false);
@@ -138,8 +142,13 @@ public class GUI{
               
             }
             else if(e.getSource() == gerirProjeto){
-                //JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto;
+                
+                
                 frameGerirProjeto = new JFrame("Gerir Projeto");
+                frameGerirProjeto.setSize(600,800);
+                frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                JPanel panelGerirProjeto = new JPanel();
+                panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
                 addPessoa = new JButton("Associar Pessoa");
@@ -154,11 +163,13 @@ public class GUI{
                 terminaProjeto = new JButton("Concluir Projeto");
                 terminaProjeto.addActionListener(new botaoListenerEcras());
                 
-                
-                
-                
-                
-                
+                panelGerirProjeto.add(addPessoa);
+                panelGerirProjeto.add(listTarefas);
+                panelGerirProjeto.add(calculaCusto);
+                panelGerirProjeto.add(terminaProjeto);
+                frameGerirProjeto.add(panelGerirProjeto);
+                frameGerirProjeto.setVisible(true);
+                mainFrame.setVisible(false);
                 
             }
             
@@ -210,6 +221,7 @@ public class GUI{
                 atualizaTaxa.addActionListener(new botaoListenerEcras2());
                 
                 
+                
             }
             
         }
@@ -218,6 +230,29 @@ public class GUI{
       private class botaoListenerEcras2 implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            JPanel newPanel2 = new JPanel();
+            if(e.getSource() == addPessoa ){
+                selecionarPessoas = new JButton("Selecionar Pessoas");
+                frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
+                frameAdicionarPessoa.setSize(600,800);
+                newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
+                JScrollPane listScroller = new JScrollPane(listaPessoas);
+                
+                newPanel2.add(listScroller);
+                newPanel2.add(selecionarPessoas);
+                frameAdicionarPessoa.setVisible(true);
+                mainFrame.setVisible(false);
+                
+                
+                
+                
+                
+               
+                
+                
+                
+            }
             
             
         } 

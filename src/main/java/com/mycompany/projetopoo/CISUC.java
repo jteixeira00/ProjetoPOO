@@ -250,6 +250,18 @@ public ArrayList<Projeto> getListaProjeto(){
     return projeto;
 }
 
+
+public ArrayList<String> getNomesPessoas(){
+    ArrayList<String> list = new ArrayList<String>();
+    
+    for(Pessoa temp: pessoas){
+        list.add(temp.getNome());
+        
+    }
+    
+    
+    return list;
+}
     
     /*public void leFicheiroProjetos(){
     File f = new File("CISUC.txt");
