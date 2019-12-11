@@ -448,7 +448,7 @@ public void SaveObjectFilesDocentes(){
         CISUC cisuc = new CISUC();
         
         try {
-            //GUI gui = new GUI(cisuc);
+            GUI gui = new GUI(cisuc);
            if(cisuc.ObjectCheck() == false){
                 cisuc.leFicheiroPessoas();
                 cisuc.leFicheiroProjetos();  

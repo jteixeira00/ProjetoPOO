@@ -39,9 +39,9 @@ public class GUI{
     JTextField ano;
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
-    
+    JComboBox ComboBoxProjetos;
     JList listaPessoas;
-           
+    Projeto currentProjeto;
     CISUC cisuc;
     
     
@@ -52,19 +52,15 @@ public class GUI{
         
         mainFrame.setSize(800, 600);
         
-        
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,3));
         
-        
         criarProjeto = new JButton("Criar Projeto");
         criarProjeto.addActionListener(new botaoListener());
         mainPanel.add(criarProjeto);
         
-        
-    
         gerirProjeto = new JButton("Gerir Projeto");
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
@@ -154,6 +150,10 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
+                ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
+                
+                
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
                 
@@ -168,7 +168,7 @@ public class GUI{
                 
                 regressaMainDaGestao = new JButton("Ecrã Principal");
                 regressaMainDaGestao.addActionListener(new botaoListenerEcras());
-                
+                panelGerirProjeto.add(ComboBoxProjetos);
                 panelGerirProjeto.add(addPessoa);
                 panelGerirProjeto.add(listTarefas);
                 panelGerirProjeto.add(calculaCusto);
@@ -263,6 +263,10 @@ public class GUI{
                 frameGerirProjeto.setVisible(false);
                 
        
+                
+            }
+            
+            else if(e.getSource() == ComboBoxProjetos){
                 
             }
             
