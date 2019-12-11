@@ -73,10 +73,46 @@ public class CISUC extends JFrame implements Serializable {
         return P_Null;              
     }
     
+    public Bolseiro BolseiroGetter(String nome){
+        Bolseiro B_Null;
+         for(Bolseiro b:bolseiro){
+            if(nome.equals(b.getNome()) == true){
+                return b;
+            }
+        }
+                  
+         return null;
+        }
+    public Docente DocenteGetter(String nome){
+        Docente D_Null = new Docente(null,null,0,null);
+         for(Docente d:docente){
+            if(nome.equals(d.getNome()) == true){
+                return d;
+            }
+        }
+        return D_Null;              
+    }
+    
     public ArrayList<String> getNomesProjetos(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Projeto p:projeto){
             nomes.add(p.getNome());
+        }
+        return nomes;
+    }
+    
+    public ArrayList<String> getNomesBolseiros(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for(Bolseiro b:bolseiro){
+            nomes.add(b.getNome());
+        }
+        return nomes;
+    }
+    
+    public ArrayList<String> getNomesDocentes(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for(Docente d:docente){
+            nomes.add(d.getNome());
         }
         return nomes;
     }
