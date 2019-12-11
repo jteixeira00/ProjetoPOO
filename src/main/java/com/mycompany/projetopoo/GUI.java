@@ -28,11 +28,11 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
     JButton confirm, selecionarPessoas;
-    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao;
+    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
@@ -40,7 +40,7 @@ public class GUI{
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
     JComboBox ComboBoxProjetos;
-    JList listaPessoas, listaDocentes;
+    JList listaPessoas, listaDocentes, listaTarefas;
     Projeto currentProjeto;
     CISUC cisuc;
     
@@ -112,8 +112,7 @@ public class GUI{
                 for(Docente temp: cisuc.docente){
                     lista.add(temp.getNome());
                 }
-                 
-                
+             
                 listaInvestigadoresPrinc = new JComboBox(lista.toArray());  
                 newPanel.add(labelNome);
                 newPanel.add(nome);
@@ -217,6 +216,14 @@ public class GUI{
             }
             
             else if(e.getSource() == listTarefas){
+                gerirTarefas = new JFrame("Gerir Tarefas");
+                gerirTarefas.setSize(600,800);
+                JPanel panelTarefas= new JPanel();
+                panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));
+                
+                gerirTarefas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
+                JScrollPane listScroller = new JScrollPane(listaTarefas);
                 
                 eliminaTarefa = new JButton("Eliminar Tarefa");
                 eliminaTarefa.addActionListener(new botaoListenerEcras2());
@@ -226,6 +233,20 @@ public class GUI{
                 
                 atualizaTaxa = new JButton("Atualizar Taxa");
                 atualizaTaxa.addActionListener(new botaoListenerEcras2());
+                
+                regressaMainDasTarefas = new JButton("Ecrã Principal");
+                regressaMainDasTarefas.addActionListener(new botaoListenerEcras2());
+                
+                panelTarefas.add(listaTarefas, "span 1 6");
+                panelTarefas.add(eliminaTarefa, "cell 1 0");
+                panelTarefas.add(atribuiTarefa, "cell 1 1");
+                panelTarefas.add(atualizaTaxa, "cell 1 2");
+                gerirTarefas.add(panelTarefas);
+                frameGerirProjeto.setVisible(false);
+                gerirTarefas.setVisible(true);
+                
+                
+                
                 
                 
                 

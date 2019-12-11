@@ -77,6 +77,8 @@ public class Projeto extends CISUC implements Serializable{
         return tarefa;
     }
     
+    
+    
     public int addPessoa(Pessoa p){
         int check =0;
         for(Projeto proj: projeto){
@@ -150,7 +152,13 @@ public class Projeto extends CISUC implements Serializable{
         }
         
     }
-    
+    public ArrayList<String> getNomesTarefas(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for(Tarefa b:tarefa){
+            nomes.add(b.getNome());
+        }
+        return nomes;
+    }
     public ArrayList<Tarefa> ListarNaoIniciadas(){
         ArrayList<Tarefa> nIniciadas = new ArrayList<>();
         for(Tarefa temp: tarefa){
