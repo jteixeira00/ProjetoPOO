@@ -33,20 +33,18 @@ public class CISUC extends JFrame implements Serializable {
     ArrayList<Pessoa> pessoas = new ArrayList<>();
     
     
-    //interface
    
-    
-    
+
     
     public CISUC(){
-              
+
         
     }
     
     
   
     
-  
+
     
    
     public void foraPrazo(){
@@ -403,13 +401,13 @@ public ArrayList<Projeto> getListaProjeto(){
      */
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
-        
+        GUI gui = new GUI(cisuc);
 
         cisuc.leFicheiroPessoas();
         cisuc.leFicheiroProjetos(); 
         ArrayList<Projeto> a = cisuc.getListaProjeto();
         Projeto p = a.get(0);
-        System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
+        //System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
         
         
     }
