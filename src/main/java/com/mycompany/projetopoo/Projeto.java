@@ -185,6 +185,10 @@ public class Projeto extends CISUC implements Serializable{
         return fprazo;            
     }
     
+    public void setCompleto(){
+        completo = true;
+    }
+    
     public ArrayList<Tarefa> ListarConcluidas(){
         ArrayList<Tarefa> Concluidas = new ArrayList<>();
         for(Tarefa temp: tarefa){
