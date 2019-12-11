@@ -39,7 +39,6 @@ public class GUI{
     JTextField ano;
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
-    Projeto currentProjeto;
     
     JList listaPessoas, listaProjetos;
            
@@ -48,7 +47,6 @@ public class GUI{
     
     
     GUI(CISUC cisuc){
-        
         this.cisuc = cisuc;
         mainFrame = new JFrame("Cenas");
         
@@ -153,11 +151,9 @@ public class GUI{
                 
                 frameEscolherProjeto = new JFrame("Escolher Projeto");        
                 frameEscolherProjeto.setSize(600,800);
-                frameEscolherProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 
                 escolherProjeto = new JButton("Escolher");
-                
-                
                 escolherProjeto.addActionListener(new botaoListenerEcras());
                 
                 JPanel panel = new JPanel(new MigLayout("align 50% 50%, wrap 1"));
@@ -166,11 +162,6 @@ public class GUI{
                 
                 panel.add(listScrollerProjetos, "span 2 4");
                 panel.add(escolherProjeto);
-                
-                frameEscolherProjeto.add(panel);
-                
-                frameEscolherProjeto.setVisible(true);
-                mainFrame.setVisible(false);
                 
                 
                 
@@ -215,11 +206,12 @@ public class GUI{
  
             }
             
-            else if(e.getSource() == escolherProjeto){
+            else if(e.getSource() ==escolherProjeto){
                 
                 
                 String Projeto = (String)listaProjetos.getSelectedValue();
-                
+                listaProjetos = new JList(cisuc.getNomesProjetos().toArray());
+                JScrollPane projectScroller = new JScrollPane(listaProjetos);
                 
                 
                 
