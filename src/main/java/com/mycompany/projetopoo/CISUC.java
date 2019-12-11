@@ -13,9 +13,11 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.GregorianCalendar; 
 import java.util.ArrayList;
@@ -357,9 +359,56 @@ public int leObjectFilesProjetos(){
     return 1;
 }
 
+public void SaveObjectFilesProjetos(){
+    File f = new File("Projetos.obj");
+    try { 
+        FileOutputStream fos = new FileOutputStream(f);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        for(Projeto p:projeto){
+            oos.writeObject(p);
+        }
+        oos.close(); 
+    } catch (FileNotFoundException ex) { 
+        System.out.println("Erro a criar ficheiro."); 
+    } catch (IOException ex) { 
+        System.out.println("Erro a escrever para o ficheiro."); 
+    }    
+}
 
-        
+public void SaveObjectFilesBolseiros(){
+    File f = new File("Bolseiros.obj");
+    try { 
+        FileOutputStream fos = new FileOutputStream(f);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        for(Bolseiro b:bolseiro){
+            oos.writeObject(b);
+        }
+        oos.close(); 
+    } catch (FileNotFoundException ex) { 
+        System.out.println("Erro a criar ficheiro."); 
+    } catch (IOException ex) { 
+        System.out.println("Erro a escrever para o ficheiro."); 
+    } 
     
+}
+
+public void SaveObjectFilesDocentes(){
+    File f = new File("Docentes.obj");
+    try { 
+        FileOutputStream fos = new FileOutputStream(f);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        for(Docente d:docente){
+            oos.writeObject(d);
+        }
+        oos.close(); 
+    } catch (FileNotFoundException ex) { 
+        System.out.println("Erro a criar ficheiro."); 
+    } catch (IOException ex) { 
+        System.out.println("Erro a escrever para o ficheiro."); 
+    } 
+    
+}
+
 
     /**
      * @param args the command line arguments
@@ -380,9 +429,9 @@ public int leObjectFilesProjetos(){
         } catch (IOException ex) {
             System.out.println("IOException caught; Main");
         }
-
-
-        
+        cisuc.SaveObjectFilesBolseiros();
+        cisuc.SaveObjectFilesBolseiros();
+        cisuc.SaveObjectFilesProjetos();
         
     }
     
