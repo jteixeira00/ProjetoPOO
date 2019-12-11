@@ -35,22 +35,18 @@ public class CISUC extends JFrame implements Serializable {
     ArrayList<Pessoa> pessoas = new ArrayList<>();
     
     
-    //interface
-    
-    
-    
+   
+
     
     public CISUC(){
-        //interface
-        //mainFrame = new JFrame();
-        
+
         
     }
     
     
   
     
-   
+
     
    
     public void foraPrazo(){

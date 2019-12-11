@@ -5,26 +5,38 @@
  */
 package com.mycompany.projetopoo;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 /**
  *
  * @author User
  */
 public class GUI{
-    JFrame mainFrame;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto;
     JPanel mainPanel;
-    JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
+    final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
+    JButton confirm;
+    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto;
+    JTextField nome, acronimo;
+    JTextField dia;
+    JTextField mes ;
+    JTextField ano;
+    JTextField eta;
+    JComboBox listaInvestigadoresPrinc; 
+           
     CISUC cisuc;
     
     
@@ -32,6 +44,8 @@ public class GUI{
     GUI(CISUC cisuc){
         this.cisuc = cisuc;
         mainFrame = new JFrame("Cenas");
+        mainFrame.setSize(800, 500);
+        
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new JPanel();
@@ -45,7 +59,7 @@ public class GUI{
         
     
         gerirProjeto = new JButton("Gerir Projeto");
-        gerirProjeto.addActionListener(new botaoListener());
+        gerirProjeto.addActionListener(new botaoListenerEcras());
         mainPanel.add(gerirProjeto);  
         
         listaAtivos = new JButton("Listar Projetos Ativos");
@@ -59,7 +73,7 @@ public class GUI{
         listaConcluidos = new JButton("Listar Projetos Concluídos");
         listaConcluidos.addActionListener(new botaoListener());
         mainPanel.add(listaConcluidos);
-        mainFrame.setSize(800, 500);
+        
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
     
@@ -68,53 +82,83 @@ public class GUI{
         @Override
         public void actionPerformed(ActionEvent e){
             JPanel newPanel = new JPanel();
+            
             if (e.getSource() == criarProjeto){ 
-                JFrame newFrame = new JFrame();
+                frameCreateProject = new JFrame();
+                frameCreateProject.setSize(100, 300);
+                frameCreateProject.setResizable(false);
                 
-                newPanel.setLayout(new GridLayout(10,2));
+                confirm = new JButton("Confirmar");
+                confirm.addActionListener(new botaoListenerEcras());
+                newPanel.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 JLabel labelNome = new JLabel("Nome:");
-                JTextField nome = new JTextField(10);
+                nome = new JTextField(10);
                 JLabel labelAcronimo = new JLabel("Acronimo:");
-                JTextField acronimo = new JTextField(10);
+                acronimo = new JTextField(10);
                 JLabel labelDataInicio = new JLabel("Data Inicio (dia/mes/ano):");
-                
-                JTextField dia = new JTextField(10);
-                JTextField mes = new JTextField(10);
-                JTextField ano = new JTextField(10);
+                dia = new JTextField(2);
+                mes = new JTextField(2);
+                ano = new JTextField(4);
                 JLabel labelETA = new JLabel("Duração Estimada: (meses)");
-                JTextField eta = new JTextField(10);
-                
-                JLabel labelIP = new JLabel("Investigador Principal:");               
+                eta = new JTextField(10); 
+                JLabel labelIP = new JLabel("Investigador Principal:");  
                 ArrayList<String> lista;
                 lista = new ArrayList();
+ 
                 
-                for(Projeto temp: cisuc.projeto){
-                    lista.add(temp.getInvestigadorP().getNome());
-                }    
-                JComboBox listaInvestigadores = new JComboBox(lista.toArray());  
+                for(Docente temp: cisuc.docente){
+                    lista.add(temp.getNome());
+                }
+                 
                 
+                listaInvestigadoresPrinc = new JComboBox(lista.toArray());  
                 newPanel.add(labelNome);
                 newPanel.add(nome);
                 newPanel.add(labelAcronimo);
                 newPanel.add(acronimo);
                 newPanel.add(labelDataInicio);
-                newPanel.add(dia);
+                newPanel.add(dia, "split 3");
                 newPanel.add(mes);
                 newPanel.add(ano);
                 newPanel.add(labelETA);
-                newPanel.add(eta);
+                newPanel.add(eta);                
                 newPanel.add(labelIP);
-                newPanel.add(listaInvestigadores);
-                newFrame.add(newPanel);
-                newFrame.setSize(800, 500);
-                newFrame.add(newPanel);
-                newFrame.setVisible(true);
-                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                newPanel.add(listaInvestigadoresPrinc);
+                frameCreateProject.add(newPanel);               
+                frameCreateProject.setSize(800, 500);
+                frameCreateProject.add(newPanel);
+                newPanel.add(confirm, "cell 1 6");
+                mainFrame.setVisible(false);
+                frameCreateProject.setVisible(true);
+                
+                frameCreateProject.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                
                 
                
               
             }
             else if(e.getSource() == gerirProjeto){
+                //JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto;
+                frameGerirProjeto = new JFrame("Gerir Projeto");
+                frameGerirProjeto.setResizable(false);
+                
+                addPessoa = new JButton("Associar Pessoa");
+                addPessoa.addActionListener(new botaoListenerEcras());
+                
+                listTarefas = new JButton("Listar Tarefas");
+                listTarefas.addActionListener(new botaoListenerEcras());
+                
+                calculaCusto = new JButton("Calcular Custo");
+                calculaCusto.addActionListener(new botaoListenerEcras());
+                
+                terminaProjeto = new JButton("Concluir Projeto");
+                terminaProjeto.addActionListener(new botaoListenerEcras());
+                
+                
+                
+                
+                
+                
                 
             }
             
@@ -128,7 +172,56 @@ public class GUI{
             else if(e.getSource() == listaConcluidos){
                 
             }
+            
+            
         }
         
     }
+      private class botaoListenerEcras implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == confirm){
+                mainFrame.setVisible(true);
+                frameCreateProject.setVisible(false);
+                
+                String nomeText =  (String)nome.getText();
+                String acronimoText = (String)acronimo.getText();
+                int diaT = Integer.parseInt((String)dia.getText());
+                int mesT = Integer.parseInt((String)mes.getText());  
+                int anoT = Integer.parseInt((String)ano.getText());
+                int etaT = Integer.parseInt((String)eta.getText());
+                GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
+                Projeto temp = new Projeto(nomeText, acronimoText, dataIT, etaT);
+                cisuc.projeto.add(temp);
+                
+                String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
+ 
+            }
+            
+            else if(e.getSource() == listTarefas){
+                
+                eliminaTarefa = new JButton("Eliminar Tarefa");
+                eliminaTarefa.addActionListener(new botaoListenerEcras2());
+                
+                atribuiTarefa = new JButton("Atribuir Tarefa");
+                atribuiTarefa.addActionListener(new botaoListenerEcras2());
+                
+                atualizaTaxa = new JButton("Atualizar Taxa");
+                atualizaTaxa.addActionListener(new botaoListenerEcras2());
+                
+                
+            }
+            
+        }
+            
+     }
+      private class botaoListenerEcras2 implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+            
+        } 
+        
+     }
+      
 }

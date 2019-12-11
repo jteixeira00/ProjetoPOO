@@ -1,11 +1,16 @@
 com\mycompany\projetopoo\GUI$botaoListener.class
+com\mycompany\projetopoo\GUI$botaoListenerEcras.class
 com\mycompany\projetopoo\Projeto.class
 com\mycompany\projetopoo\Tarefa.class
 com\mycompany\projetopoo\Documentacao.class
 com\mycompany\projetopoo\Licenciado.class
 com\mycompany\projetopoo\Desenvolvimento.class
 com\mycompany\projetopoo\Mestre.class
+com\mycompany\projetopoo\CISUC.class
+com\mycompany\projetopoo\GUI$botaoListenerEcras2.class
 com\mycompany\projetopoo\Bolseiro.class
 com\mycompany\projetopoo\Doutorado.class
+com\mycompany\projetopoo\Docente.class
 com\mycompany\projetopoo\Pessoa.class
+com\mycompany\projetopoo\Design.class
 com\mycompany\projetopoo\GUI.class
