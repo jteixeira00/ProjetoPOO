@@ -30,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
 public class GUI{
     JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas;
     JPanel mainPanel;
-    final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
+    final JButton criarProjeto, gerirProjeto, listaIncompletos,listaConcluidos;
     JButton confirm, selecionarPessoas;
     JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas;
     JTextField nome, acronimo;
@@ -65,9 +65,7 @@ public class GUI{
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
         
-        listaAtivos = new JButton("Listar Projetos Ativos");
-        listaAtivos.addActionListener(new botaoListener());
-        mainPanel.add(listaAtivos); 
+       
         
         listaIncompletos = new JButton("Listar Projetos por Concluir");
         listaIncompletos.addActionListener(new botaoListener());
@@ -179,9 +177,7 @@ public class GUI{
                 
             }
             
-            else if(e.getSource() == listaAtivos){
-                
-            }
+            
             else if(e.getSource() == listaIncompletos){
                 
             }
