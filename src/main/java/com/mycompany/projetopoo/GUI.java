@@ -258,8 +258,10 @@ public class GUI{
                 
                 listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
                 JScrollPane listScroller2 = new JScrollPane(listaDocentes);
-                
+                newPanel2.add(new Label("Bolseiros"));
+                newPanel2.add(new Label("Docentes"));
                 newPanel2.add(listScroller);
+                newPanel2.add(listScroller2);
                 newPanel2.add(selecionarPessoas, "cell 1 1");
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
@@ -283,8 +285,14 @@ public class GUI{
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == selecionarPessoas){
+                
+                
                 List<String> lista = listaPessoas.getSelectedValuesList();
+                List<String> listaDoc = listaDocentes.getSelectedValuesList();
+                
+                
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
+                ArrayList<String> listaNomesDocentes = new ArrayList<>(listaDoc.size());
                 listaNomesPessoas.addAll(lista);
                 
                 //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
