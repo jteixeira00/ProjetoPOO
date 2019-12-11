@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.GregorianCalendar; 
 import java.util.ArrayList;
@@ -405,13 +407,13 @@ public ArrayList<Projeto> getListaProjeto(){
      */
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
-        GUI gui = new GUI(cisuc);
+        //GUI gui = new GUI(cisuc);
+       
+        System.out.println("Erro a abrir ficheiro: pessoas.");
+        
+      //  cisuc.leFicheiroPessoas();
+        //cisuc.leFicheiroProjetos(); 
 
-        cisuc.leFicheiroPessoas();
-        cisuc.leFicheiroProjetos(); 
-        ArrayList<Projeto> a = cisuc.getListaProjeto();
-        Projeto p = a.get(0);
-        //System.out.println(p.getTarefa().get(0).getResponsavel().getNome());
         
         
     }
