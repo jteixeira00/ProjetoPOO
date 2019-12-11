@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,10 +47,7 @@ public class CISUC extends JFrame implements Serializable {
     }
     
     
-  
-    
 
-    
    
     public void foraPrazo(){
         for(Projeto temp:projeto){
@@ -288,7 +286,78 @@ public boolean ObjectCheck() throws IOException{
     
 }
     
+
+public int leObjectFilesBolseiros(){
+    try {
+            FileInputStream fis = new FileInputStream("Bolseiros.obj");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            while(true){ 
+                try{
+                    projeto.add((Projeto)ois.readObject());   
+
+                }catch (ClassNotFoundException ex) {
+                    System.out.println("Erro a converter objeto");
+                }catch (EOFException ex){
+                    ois.close();
+                    return 0;
+                }
+            }
+    }catch (FileNotFoundException ex) {
+        System.out.println("Erro a abrir ficheiro.");
+    }catch (IOException ex) {
+        System.out.println("Erro a ler ficheiro.");          
+    }
+    return 1;
+}
+
+public int leObjectFilesDocentes(){
+    try {
+            FileInputStream fis = new FileInputStream("Docentes.obj");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            while(true){ 
+                try{
+                    projeto.add((Projeto)ois.readObject());   
+
+                }catch (ClassNotFoundException ex) {
+                    System.out.println("Erro a converter objeto");
+                }catch (EOFException ex){
+                    ois.close();
+                    return 0;
+                }
+            }
+    }catch (FileNotFoundException ex) {
+        System.out.println("Erro a abrir ficheiro.");
+    }catch (IOException ex) {
+        System.out.println("Erro a ler ficheiro.");          
+    }
+    return 1;
+}
     
+
+public int leObjectFilesProjetos(){
+    try {
+            FileInputStream fis = new FileInputStream("Projetos.obj");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            while(true){ 
+                try{
+                    projeto.add((Projeto)ois.readObject());   
+
+                }catch (ClassNotFoundException ex) {
+                    System.out.println("Erro a converter objeto");
+                }catch (EOFException ex){
+                    ois.close();
+                    return 0;
+                }
+            }
+    }catch (FileNotFoundException ex) {
+        System.out.println("Erro a abrir ficheiro.");
+    }catch (IOException ex) {
+        System.out.println("Erro a ler ficheiro.");          
+    }
+    return 1;
+}
+
+
         
     
 
@@ -304,10 +373,12 @@ public boolean ObjectCheck() throws IOException{
                 cisuc.leFicheiroProjetos();  
             }
            else{
-                   
+               cisuc.leObjectFilesDocentes();
+               cisuc.leObjectFilesBolseiros();
+               cisuc.leObjectFilesProjetos();
             }
         } catch (IOException ex) {
-            System.out.println("IOException caught; Main");;
+            System.out.println("IOException caught; Main");
         }
 
 
