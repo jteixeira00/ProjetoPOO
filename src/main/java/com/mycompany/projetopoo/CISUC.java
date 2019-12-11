@@ -109,7 +109,7 @@ public void leFicheiroProjetos(){
                     case "INV":{
                         for(Docente doc:docente){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
-                                //p.addInv(doc)
+                                p.setIP(doc);
                             }
                         }
                         break;
@@ -117,7 +117,7 @@ public void leFicheiroProjetos(){
                     case "DOC":{
                         for(Docente doc:docente){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
-                                //p.addDoc(doc)
+                                p.addDocente(doc);
                             }
                         }                        
                         break;
@@ -125,7 +125,7 @@ public void leFicheiroProjetos(){
                     case "EST":{
                         for(Bolseiro b:bolseiro){
                             if(b.getEmail().equals(line.split("/")[1])==true){
-                                //p.addBolseiro(b);
+                                p.addBolseiro(b);
                             }
                         }
                         break;

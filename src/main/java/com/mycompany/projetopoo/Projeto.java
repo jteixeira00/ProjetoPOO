@@ -22,7 +22,8 @@ public class Projeto extends CISUC implements Serializable{
     private int duracao;
     protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
     protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
-    protected ArrayList<Docente> docente = new ArrayList<Docente>();    
+    protected ArrayList<Docente> docente = new ArrayList<Docente>();
+    protected ArrayList<Bolseiro> bolseiro = new ArrayList<Bolseiro>();    
     private Pessoa investigadorP;
     private boolean completo = false;
     private boolean fPrazo = false;
@@ -36,13 +37,15 @@ public class Projeto extends CISUC implements Serializable{
         this.duracao = duracao;
         this.acronimo = acronimo;
         this.data_final = data_final;
+        this.investigadorP = null;
        
     }
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,String acronimo){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.duracao = duracao;
-        this.acronimo = acronimo;        
+        this.acronimo = acronimo;
+        this.investigadorP = null;        
     }
    
     
@@ -54,8 +57,16 @@ public class Projeto extends CISUC implements Serializable{
         docente.add(d);       
     }
     
-    public void setIP(Docente d){
-        this.investigadorP = d;       
+    public void addBolseiro(Bolseiro b){
+        bolseiro.add(b);       
+    }
+    
+    public int setIP(Docente d){
+        if(investigadorP == null){
+            this.investigadorP = d;
+            return 1;
+        }
+        return 0;               
     }
     
 
