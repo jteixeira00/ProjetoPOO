@@ -317,19 +317,31 @@ public class GUI{
                 listaNomesPessoas.addAll(lista);
                 
                 //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
-                /*ArrayList<Bolseiro> BolseirosRejeitados;
+                
+                ArrayList<Bolseiro> listaBolseiro = new ArrayList<>();
+                ArrayList<Docente> listaDocentes = new ArrayList<>();
+                ArrayList<Bolseiro> BolseirosRejeitados = new ArrayList<>();
+                
+                for(String bolseiro:listaNomesPessoas){
+                    listaBolseiro.add(cisuc.BolseiroGetter(bolseiro));
+                }
+                for(String docente:listaNomesDocentes){
+                    listaDocentes.add(cisuc.DocenteGetter(docente));
+                }
+                
                 for(Bolseiro bol:listaBolseiro){
                     if(cisuc.BolseiroInProjetos(bol) == 1){
                         BolseirosRejeitados.add(bol);
+                        /*Bolseiros Rejeitados mostar*/
                     }
                     else{
                         currentProjeto.addBolseiro(bol);
                     }
-                 for(Docentes dol:listaDocentes){
-                     currentProjeto.addDocentes(dol);
+                 for(Docente dol:listaDocentes){
+                     currentProjeto.addDocente(dol);
                  }
                     
-                }*/
+                }
                 
                 
                 frameAdicionarPessoa.setVisible(false);
