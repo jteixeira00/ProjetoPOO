@@ -31,7 +31,7 @@ public class GUI{
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
     JButton confirm, selecionarPessoas;
-    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto;
+    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
@@ -48,6 +48,7 @@ public class GUI{
     GUI(CISUC cisuc){
         this.cisuc = cisuc;
         mainFrame = new JFrame("Cenas");
+        
         mainFrame.setSize(800, 600);
         
         
@@ -89,9 +90,10 @@ public class GUI{
             JPanel newPanel = new JPanel();
             
             if (e.getSource() == criarProjeto){ 
-                frameCreateProject = new JFrame();       
+                frameCreateProject = new JFrame();   
+                frameCreateProject.setSize(400,300);
                 frameCreateProject.setResizable(false);
-
+                
                 confirm = new JButton("Confirmar");
                 confirm.addActionListener(new botaoListenerEcras());
                 newPanel.setLayout(new MigLayout("align 50% 50%, wrap 2"));
@@ -152,7 +154,7 @@ public class GUI{
                 frameGerirProjeto.setResizable(false);
                 
                 addPessoa = new JButton("Associar Pessoa");
-                addPessoa.addActionListener(new botaoListenerEcras());
+                addPessoa.addActionListener(new botaoListenerEcras2());
                 
                 listTarefas = new JButton("Listar Tarefas");
                 listTarefas.addActionListener(new botaoListenerEcras());
@@ -163,10 +165,14 @@ public class GUI{
                 terminaProjeto = new JButton("Concluir Projeto");
                 terminaProjeto.addActionListener(new botaoListenerEcras());
                 
+                regressaMainDaGestao = new JButton("Ecrã Principal");
+                regressaMainDaGestao.addActionListener(new botaoListenerEcras());
+                
                 panelGerirProjeto.add(addPessoa);
                 panelGerirProjeto.add(listTarefas);
                 panelGerirProjeto.add(calculaCusto);
                 panelGerirProjeto.add(terminaProjeto);
+                panelGerirProjeto.add(regressaMainDaGestao, "cell 0 6");
                 frameGerirProjeto.add(panelGerirProjeto);
                 frameGerirProjeto.setVisible(true);
                 mainFrame.setVisible(false);
@@ -224,6 +230,14 @@ public class GUI{
                 
             }
             
+            else if(e.getSource() == regressaMainDaGestao){
+                
+                frameGerirProjeto.setVisible(false);
+                mainFrame.setVisible(true);
+                
+                
+            }
+            
         }
             
      }
@@ -233,24 +247,21 @@ public class GUI{
             JPanel newPanel2 = new JPanel();
             if(e.getSource() == addPessoa ){
                 selecionarPessoas = new JButton("Selecionar Pessoas");
+                selecionarPessoas.addActionListener(new botaoListenerEcras2());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
                 frameAdicionarPessoa.setSize(600,800);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                
                 listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
                 JScrollPane listScroller = new JScrollPane(listaPessoas);
                 
                 newPanel2.add(listScroller);
                 newPanel2.add(selecionarPessoas);
+                frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
                 mainFrame.setVisible(false);
                 
-                
-                
-                
-                
-               
-                
-                
+       
                 
             }
             
@@ -258,5 +269,19 @@ public class GUI{
         } 
         
      }
+      private class botaoListenerEcras3 implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == selecionarPessoas){
+                
+                
+                
+            }
+            
+            
+        }
+            
+            
+        }
       
 }

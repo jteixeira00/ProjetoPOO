@@ -61,6 +61,24 @@ public class Projeto extends CISUC implements Serializable{
         return tarefa;
     }
     
+    public int addPessoa(Pessoa p){
+        int check =0;
+        for(Projeto proj: projeto){
+            for(Pessoa pess: proj.getPessoas()){
+                if(pess.getNome().equals(p.getNome())){
+                    check =1;
+                }
+            }
+        }
+        if(check==1){
+            return 0;
+        }
+        else{
+            pessoa.add(p);
+            return 1;
+        }
+     
+    }
     
 
 
