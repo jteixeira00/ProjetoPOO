@@ -94,7 +94,12 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                        p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf);
+                        if(dataf.get(GregorianCalendar.YEAR) == 0000 & dataf.get(GregorianCalendar.MONTH) == 00 & dataf.get(GregorianCalendar.DAY_OF_MONTH) == 0){
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5]);
+                        } 
+                        else{
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5]);
+                        }
                         projeto.add(p);
 
                         break;
@@ -391,6 +396,17 @@ public ArrayList<Projeto> getListaProjeto(){
     }
 
 }*/
+
+public boolean ObjectCheck(){
+        try{
+            File f = new File("Pessoas.obj");
+            FileInputStream fis = new FileInputStream(f);
+        }catch(FileNotFoundException ex){
+            return false; 
+        }
+        return true;
+        
+}
   
     
     
@@ -402,10 +418,11 @@ public ArrayList<Projeto> getListaProjeto(){
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CISUC cisuc = new CISUC();
+        //CISUC cisuc = new CISUC();
         //GUI gui = new GUI(cisuc);
-       
-        System.out.println("Erro a abrir ficheiro: pessoas.");
+        //System.out.println(cisuc.ObjectCheck()+);
+        
+        
         
       //  cisuc.leFicheiroPessoas();
         //cisuc.leFicheiroProjetos(); 
