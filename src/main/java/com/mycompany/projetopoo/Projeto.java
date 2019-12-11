@@ -244,7 +244,11 @@ public class Projeto extends CISUC implements Serializable{
     public ArrayList<Pessoa> getPessoas() {
         return pessoa;
     }
-
+    
+    public ArrayList<Bolseiro> getBolseiros() {
+        return bolseiro;
+    }
+    
     public Pessoa getInvestigadorP() {
         return investigadorP;
     }

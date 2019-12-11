@@ -48,6 +48,19 @@ public class CISUC extends JFrame implements Serializable {
         
     }
     
+    public int BolseiroInProjetos(Bolseiro b){
+         ArrayList<Bolseiro> ListaB;
+         for(Projeto proj:projeto){
+             ListaB = proj.getBolseiros();
+             for(Bolseiro bol: ListaB){
+                 if(bol.getNome().equals(b.getNome()) == true){
+                     return 1;
+                 }
+             }
+         }
+         return 0;         
+    }
+    
     public ArrayList<String> getNomesProjetos(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Projeto p:projeto){
