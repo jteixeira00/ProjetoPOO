@@ -28,11 +28,16 @@ public class Projeto extends CISUC implements Serializable{
     private boolean fPrazo = false;
     private int custo;
     
+    //FALTA ACRONIMO
+    
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.duracao = duracao;
        
+    }
+    public Projeto(String nome,String acronimo,GregorianCalendar data_inicio,int duracao){
+        
     }
    
     
