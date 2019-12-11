@@ -284,7 +284,20 @@ public class GUI{
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
                 listaNomesPessoas.addAll(lista);
                 
-                //CODIGO PARA ADICIONAR A PESSOA
+                //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
+                /*ArrayList<Bolseiro> BolseirosRejeitados;
+                for(Bolseiro bol:listaBolseiro){
+                    if(cisuc.BolseiroInProjetos(bol) == 1){
+                        BolseirosRejeitados.add(bol);
+                    }
+                    else{
+                        projeto.addBolseiro(bol);
+                    }
+                 for(Docentes dol:listaDocentes){
+                     projeto.addDocentes(dol);
+                 }
+                    
+                }*/
                 
                 
                 frameAdicionarPessoa.setVisible(false);
