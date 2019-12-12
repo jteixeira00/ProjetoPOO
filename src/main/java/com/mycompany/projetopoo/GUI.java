@@ -21,6 +21,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -28,11 +29,11 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos, frameCusto;
     JPanel mainPanel;
-    final JButton criarProjeto, gerirProjeto, listaIncompletos,listaConcluidos;
-    JButton confirm, selecionarPessoas;
-    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa;
+    final JButton criarProjeto, gerirProjeto,listaConcluidos;
+    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto;
+    JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
@@ -61,20 +62,24 @@ public class GUI{
         criarProjeto.addActionListener(new botaoListener());
         mainPanel.add(criarProjeto);
         
+        
+        
         gerirProjeto = new JButton("Gerir Projeto");
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
         
        
         
-        listaIncompletos = new JButton("Listar Projetos por Concluir");
-        listaIncompletos.addActionListener(new botaoListener());
-        mainPanel.add(listaIncompletos);
+        
         
         listaConcluidos = new JButton("Listar Projetos Concluídos");
         listaConcluidos.addActionListener(new botaoListener());
         mainPanel.add(listaConcluidos);
         
+        
+        guardarFechar = new JButton("Guardar e Fechar");
+        guardarFechar.addActionListener(new botaoListener());
+        mainPanel.add(guardarFechar);
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
     
@@ -131,12 +136,21 @@ public class GUI{
                 mainFrame.setVisible(false);
                 frameCreateProject.setVisible(true);
                 
-                frameCreateProject.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frameCreateProject.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 
                 
                
               
             }
+            
+            else if(e.getSource() == guardarFechar){
+                
+                cisuc.SaveObjectFilesBolseiros();
+                cisuc.SaveObjectFilesDocentes();
+                cisuc.SaveObjectFilesProjetos();
+                System.exit(0);
+            }
+            
             else if(e.getSource() == gerirProjeto){
                 
                 
@@ -147,14 +161,8 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
-                
-
-                
-                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray());
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
-                System.out.println("AAAAA\n");
-                 ArrayList<String> nomes = cisuc.getNomesProjetosIncompletos();
-                 System.out.println(nomes.get(0));
                 
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
@@ -183,12 +191,10 @@ public class GUI{
             }
             
             
-            else if(e.getSource() == listaIncompletos){
-                
-                
-            }
+            
             
             else if(e.getSource() == listaConcluidos){
+                
                 
             }
           
@@ -215,6 +221,16 @@ public class GUI{
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
  
             }
+            else if(e.getSource()==terminaProjeto){
+                currentProjeto.TerminarP();
+                ComboBoxProjetos.removeAllItems();
+                for(String nome: cisuc.getNomesProjetosIncompletos()){
+                    ComboBoxProjetos.addItem(nome);
+                }
+                
+                
+                
+            }
             
             else if(e.getSource() == listTarefas){
                 
@@ -223,10 +239,8 @@ public class GUI{
                 gerirTarefas.setSize(600,800);
                 JPanel panelTarefas= new JPanel();
                 panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));                
-                gerirTarefas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
                
-                
-                
                 listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
                    
                 JScrollPane listScroller = new JScrollPane(listaTarefas);
@@ -268,6 +282,33 @@ public class GUI{
                 
             }
             
+            else if(e.getSource() == calculaCusto){
+                frameCusto = new JFrame("Custo");
+                frameCusto.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                frameCusto.setResizable(false);
+                frameCusto.setSize(300, 200);
+                fecharCusto = new JButton("Fechar");
+                fecharCusto.addActionListener(new botaoListenerEcras2());
+                JPanel panelCusto = new JPanel();
+                panelCusto.setLayout(new MigLayout("align 50% 50%, wrap 1"));  
+                JLabel mensagem = new JLabel("O custo do projeto é:");
+                
+                String Custo = new String("Batata"); //CALCULAR E INSERIR AQUI
+                
+                JLabel custoL = new JLabel(Custo);
+                panelCusto.add(mensagem);
+                panelCusto.add(custoL);
+                panelCusto.add(fecharCusto);
+                frameCusto.add(panelCusto);
+                frameCusto.setVisible(true);
+                frameGerirProjeto.setVisible(false);
+                
+                 
+                
+            
+            
+            }
+            
         }
             
      }
@@ -277,10 +318,15 @@ public class GUI{
             JPanel newPanel2 = new JPanel();
             if(e.getSource() == addPessoa ){
                 selecionarPessoas = new JButton("Selecionar Pessoas");
-                selecionarPessoas.addActionListener(new botaoListenerEcras2());
+                selecionarPessoas.addActionListener(new botaoListenerEcras3());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
-                frameAdicionarPessoa.setSize(600,800);
+                frameAdicionarPessoa.setSize(600,400);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
+                
+                regressaGerirDasPessoas = new JButton("Gerir Projeto");
+                regressaGerirDasPessoas.addActionListener(new botaoListenerEcras3());
+                
+                
                 
                 listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
                 JScrollPane listScroller = new JScrollPane(listaPessoas);
@@ -291,13 +337,20 @@ public class GUI{
                 newPanel2.add(new Label("Docentes"));
                 newPanel2.add(listScroller);
                 newPanel2.add(listScroller2);
-                newPanel2.add(selecionarPessoas, "cell 1 1");
+                newPanel2.add(selecionarPessoas, "cell 1 2");
+                newPanel2.add(regressaGerirDasPessoas, "cell 1 3");
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
                 frameGerirProjeto.setVisible(false);
                 
        
                 
+            }
+            
+            else if(e.getSource() == fecharCusto){
+                
+                frameCusto.setVisible(false);
+                frameGerirProjeto.setVisible(true);
             }
             
             else if(e.getSource() == ComboBoxProjetos){
@@ -381,6 +434,13 @@ public class GUI{
                 frameAdicionarPessoa.setVisible(false);
                 frameGerirProjeto.setVisible(true);
                 
+                
+                
+            }
+            else if(e.getSource() == regressaGerirDasPessoas){
+                
+                 frameAdicionarPessoa.setVisible(false);
+                 frameGerirProjeto.setVisible(true);
                 
                 
             }

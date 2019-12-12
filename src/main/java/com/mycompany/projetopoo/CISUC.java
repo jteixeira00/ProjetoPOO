@@ -272,7 +272,7 @@ public void leFicheiroPessoas(){
     File f = new File("Pessoas.txt");
     String DataI[];
     String DataF[];
-
+    
 
     if(f.exists() && f.isFile()) { 
         try { 
@@ -355,6 +355,17 @@ public ArrayList<String> getNomesPessoas(){
 
   
 public boolean ObjectCheck() throws IOException{
+    File bol = new File("Bolseiros.OBJ");
+    File doc = new File("Docentes.OBJ");
+    File proj = new File("Projetos.OBJ");
+    
+    if(bol.exists() && doc.exists() && proj.exists()){
+        return true;
+        
+    }
+    
+    return false;
+    /*
     File f = new File("Pessoas.obj");
 
     try { 
@@ -363,6 +374,7 @@ public boolean ObjectCheck() throws IOException{
         return false; 
     }
     return true;
+    */
     
 }
     
@@ -497,13 +509,15 @@ public void SaveObjectFilesDocentes(){
         try {
             
            if(cisuc.ObjectCheck() == false){
+                
                 cisuc.leFicheiroPessoas();
                 cisuc.leFicheiroProjetos();  
             }
            else{
-               cisuc.leObjectFilesDocentes();
-               cisuc.leObjectFilesBolseiros();
-               cisuc.leObjectFilesProjetos();
+               
+               //cisuc.leObjectFilesDocentes();
+               //cisuc.leObjectFilesBolseiros();
+               //cisuc.leObjectFilesProjetos();
             }
         } catch (IOException ex) {
             System.out.println("IOException caught; Main");
