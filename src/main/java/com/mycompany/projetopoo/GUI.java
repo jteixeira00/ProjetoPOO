@@ -152,7 +152,9 @@ public class GUI{
                 
                 ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
-                
+                System.out.println("AAAAA\n");
+                 ArrayList<String> nomes = cisuc.getNomesProjetosIncompletos();
+                 System.out.println(nomes.get(0));
                 
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
