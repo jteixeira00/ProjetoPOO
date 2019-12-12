@@ -172,13 +172,17 @@ public void leFicheiroProjetos(){
                     case "PROJ":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
+                        
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
-                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                        if(dataf.get(GregorianCalendar.YEAR)==0000 && dataf.get(GregorianCalendar.MONTH)==00 && dataf.get(GregorianCalendar.DAY_OF_MONTH)==00){
+                        
+
+                        if(line.split("/")[4].equals("null") == true){
                             p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5]);
                         }
                         else{
+                            GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                             p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5]);
+                            System.out.println("NOT NULL\n");
                         }
                         projeto.add(p);
 
@@ -509,7 +513,7 @@ public void SaveObjectFilesDocentes(){
             System.out.println("IOException caught; Main");
         }
         cisuc.SaveObjectFilesBolseiros();
-        cisuc.SaveObjectFilesBolseiros();
+        cisuc.SaveObjectFilesDocentes();
         cisuc.SaveObjectFilesProjetos();
         
     }
