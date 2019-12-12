@@ -21,9 +21,7 @@ public class Projeto implements Serializable{
     private GregorianCalendar data_final;
     private int duracao;
     protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
-    protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
-    protected ArrayList<Docente> docente = new ArrayList<Docente>();
-    protected ArrayList<Bolseiro> bolseiro = new ArrayList<Bolseiro>();    
+    protected ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();   
     private Pessoa investigadorP;
     private boolean completo = false;
     private boolean fPrazo = false;
@@ -58,11 +56,11 @@ public class Projeto implements Serializable{
     }
     
     public void addDocente(Docente d){
-        docente.add(d);       
+        pessoa.add(d);       
     }
-    
+        
     public void addBolseiro(Bolseiro b){
-        bolseiro.add(b);       
+        pessoa.add(b);       
     }
     
     public int setIP(Docente d){
@@ -84,17 +82,20 @@ public class Projeto implements Serializable{
     
     
     public int addPessoa(Pessoa p){
-        int check =0;
-        for(Projeto proj: cisuc.getProjeto()){
-            for(Pessoa pess: proj.getPessoas()){
-                if(pess.getNome().equals(p.getNome())){
-                    return 1;
+        if(p.getCusto() != 0){
+            for(Projeto proj: cisuc.getProjeto()){
+                for(Pessoa pess: proj.getPessoas()){
+                    if(pess.getNome().equals(p.getNome())){
+                        return 1;
+                    }
                 }
             }
-        }
-        pessoa.add(p);
+            pessoa.add(p);
+        }else{
+            pessoa.add(p);
+        }       
         return 0;
-        }
+     }
      
     
     
@@ -189,8 +190,9 @@ public class Projeto implements Serializable{
     public int CustoP(){
         int custoMensal =0;
         int custoFinal;
-        for (Bolseiro b: bolseiro){            
-            custoMensal += b.getCusto();
+        for (Pessoa b: pessoa){   
+            if(b.getCusto()!=0)
+                custoMensal += b.getCusto();
         }
         if((data_inicio.get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12  + duracao <= cisuc.getDataAtual().get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)){
             custoFinal = custoMensal * (((cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)+cisuc.getDataAtual().get(GregorianCalendar.MONTH)-data_inicio.get(GregorianCalendar.MONTH));
@@ -235,10 +237,6 @@ public class Projeto implements Serializable{
 
     public ArrayList<Pessoa> getPessoas() {
         return pessoa;
-    }
-    
-    public ArrayList<Bolseiro> getBolseiros() {
-        return bolseiro;
     }
     
     public Pessoa getInvestigadorP() {

@@ -121,8 +121,9 @@ public class GUI{
                 lista = new ArrayList();
                 JTextField text = new JTextField();
                 
-                for(Docente temp: cisuc.docente){
-                    lista.add(temp.getNome());
+                for(Pessoa temp: cisuc.pessoas){
+                    if(temp.getCusto() == 0)
+                        lista.add(temp.getNome());
                 }
              
                 listaInvestigadoresPrinc = new JComboBox(lista.toArray());
@@ -379,7 +380,7 @@ public class GUI{
                 frameAdicionarPessoa.addMouseListener(new MouseAdapter(){
                     public void mouseClicked(MouseEvent e) {
                         infoPessoasText.setText("");
-                        infoPessoasText.setText(;cisuc.getInfo(cisuc.PessoaGetter(listaPessoas.getSelectedValue())));
+                        infoPessoasText.setText(cisuc.getInfo(cisuc.PessoaGetter((String)listaPessoas.getSelectedValue())));
                     }
                 
                 });
@@ -456,40 +457,38 @@ public class GUI{
             if(e.getSource() == selecionarPessoas){
                 
                 
-                List<String> lista = listaPessoas.getSelectedValuesList();
-                List<String> listaDoc = listaDocentes.getSelectedValuesList();
-                
+                List<String> lista = listaPessoas.getSelectedValuesList();                
                 
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
-                ArrayList<String> listaNomesDocentes = new ArrayList<>(listaDoc.size());
                 listaNomesPessoas.addAll(lista);
                 
                 //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
-                
-                ArrayList<Bolseiro> listaBolseiro = new ArrayList<>();
-                ArrayList<Docente> listaDocentes = new ArrayList<>();
-                ArrayList<Bolseiro> BolseirosRejeitados = new ArrayList<>();
+
+                  ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
                 for(String bolseiro:listaNomesPessoas){
-                    listaBolseiro.add(cisuc.BolseiroGetter(bolseiro));
+                    if(cisuc.PessoaGetter(bolseiro).getCusto() != 0)
+                        listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
-                for(String docente:listaNomesDocentes){
-                    listaDocentes.add(cisuc.DocenteGetter(docente));
+                for(String docente:listaNomesPessoas){
+                    if(cisuc.PessoaGetter(docente).getCusto() != 0)
+                        listaPessoa.add(cisuc.PessoaGetter(docente));
                 }
                 
-                for(Bolseiro bol:listaBolseiro){
-                    if(cisuc.BolseiroInProjetos(bol) == 1){
-                        BolseirosRejeitados.add(bol);
-                        /*Bolseiros Rejeitados mostar*/
+                for(Pessoa bol:listaPessoa){
+                    if(bol.getCusto() != 0){
+                        if(cisuc.BolseiroInProjetos(bol) == 1){
+                            System.out.println("Bolseiro já tem um Projeto atribuido");
+                        }
+                        else{
+                            currentProjeto.addPessoa(bol);
+                        }
                     }
                     else{
-                        currentProjeto.addBolseiro(bol);
+                        for(Pessoa dol:listaPessoa){
+                            currentProjeto.addPessoa(dol);
+                        }          
                     }
-                 for(Docente dol:listaDocentes){
-                     currentProjeto.addDocente(dol);
-                 }
-                    
-                }
                 
                 
                 frameAdicionarPessoa.setVisible(false);
@@ -498,19 +497,23 @@ public class GUI{
                 
                 
             }
-            else if(e.getSource() == regressaGerirDasPessoas){
+            }else if(e.getSource() == regressaGerirDasPessoas){
                 
                  frameAdicionarPessoa.setVisible(false);
                  frameGerirProjeto.setVisible(true);
                 
                 
             }
+
             
             
             
         }
+
             
             
         }
       
+
+        
 }

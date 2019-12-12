@@ -35,11 +35,9 @@ import javax.swing.*;
 public class CISUC extends JFrame implements Serializable {
     private GregorianCalendar dataAtual = new GregorianCalendar();
     protected ArrayList<Projeto> projeto = new ArrayList<>();
-    protected ArrayList<Docente> docente = new ArrayList<>();
-    protected ArrayList<Bolseiro> bolseiro = new ArrayList<>();
     protected ArrayList<Pessoa> pessoas = new ArrayList<>();
-
     
+       
     
    
 
@@ -51,12 +49,12 @@ public class CISUC extends JFrame implements Serializable {
     
     
       
-    public int BolseiroInProjetos(Bolseiro b){
-         ArrayList<Bolseiro> ListaB;
+    public int BolseiroInProjetos(Pessoa b){
+         ArrayList<Pessoa> ListaB;
          for(Projeto proj:projeto){
-             ListaB = proj.getBolseiros();
-             for(Bolseiro bol: ListaB){
-                 if(bol.getNome().equals(b.getNome()) == true){
+             ListaB = proj.getPessoas();
+             for(Pessoa bol: ListaB){
+                 if(bol.getNome().equals(b.getNome()) == true && bol.getCusto() != 0){
                      return 1;
                  }
              }
@@ -74,27 +72,16 @@ public class CISUC extends JFrame implements Serializable {
         return P_Null;              
     }
     
-    public Bolseiro BolseiroGetter(String nome){
-        Bolseiro B_Null;
-         for(Bolseiro b:bolseiro){
-            if(nome.equals(b.getNome()) == true){
-                return b;
+    public Pessoa PessoaGetter(String nome){
+         for(Pessoa p:pessoas){
+            if(nome.equals(p.getNome()) == true){
+                return p;
             }
         }
                   
          return null;
         }
-    
-    
-    public Docente DocenteGetter(String nome){
-        Docente D_Null = new Docente(null,null,0,null);
-         for(Docente d:docente){
-            if(nome.equals(d.getNome()) == true){
-                return d;
-            }
-        }
-        return D_Null;              
-    }
+
     
     public ArrayList<String> getNomesProjetos(){
         ArrayList<String> nomes = new ArrayList<>();
@@ -114,22 +101,7 @@ public class CISUC extends JFrame implements Serializable {
         return nomes;
     }
     
-   
-    public ArrayList<String> getNomesBolseiros(){
-        ArrayList<String> nomes = new ArrayList<>();
-        for(Bolseiro b:bolseiro){
-            nomes.add(b.getNome());
-        }
-        return nomes;
-    }
-    
-    public ArrayList<String> getNomesDocentes(){
-        ArrayList<String> nomes = new ArrayList<>();
-        for(Docente d:docente){
-            nomes.add(d.getNome());
-        }
-        return nomes;
-    }
+ 
 
    
     public void foraPrazo(){
@@ -189,28 +161,24 @@ public void leFicheiroProjetos(){
                         break;
                     }
                     case "INV":{
-                        for(Docente doc:docente){
+                        for(Pessoa doc:pessoas){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
-                                p.setIP(doc);
                                 p.addPessoa(doc);
-                                p.addDocente(doc);
                             }
                         }
                         break;
                     }
                     case "DOC":{
-                        for(Docente doc:docente){
+                        for(Pessoa doc:pessoas){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
-                                p.addDocente(doc);
                                 p.addPessoa(doc);
                             }
                         }                        
                         break;
                     }
                     case "EST":{
-                        for(Bolseiro b:bolseiro){
+                        for(Pessoa b:pessoas){
                             if(b.getEmail().equals(line.split("/")[1])==true){
-                                p.addBolseiro(b);
                                 p.addPessoa(b);
                             }
                         }
@@ -291,7 +259,6 @@ public void leFicheiroPessoas(){
                 switch (line.split("/")[0]) {
                     case "DOC":{
                         Docente p = new Docente(line.split("/")[1],line.split("/")[2],Integer.parseInt(line.split("/")[3]),line.split("/")[4]);
-                        docente.add(p);
                         pessoas.add(p);
                             break;
                         }
@@ -301,7 +268,6 @@ public void leFicheiroPessoas(){
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         Bolseiro p = new Licenciado(line.split("/")[1],line.split("/")[2],datai,dataf);
-                        bolseiro.add(p);
                         pessoas.add(p);
                             break;
                         }
@@ -311,7 +277,6 @@ public void leFicheiroPessoas(){
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         Bolseiro p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
-                        bolseiro.add(p);
                         pessoas.add(p);
                             break;
                         }
@@ -321,7 +286,6 @@ public void leFicheiroPessoas(){
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         Bolseiro p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
-                        bolseiro.add(p);
                         pessoas.add(p);
                             break;
                         }
@@ -373,17 +337,6 @@ public boolean ObjectCheck() throws IOException{
     }
     
     return false;
-    /*
-    File f = new File("Pessoas.obj");
-
-    try { 
-        FileInputStream fis = new FileInputStream(f); 
-    } catch (FileNotFoundException ex) { 
-        return false; 
-    }
-    return true;
-    */
-    
 }
     
 
@@ -393,8 +346,7 @@ public int leObjectFilesBolseiros(){
             ObjectInputStream ois = new ObjectInputStream(fis);
             while(true){ 
                 try{
-                    bolseiro.add((Bolseiro)ois.readObject());   
-
+                    pessoas.add((Bolseiro)ois.readObject());   
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");
                 }catch (EOFException ex){
@@ -416,7 +368,9 @@ public int leObjectFilesDocentes(){
             ObjectInputStream ois = new ObjectInputStream(fis);
             while(true){ 
                 try{
-                    docente.add((Docente)ois.readObject());   
+
+                    pessoas.add((Docente)ois.readObject());   
+
 
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");
@@ -478,8 +432,9 @@ public void SaveObjectFilesBolseiros(){
     try { 
         FileOutputStream fos = new FileOutputStream(f);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        for(Bolseiro b:bolseiro){
-            oos.writeObject(b);
+        for(Pessoa b:pessoas){
+            if (b.getCusto() != 0)
+                oos.writeObject(b);
         }
         oos.close(); 
     } catch (FileNotFoundException ex) { 
@@ -495,16 +450,16 @@ public void SaveObjectFilesDocentes(){
     try { 
         FileOutputStream fos = new FileOutputStream(f);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        for(Docente d:docente){
-            oos.writeObject(d);
+        for(Pessoa d:pessoas){
+            if (d.getCusto() == 0)
+                oos.writeObject(d);
         }
         oos.close(); 
     } catch (FileNotFoundException ex) { 
         System.out.println("Erro a criar ficheiro."); 
     } catch (IOException ex) { 
         System.out.println("Erro a escrever para o ficheiro."); 
-    } 
-    
+    }     
 }
 
     public GregorianCalendar getDataAtual() {
@@ -517,13 +472,13 @@ public void SaveObjectFilesDocentes(){
         return projeto;
     }
 
-    public ArrayList<Docente> getDocente() {
-        return docente;
-    }
+//    public ArrayList<Docente> getDocente() {
+//        return docente;
+//    }
 
-    public ArrayList<Bolseiro> getBolseiro() {
-        return bolseiro;
-    }
+//    public ArrayList<Bolseiro> getBolseiro() {
+//        return bolseiro;
+//    }
 
     public ArrayList<Pessoa> getPessoas() {
         return pessoas;
@@ -546,7 +501,6 @@ public void SaveObjectFilesDocentes(){
                 cisuc.leFicheiroProjetos();  
             }
            else{
-               
                cisuc.leObjectFilesDocentes();
                cisuc.leObjectFilesBolseiros();
                cisuc.leObjectFilesProjetos();
