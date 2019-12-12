@@ -423,6 +423,15 @@ public class GUI{
             
             else if(e.getSource() == eliminaTarefa){
                 
+                String nomeTarefa = new String();
+                
+                nomeTarefa = (String)listaTarefas.getSelectedValue();
+                currentProjeto.EliminarTarefa(currentProjeto.tarefaGetter(nomeTarefa));
+                listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
+                
+                
+                
+                
                 
             }
             

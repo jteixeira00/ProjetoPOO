@@ -49,6 +49,14 @@ public class Projeto implements Serializable{
         this.cisuc = cisuc;
 
     }
+    public Tarefa tarefaGetter(String nome){
+        for(Tarefa temp: tarefa){
+            if(temp.getNome() == nome){
+                return temp;
+            }
+        }        
+        return null;
+    }
    
     
     public void addTarefa(Tarefa t){
