@@ -136,12 +136,13 @@ public class CISUC extends JFrame implements Serializable {
         }    
     }
     
-    public void listaConcluidos(){
+    public ArrayList<String> listaNomesConcluidos(){
+        ArrayList<String> ret = new ArrayList<>();
         for(Projeto temp:projeto){
             if(temp.isCompleto() == true)
-                System.out.println(temp.getNome());
+                ret.add(temp.getNome());
         }        
-        
+        return ret;
     }
     
     public void listaNaoConcluidos(){
