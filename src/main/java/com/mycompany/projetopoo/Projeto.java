@@ -38,6 +38,7 @@ public class Projeto extends CISUC implements Serializable{
         this.acronimo = acronimo;
         this.data_final = data_final;
         this.investigadorP = null;
+        this.setCompleto();
        
     }
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,String acronimo){

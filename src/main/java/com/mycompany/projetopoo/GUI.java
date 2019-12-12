@@ -28,9 +28,9 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos;
     JPanel mainPanel;
-    final JButton criarProjeto, gerirProjeto,listaAtivos, listaIncompletos,listaConcluidos;
+    final JButton criarProjeto, gerirProjeto, listaIncompletos,listaConcluidos;
     JButton confirm, selecionarPessoas;
     JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas;
     JTextField nome, acronimo;
@@ -65,9 +65,7 @@ public class GUI{
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
         
-        listaAtivos = new JButton("Listar Projetos Ativos");
-        listaAtivos.addActionListener(new botaoListener());
-        mainPanel.add(listaAtivos); 
+       
         
         listaIncompletos = new JButton("Listar Projetos por Concluir");
         listaIncompletos.addActionListener(new botaoListener());
@@ -149,7 +147,7 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
-                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray()); //incompletos
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray());
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
                 
                 
@@ -179,18 +177,16 @@ public class GUI{
                 
             }
             
-            else if(e.getSource() == listaAtivos){
-                
-            }
+            
             else if(e.getSource() == listaIncompletos){
+                
                 
             }
             
             else if(e.getSource() == listaConcluidos){
                 
             }
-            
-            
+          
         }
         
     }
@@ -244,11 +240,6 @@ public class GUI{
                 gerirTarefas.add(panelTarefas);
                 frameGerirProjeto.setVisible(false);
                 gerirTarefas.setVisible(true);
-                
-                
-                
-                
-                
                 
             }
             
