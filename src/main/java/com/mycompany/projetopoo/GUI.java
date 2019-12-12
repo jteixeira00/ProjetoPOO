@@ -29,10 +29,10 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos, frameCusto;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos, frameCusto, frameConcluidos;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaConcluidos;
-    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto;
+    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver;
     JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
     JTextField nome, acronimo;
     JTextField dia;
@@ -41,7 +41,7 @@ public class GUI{
     JTextField eta;
     JComboBox listaInvestigadoresPrinc;
     JComboBox ComboBoxProjetos;
-    JList listaPessoas, listaDocentes, listaTarefas;
+    JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
     Projeto currentProjeto;
     CISUC cisuc;
     
@@ -194,6 +194,28 @@ public class GUI{
             
             
             else if(e.getSource() == listaConcluidos){
+                frameConcluidos = new JFrame("Projetos Concluídos");
+                JPanel panelConcluidos = new JPanel();
+                frameConcluidos.setSize(600,800);
+                frameConcluidos.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                regressaMainDosConcluidos = new JButton("Regressar");
+                regressaMainDosConcluidos.addActionListener(new botaoListenerEcras());
+                ver = new JButton("Ver +");
+                ver.addActionListener(new botaoListenerEcras());
+                
+                panelConcluidos.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                
+                listaProjConcluidos = new JList(cisuc.listaNomesConcluidos().toArray());
+                   
+                JScrollPane listScrollerConcluidos = new JScrollPane(listaProjConcluidos);
+                
+                
+                panelConcluidos.add(listScrollerConcluidos);
+                panelConcluidos.add(ver, "split 2");
+                panelConcluidos.add(regressaMainDosConcluidos);
+                frameConcluidos.add(panelConcluidos);
+                mainFrame.setVisible(false);
+                frameConcluidos.setVisible(true);
                 
                 
             }
@@ -230,6 +252,28 @@ public class GUI{
                 
                 
                 
+            }
+            else if(e.getSource()==ver){
+                JFrame frameVerC = new JFrame("Informações projeto concluído");
+                JPanel panelVerC = new JPanel();
+                panelVerC.setLayout(new MigLayout("align 50% 50%, wrap 2"));
+                String nomeProjeto = new String((String)listaProjConcluidos.getSelectedValue());
+                Projeto tempProj = cisuc.ProjetoGetter(nomeProjeto);
+                JLabel nome = new JLabel("Nome:");
+                JLabel nomeP = new JLabel(tempProj.getNome());
+                JLabel acr = new JLabel("Acrónimo:");
+                JLabel acrP = new JLabel(tempProj.getAcronimo());
+                JLabel dataI = new JLabel("Data Início:") ;
+                
+                
+                
+                //completar
+            }
+            
+            else if(e.getSource()==regressaMainDosConcluidos){
+                
+                mainFrame.setVisible(true);
+                frameConcluidos.setVisible(false);
             }
             
             else if(e.getSource() == listTarefas){
