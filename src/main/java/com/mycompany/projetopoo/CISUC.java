@@ -386,7 +386,7 @@ public int leObjectFilesBolseiros(){
             ObjectInputStream ois = new ObjectInputStream(fis);
             while(true){ 
                 try{
-                    projeto.add((Projeto)ois.readObject());   
+                    bolseiro.add((Bolseiro)ois.readObject());   
 
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");
@@ -409,7 +409,7 @@ public int leObjectFilesDocentes(){
             ObjectInputStream ois = new ObjectInputStream(fis);
             while(true){ 
                 try{
-                    projeto.add((Projeto)ois.readObject());   
+                    docente.add((Docente)ois.readObject());   
 
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");
@@ -516,9 +516,9 @@ public void SaveObjectFilesDocentes(){
             }
            else{
                
-               //cisuc.leObjectFilesDocentes();
-               //cisuc.leObjectFilesBolseiros();
-               //cisuc.leObjectFilesProjetos();
+               cisuc.leObjectFilesDocentes();
+               cisuc.leObjectFilesBolseiros();
+               cisuc.leObjectFilesProjetos();
             }
         } catch (IOException ex) {
             System.out.println("IOException caught; Main");

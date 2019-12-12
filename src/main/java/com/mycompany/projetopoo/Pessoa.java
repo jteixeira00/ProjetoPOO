@@ -29,6 +29,8 @@ public abstract class Pessoa implements Serializable{
        tarefa.add(t);
        
     }
+    
+    
 
     public String getNome() {
         return nome;
