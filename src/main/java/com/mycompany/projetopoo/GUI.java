@@ -47,7 +47,7 @@ public class GUI{
     JTextField ano;
     JTextField eta;
     
-    JTextArea infoPessoasText;
+    JTextArea infoPessoasText, infoProjetoText;
     JComboBox listaInvestigadoresPrinc;
     JComboBox ComboBoxProjetos;
     JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
@@ -171,11 +171,23 @@ public class GUI{
                 frameGerirProjeto.setSize(600,800);
                 frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 JPanel panelGerirProjeto = new JPanel();
-                panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 frameGerirProjeto.setResizable(false);
-                
+                infoProjetoText = new JTextArea();
+                infoProjetoText.setEditable(false);
                 ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray());
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
+                ComboBoxProjetos.addMouseListener(new MouseAdapter(){
+                            public void mouseClicked(MouseEvent e) {
+                                
+                                infoProjetoText.setText("OLA ORA BOLAS");
+                                
+                                //infoProjetoText.setText(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
+                               
+                                
+                            }
+                        });
+
                 
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
@@ -191,12 +203,13 @@ public class GUI{
                 
                 regressaMainDaGestao = new JButton("Ecrã Principal");
                 regressaMainDaGestao.addActionListener(new botaoListenerEcras());
+                panelGerirProjeto.add(infoProjetoText, "span 1 6");
                 panelGerirProjeto.add(ComboBoxProjetos);
                 panelGerirProjeto.add(addPessoa);
                 panelGerirProjeto.add(listTarefas);
                 panelGerirProjeto.add(calculaCusto);
                 panelGerirProjeto.add(terminaProjeto);
-                panelGerirProjeto.add(regressaMainDaGestao, "cell 0 6");
+                panelGerirProjeto.add(regressaMainDaGestao, "cell 1 6");
                 frameGerirProjeto.add(panelGerirProjeto);
                 frameGerirProjeto.setVisible(true);
                 mainFrame.setVisible(false);
@@ -349,7 +362,7 @@ public class GUI{
                 panelCusto.setLayout(new MigLayout("align 50% 50%, wrap 1"));  
                 JLabel mensagem = new JLabel("O custo do projeto é:");
                 
-                String Custo = new String("Batata"); //CALCULAR E INSERIR AQUI
+                String Custo = Integer.toString(currentProjeto.CustoP()); //CALCULAR E INSERIR AQUI
                 
                 JLabel custoL = new JLabel(Custo);
                 panelCusto.add(mensagem);
@@ -377,36 +390,41 @@ public class GUI{
                 selecionarPessoas.addActionListener(new botaoListenerEcras3());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
                 
-                frameAdicionarPessoa.addMouseListener(new MouseAdapter(){
-                    public void mouseClicked(MouseEvent e) {
-                        infoPessoasText.setText("");
-                        infoPessoasText.setText(cisuc.getInfo(cisuc.PessoaGetter((String)listaPessoas.getSelectedValue())));
-                    }
                 
-                });
                 frameAdicionarPessoa.setSize(600,400);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 
                 regressaGerirDasPessoas = new JButton("Gerir Projeto");
                 regressaGerirDasPessoas.addActionListener(new botaoListenerEcras3());
-                
                 infoPessoa = new JButton("Informação dos Selecionados");
                 infoPessoa.addActionListener(new botaoListenerEcras3());
                 
                 
                 listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
                 JScrollPane listScroller = new JScrollPane(listaPessoas);
-                
-                newPanel2.add(listScroller);
-                
+               
+                infoPessoasText = new JTextArea();
+                infoPessoasText.setEditable(false);
+                 infoPessoasText.setText(cisuc.getInfo(cisuc.pessoas.get(0)));
+                newPanel2.add(infoPessoasText);
+                newPanel2.add(listaPessoas);
                 newPanel2.add(selecionarPessoas, "cell 1 2");
                 newPanel2.add(regressaGerirDasPessoas, "cell 1 3");
                 frameAdicionarPessoa.add(newPanel2);               
                 frameAdicionarPessoa.setVisible(true);
                 frameGerirProjeto.setVisible(false);
                 
-       
-                
+                listaPessoas.addMouseListener(new MouseAdapter(){
+                            public void mouseClicked(MouseEvent e) {
+                                
+                                
+                                System.out.println(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
+                                infoPessoasText.setText(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
+                               
+                                
+                            }
+                        });
+
             }
             
             else if(e.getSource() == fecharCusto){
