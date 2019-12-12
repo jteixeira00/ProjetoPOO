@@ -50,10 +50,8 @@ public class CISUC extends JFrame implements Serializable {
     
       
     public int BolseiroInProjetos(Pessoa b){
-         ArrayList<Pessoa> ListaB;
          for(Projeto proj:projeto){
-             ListaB = proj.getPessoas();
-             for(Pessoa bol: ListaB){
+             for(Pessoa bol: proj.getPessoas()){
                  if(bol.getNome().equals(b.getNome()) == true && bol.getCusto() != 0){
                      return 1;
                  }
@@ -517,7 +515,7 @@ public void SaveObjectFilesDocentes(){
                cisuc.leObjectFilesProjetos();
             }
         } catch (IOException ex) {
-            System.out.println("IOException caught; Main");
+            System.out.println("IOException caught: Main");
         }
         
 

@@ -480,9 +480,13 @@ public class GUI{
                         listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
                 for(String docente:listaNomesPessoas){
-                    if(cisuc.PessoaGetter(docente).getCusto() != 0)
+                    if(cisuc.PessoaGetter(docente).getCusto() == 0)
                         listaPessoa.add(cisuc.PessoaGetter(docente));
                 }
+                
+
+                
+                
                 
                 for(Pessoa bol:listaPessoa){
                     if(bol.getCusto() != 0){

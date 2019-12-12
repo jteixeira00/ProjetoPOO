@@ -138,7 +138,6 @@ public class Projeto implements Serializable{
     public ArrayList<String> getNomesTarefas(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Tarefa b:tarefa){
-            System.out.println(b.getNome());
             nomes.add(b.getNome());
         }
         return nomes;
