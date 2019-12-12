@@ -346,7 +346,6 @@ public int leObjectFilesBolseiros(){
             while(true){ 
                 try{
                     pessoas.add((Bolseiro)ois.readObject());   
-
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");
                 }catch (EOFException ex){
@@ -368,7 +367,9 @@ public int leObjectFilesDocentes(){
             ObjectInputStream ois = new ObjectInputStream(fis);
             while(true){ 
                 try{
+
                     pessoas.add((Docente)ois.readObject());   
+
 
                 }catch (ClassNotFoundException ex) {
                     System.out.println("Erro a converter objeto");

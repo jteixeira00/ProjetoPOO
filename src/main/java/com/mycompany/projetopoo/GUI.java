@@ -5,22 +5,29 @@
  */
 package com.mycompany.projetopoo;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import net.miginfocom.swing.MigLayout;
 
@@ -29,16 +36,18 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameListaIncompletos, frameCusto, frameConcluidos;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaConcluidos;
-    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver;
+    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa;
     JButton addPessoa, listTarefas,eliminaTarefa, atribuiTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
     JTextField nome, acronimo;
     JTextField dia;
     JTextField mes ;
     JTextField ano;
     JTextField eta;
+    
+    JTextArea infoPessoasText;
     JComboBox listaInvestigadoresPrinc;
     JComboBox ComboBoxProjetos;
     JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
@@ -110,14 +119,16 @@ public class GUI{
                 JLabel labelIP = new JLabel("Investigador Principal:");  
                 ArrayList<String> lista;
                 lista = new ArrayList();
- 
+                JTextField text = new JTextField();
                 
                 for(Pessoa temp: cisuc.pessoas){
                     if(temp.getCusto() == 0)
                         lista.add(temp.getNome());
                 }
              
-                listaInvestigadoresPrinc = new JComboBox(lista.toArray());  
+                listaInvestigadoresPrinc = new JComboBox(lista.toArray());
+                
+                       
                 newPanel.add(labelNome);
                 newPanel.add(nome);
                 newPanel.add(labelAcronimo);
@@ -130,6 +141,7 @@ public class GUI{
                 newPanel.add(eta);                
                 newPanel.add(labelIP);
                 newPanel.add(listaInvestigadoresPrinc);
+                newPanel.add(text);
                 frameCreateProject.add(newPanel);               
                 
                 frameCreateProject.add(newPanel);
@@ -285,7 +297,6 @@ public class GUI{
                 JPanel panelTarefas= new JPanel();
                 panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));                
                 
-               
                 listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
                    
                 JScrollPane listScroller = new JScrollPane(listaTarefas);
@@ -365,24 +376,29 @@ public class GUI{
                 selecionarPessoas = new JButton("Selecionar Pessoas");
                 selecionarPessoas.addActionListener(new botaoListenerEcras3());
                 frameAdicionarPessoa = new JFrame("Adicionar Pessoas");
+                
+                frameAdicionarPessoa.addMouseListener(new MouseAdapter(){
+                    public void mouseClicked(MouseEvent e) {
+                        infoPessoasText.setText("");
+                        cisuc.getInfo(listaPessoas.getSelectedValue());
+                    }
+                
+                });
                 frameAdicionarPessoa.setSize(600,400);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 
                 regressaGerirDasPessoas = new JButton("Gerir Projeto");
                 regressaGerirDasPessoas.addActionListener(new botaoListenerEcras3());
                 
+                infoPessoa = new JButton("Informação dos Selecionados");
+                infoPessoa.addActionListener(new botaoListenerEcras3());
                 
                 
-//                listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
-//                JScrollPane listScroller = new JScrollPane(listaPessoas);
-//                
-//                listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
-//                JScrollPane listScroller2 = new JScrollPane(listaDocentes);
+                listaPessoas = new JList(cisuc.getNomesPessoas().toArray());
+                JScrollPane listScroller = new JScrollPane(listaPessoas);
                 
-                newPanel2.add(new Label("Bolseiros"));
-                newPanel2.add(new Label("Docentes"));
-//                newPanel2.add(listScroller);
-//                newPanel2.add(listScroller2);
+                newPanel2.add(listScroller);
+                
                 newPanel2.add(selecionarPessoas, "cell 1 2");
                 newPanel2.add(regressaGerirDasPessoas, "cell 1 3");
                 frameAdicionarPessoa.add(newPanel2);               
@@ -488,10 +504,18 @@ public class GUI{
                 
                 
             }
+
      
+
+                    
+                    
+                }
+                
+            }
+
             
             
         }
-      }
-}
+      
+
         
