@@ -25,5 +25,9 @@ public class Mestre extends Bolseiro implements Serializable{
     public int getCusto() {
         return 1200;
     }
+    @Override 
+    public String getEstatuto(){
+        return "Mestre";
+    }
         
 }

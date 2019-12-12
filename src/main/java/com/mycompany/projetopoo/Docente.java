@@ -27,6 +27,13 @@ public class Docente extends Pessoa{
         return area;
     }
     
+    @Override 
+    public String getEstatuto(){
+        return "Docente";
+    }
+    
+    
+    
     
 
 }

@@ -24,5 +24,9 @@ public class Licenciado extends Bolseiro implements Serializable{
     public int getCusto() {
         return 800;
     }
-    
+    @Override 
+    public String getEstatuto(){
+        return "Licenciado";
+    }
+        
 }

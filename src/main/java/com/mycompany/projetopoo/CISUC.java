@@ -338,6 +338,17 @@ public boolean ObjectCheck() throws IOException{
     
     return false;
 }
+
+public String getInfo(Pessoa p){
+    String info;
+    if(p.getCusto() != 0){
+        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH),p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH),p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
+    }
+    else{
+        info = null;
+    }    
+    return info;
+}
     
 
 public int leObjectFilesBolseiros(){
@@ -511,8 +522,7 @@ public void SaveObjectFilesDocentes(){
         
 
         
-        System.out.println(cisuc.projeto.get(0).CustoP());
-        System.out.println(cisuc.projeto.get(1).CustoP());
+        System.out.println(cisuc.getInfo(cisuc.projeto.get(0).pessoa.get(2)));
         GUI gui = new GUI(cisuc);
 
         cisuc.SaveObjectFilesBolseiros();

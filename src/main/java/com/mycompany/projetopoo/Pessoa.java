@@ -7,6 +7,7 @@ package com.mycompany.projetopoo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -73,5 +74,16 @@ public abstract class Pessoa implements Serializable{
 
     public int getNumM() {
         return 0;
+    }
+    
+    public String getEstatuto(){
+        return null;
+    }
+    
+    public GregorianCalendar getInicio(){
+        return null;
+    }
+    public GregorianCalendar getFim(){
+        return null;
     }
 }

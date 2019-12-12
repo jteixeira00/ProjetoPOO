@@ -26,5 +26,9 @@ public class Doutorado extends Bolseiro implements Serializable{
     public int getCusto() {
         return 1000;
     }
+    @Override 
+    public String getEstatuto(){
+        return "Doutorado";
+    }
     
 }

@@ -27,4 +27,16 @@ public abstract class Bolseiro extends Pessoa implements Serializable {
     public int getCusto(){
         return custo;
     }
+    
+    @Override 
+    public String getEstatuto(){
+        return "Bolseiro";
+    }
+       
+    public GregorianCalendar getInicio(){
+        return InicioB;
+    }
+    public GregorianCalendar getFim(){
+        return FimB;
+    }
 }
