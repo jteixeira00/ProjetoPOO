@@ -18,7 +18,7 @@ public class Docente extends Pessoa{
         this.area = area;
     }
 
-
+    @Override
     public int getNumM() {
         return numM;
     }

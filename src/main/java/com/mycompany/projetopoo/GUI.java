@@ -112,8 +112,9 @@ public class GUI{
                 lista = new ArrayList();
  
                 
-                for(Docente temp: cisuc.docente){
-                    lista.add(temp.getNome());
+                for(Pessoa temp: cisuc.pessoas){
+                    if(temp.getCusto() == 0)
+                        lista.add(temp.getNome());
                 }
              
                 listaInvestigadoresPrinc = new JComboBox(lista.toArray());  
@@ -372,15 +373,16 @@ public class GUI{
                 
                 
                 
-                listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
-                JScrollPane listScroller = new JScrollPane(listaPessoas);
+//                listaPessoas = new JList(cisuc.getNomesBolseiros().toArray());
+//                JScrollPane listScroller = new JScrollPane(listaPessoas);
+//                
+//                listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
+//                JScrollPane listScroller2 = new JScrollPane(listaDocentes);
                 
-                listaDocentes = new JList(cisuc.getNomesDocentes().toArray());
-                JScrollPane listScroller2 = new JScrollPane(listaDocentes);
                 newPanel2.add(new Label("Bolseiros"));
                 newPanel2.add(new Label("Docentes"));
-                newPanel2.add(listScroller);
-                newPanel2.add(listScroller2);
+//                newPanel2.add(listScroller);
+//                newPanel2.add(listScroller2);
                 newPanel2.add(selecionarPessoas, "cell 1 2");
                 newPanel2.add(regressaGerirDasPessoas, "cell 1 3");
                 frameAdicionarPessoa.add(newPanel2);               
@@ -439,40 +441,38 @@ public class GUI{
             if(e.getSource() == selecionarPessoas){
                 
                 
-                List<String> lista = listaPessoas.getSelectedValuesList();
-                List<String> listaDoc = listaDocentes.getSelectedValuesList();
-                
+                List<String> lista = listaPessoas.getSelectedValuesList();                
                 
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
-                ArrayList<String> listaNomesDocentes = new ArrayList<>(listaDoc.size());
                 listaNomesPessoas.addAll(lista);
                 
                 //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
-                
-                ArrayList<Bolseiro> listaBolseiro = new ArrayList<>();
-                ArrayList<Docente> listaDocentes = new ArrayList<>();
-                ArrayList<Bolseiro> BolseirosRejeitados = new ArrayList<>();
+
+                  ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
                 for(String bolseiro:listaNomesPessoas){
-                    listaBolseiro.add(cisuc.BolseiroGetter(bolseiro));
+                    if(cisuc.PessoaGetter(bolseiro).getCusto() != 0)
+                        listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
-                for(String docente:listaNomesDocentes){
-                    listaDocentes.add(cisuc.DocenteGetter(docente));
+                for(String docente:listaNomesPessoas){
+                    if(cisuc.PessoaGetter(docente).getCusto() != 0)
+                        listaPessoa.add(cisuc.PessoaGetter(docente));
                 }
                 
-                for(Bolseiro bol:listaBolseiro){
-                    if(cisuc.BolseiroInProjetos(bol) == 1){
-                        BolseirosRejeitados.add(bol);
-                        /*Bolseiros Rejeitados mostar*/
+                for(Pessoa bol:listaPessoa){
+                    if(bol.getCusto() != 0){
+                        if(cisuc.BolseiroInProjetos(bol) == 1){
+                            System.out.println("Bolseiro já tem um Projeto atribuido");
+                        }
+                        else{
+                            currentProjeto.addPessoa(bol);
+                        }
                     }
                     else{
-                        currentProjeto.addBolseiro(bol);
+                        for(Pessoa dol:listaPessoa){
+                            currentProjeto.addPessoa(dol);
+                        }          
                     }
-                 for(Docente dol:listaDocentes){
-                     currentProjeto.addDocente(dol);
-                 }
-                    
-                }
                 
                 
                 frameAdicionarPessoa.setVisible(false);
@@ -481,18 +481,17 @@ public class GUI{
                 
                 
             }
-            else if(e.getSource() == regressaGerirDasPessoas){
+            }else if(e.getSource() == regressaGerirDasPessoas){
                 
                  frameAdicionarPessoa.setVisible(false);
                  frameGerirProjeto.setVisible(true);
                 
                 
             }
+     
             
             
         }
-            
-            
-        }
-      
+      }
 }
+        

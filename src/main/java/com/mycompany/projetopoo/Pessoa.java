@@ -66,7 +66,10 @@ public abstract class Pessoa implements Serializable{
     }
 
     public int getCusto() {
-        return custo;
+        return 0;
     }
 
+    public int getNumM() {
+        return 0;
+    }
 }
