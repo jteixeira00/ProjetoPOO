@@ -86,4 +86,8 @@ public abstract class Pessoa implements Serializable{
     public GregorianCalendar getFim(){
         return null;
     }
+    
+    public String getArea(){
+        return null;
+    }
 }

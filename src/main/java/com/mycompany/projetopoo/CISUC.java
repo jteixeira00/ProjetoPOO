@@ -345,7 +345,7 @@ public String getInfo(Pessoa p){
         info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH),p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH),p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
     }
     else{
-        info = null;
+        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nNúmero Mecanográfico: %d\nÁrea de investigação: %s\n",p.getNome(),p.getEstatuto(),p.getEmail(),p.getNumM(),p.getArea());
     }    
     return info;
 }
@@ -521,8 +521,14 @@ public void SaveObjectFilesDocentes(){
         }
         
 
-        
-        System.out.println(cisuc.getInfo(cisuc.projeto.get(0).pessoa.get(2)));
+        for(Projeto p:cisuc.projeto){
+            System.out.println("Projeto "+p.getNome());
+            System.out.println("++++++++++++++++++");
+            for(Pessoa pessoa:p.getPessoas()){
+                System.out.println(cisuc.getInfo(pessoa));
+                System.out.println("-------------------");
+            }
+        }
         GUI gui = new GUI(cisuc);
 
         cisuc.SaveObjectFilesBolseiros();
