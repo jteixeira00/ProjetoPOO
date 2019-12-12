@@ -48,11 +48,35 @@ public class CISUC extends JFrame implements Serializable {
     }
     
     public void AlterarDataAtual(int dia,int mes,int ano){
-        dataAtual.set(GregorianCalendar.YEAR,ano);
-        dataAtual.set(GregorianCalendar.MONTH,mes);
-        dataAtual.set(GregorianCalendar.DAY_OF_MONTH,dia);        
+        if(Checkdata(dia,mes,ano) == 0){
+            mes = mes - 1;
+            dataAtual.set(GregorianCalendar.YEAR,ano);
+            dataAtual.set(GregorianCalendar.MONTH,mes);
+            dataAtual.set(GregorianCalendar.DAY_OF_MONTH,dia);
+        }
     }
     
+    public int Checkdata(int dia,int mes,int ano){
+        if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0)){
+            if((mes==2 && dia<=29))
+                return 0;
+            else
+                return 1;
+        }
+        return 1;
+    }
+    
+    public int CheckdataGregorian(GregorianCalendar data){
+        int ano,mes,dia;
+        ano = data.get(GregorianCalendar.YEAR) + 1;
+        mes = data.get(GregorianCalendar.MONTH);
+        dia = data.get(GregorianCalendar.DAY_OF_MONTH);
+        System.out.println(dia);
+        if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0) || (mes == 2 && ano > 0 && dia > 0 && dia < 30 && mes > 0 && mes < 13 )){
+            return 0;
+        }
+        return 1;
+    }
     
       
     public int BolseiroInProjetos(Pessoa b){
@@ -131,7 +155,7 @@ public class CISUC extends JFrame implements Serializable {
         }  
     }
         
-public void leFicheiroProjetos(){
+public int leFicheiroProjetos(){
     File f = new File("CISUC.txt");
 
     String DataI[];
@@ -153,11 +177,19 @@ public void leFicheiroProjetos(){
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NO PROJETO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         if(line.split("/")[4].equals("null") == true){
                             p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5],this);
                         }
                         else{
                             GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NO PROJETO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                             p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5],this);
                         }
                         projeto.add(p);
@@ -193,6 +225,14 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DOCUMENTACAO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DOCUMENTACAO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         for(Pessoa ps:pessoas){
                             if((ps.getEmail().equals(line.split("/")[5])) == true){
                                 responsavel = ps;
@@ -207,6 +247,14 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DESIGN "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESIGN"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         for(Pessoa ps:pessoas){
                             if((ps.getEmail().equals(line.split("/")[5])) == true){
                                 responsavel = ps;
@@ -221,6 +269,14 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DESENVOLVIMENTO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESENVOLVIMENTO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         for(Pessoa ps:pessoas){
                             if((ps.getEmail().equals(line.split("/")[5])) == true){
                                 responsavel = ps;
@@ -246,9 +302,10 @@ public void leFicheiroProjetos(){
     } else { 
         System.out.println("Ficheiro não existe: projetos."); 
     }
+    return 0;
    }
 
-public void leFicheiroPessoas(){
+public int leFicheiroPessoas(){
     File f = new File("Pessoas.txt");
     String DataI[];
     String DataF[];
@@ -271,6 +328,14 @@ public void leFicheiroPessoas(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NO LICENCIADO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NO LICENCIADO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         Bolseiro p = new Licenciado(line.split("/")[1],line.split("/")[2],datai,dataf);
                         pessoas.add(p);
                             break;
@@ -282,6 +347,14 @@ public void leFicheiroPessoas(){
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         Bolseiro p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
                         pessoas.add(p);
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NO MESTRE "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NO MESTRE"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                             break;
                         }
                     case "DOU":{
@@ -289,8 +362,16 @@ public void leFicheiroPessoas(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                        Bolseiro p = new Mestre(line.split("/")[1],line.split("/")[2],datai,dataf);
+                        Bolseiro p = new Doutorado(line.split("/")[1],line.split("/")[2],datai,dataf);
                         pessoas.add(p);
+                        if(CheckdataGregorian(datai)==1){
+                            System.out.println("DATA INICIAL INVALIDA NO DOUTORADO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NO DOUTORADO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                             break;
                         }
                     default:
@@ -306,6 +387,7 @@ public void leFicheiroPessoas(){
     } else { 
         System.out.println("Ficheiro não existe: pessoas."); 
     }
+    return 0;
 }
 
 public ArrayList<Projeto> getListaProjeto(){
@@ -346,7 +428,7 @@ public boolean ObjectCheck() throws IOException{
 public String getInfo(Pessoa p){
     String info;
     if(p.getCusto() != 0){
-        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH),p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH),p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
+        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH)+1,p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH)+1,p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
     }
     else{
         info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nNúmero Mecanográfico: %d\nÁrea de investigação: %s\n",p.getNome(),p.getEstatuto(),p.getEmail(),p.getNumM(),p.getArea());
@@ -499,6 +581,12 @@ public void SaveObjectFilesDocentes(){
         return pessoas;
     }
     
+    public static void Exit(CISUC cisuc){
+        cisuc.SaveObjectFilesBolseiros();
+        cisuc.SaveObjectFilesDocentes();
+        cisuc.SaveObjectFilesProjetos();
+    }
+    
     
     
 
@@ -507,13 +595,15 @@ public void SaveObjectFilesDocentes(){
      */
     public static void main(String[] args) {
         CISUC cisuc = new CISUC();
+        int ErroFichPessoas = 0;
+        int ErroFichProjetos = 0;
         
         try {
             
            if(cisuc.ObjectCheck() == false){
                 
-                cisuc.leFicheiroPessoas();
-                cisuc.leFicheiroProjetos();  
+                ErroFichPessoas = cisuc.leFicheiroPessoas();
+                ErroFichProjetos = cisuc.leFicheiroProjetos();  
             }
            else{
                cisuc.leObjectFilesDocentes();
@@ -534,16 +624,16 @@ public void SaveObjectFilesDocentes(){
             }
         }
         
-        //cisuc.AlterarDataAtual(30,12,2000);
+        //cisuc.AlterarDataAtual(30,14,2000);
         GregorianCalendar dataAtual = cisuc.getDataAtual();
         String info = String.format("Dia: %s\nMes: %s\nAno: %s",dataAtual.get(GregorianCalendar.DAY_OF_MONTH),dataAtual.get(GregorianCalendar.MONTH),dataAtual.get(GregorianCalendar.YEAR));
         System.out.println(info);
         
         GUI gui = new GUI(cisuc);
 
-        cisuc.SaveObjectFilesBolseiros();
-        cisuc.SaveObjectFilesDocentes();
-        cisuc.SaveObjectFilesProjetos();
+        
+        if(ErroFichPessoas == 0 && ErroFichProjetos == 0)
+            Exit(cisuc);
         
     }
     
