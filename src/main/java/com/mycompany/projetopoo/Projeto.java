@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
  *
  * @author dinis
  */
-public class Projeto extends CISUC implements Serializable{
+public class Projeto implements Serializable{
     private String nome;
     private String acronimo;
     private GregorianCalendar data_inicio;
@@ -28,10 +28,10 @@ public class Projeto extends CISUC implements Serializable{
     private boolean completo = false;
     private boolean fPrazo = false;
     private int custo;
-    
+    CISUC cisuc;
     //FALTA ACRONIMO
     
-    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final,String acronimo){
+    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final,String acronimo,CISUC cisuc){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.duracao = duracao;
@@ -39,14 +39,16 @@ public class Projeto extends CISUC implements Serializable{
         this.data_final = data_final;
         this.investigadorP = null;
         this.setCompleto();
+        this.cisuc = cisuc;
        
     }
-    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,String acronimo){
+    public Projeto(String nome,GregorianCalendar data_inicio,int duracao,String acronimo,CISUC cisuc){
         this.nome = nome;
         this.data_inicio = data_inicio;
         this.duracao = duracao;
         this.acronimo = acronimo;
-        this.investigadorP = null;        
+        this.investigadorP = null;
+        this.cisuc = cisuc;
     }
    
     
@@ -82,71 +84,41 @@ public class Projeto extends CISUC implements Serializable{
     
     public int addPessoa(Pessoa p){
         int check =0;
-        for(Projeto proj: projeto){
+        for(Projeto proj: cisuc.getProjeto()){
             for(Pessoa pess: proj.getPessoas()){
                 if(pess.getNome().equals(p.getNome())){
-                    check =1;
+                    return 1;
                 }
             }
         }
-        if(check==1){
-            return 1;
-        }
-        else{
-            pessoa.add(p);
-            return 0;
+        pessoa.add(p);
+        return 0;
         }
      
-    }
+    
     
 
 
-    /*public int CriarTarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel,int tipo){
-       double carga =0;
-        if(tipo == 1){
-            //Desenvolvimento
-            
-            carga = 1;
-            
+    public int CriarTarefa(Tarefa T,Pessoa p){
+        double carga = 0;
+        for(Tarefa t:p.listarTarefas()){
+           carga += t.getEsforco();
+           if(carga > 1){
+               return 0;
+           }
         }
-        if(tipo == 2){
-            
-            carga = 0.25;
-        }
-        else{
-            
-            carga = 0.5;
-        }
-        
-        
-        
-        if((responsavel.getCarga() + carga) > 1 ){
-            return 0; //sobracarregado
-        }
-        if(tipo == 1){
-            //Desenvolvimento
-            Desenvolvimento taref;
-        }
-        if(tipo == 2){
-            Documentacao taref;
-            
-        }
-        else{
-            Design taref = new Design(inicioD,duracaoEstimada,responsavel);
-            
-        }
-        
-        
+        p.listarTarefas().add(T);
         return 1;
-    }*/
+    }
+    
+    
 
     
 
     public int EliminarTarefa(Tarefa temp){
         if (tarefa.indexOf(temp) == -1){
             return 0;                       
-        }
-        
+        }      
         else{
             tarefa.remove(temp);
             return 1;
@@ -215,10 +187,15 @@ public class Projeto extends CISUC implements Serializable{
     public int CustoP(){
         int custoMensal =0;
         int custoFinal;
-        for (Pessoa temp: pessoa){
-            custoMensal += temp.getCusto();
+        for (Bolseiro b: bolseiro){            
+            custoMensal += b.getCusto();
         }
-        custoFinal = custoMensal * this.duracao;
+        if((data_inicio.get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12  + duracao <= cisuc.getDataAtual().get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)){
+            custoFinal = custoMensal * (((cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)+cisuc.getDataAtual().get(GregorianCalendar.MONTH)-data_inicio.get(GregorianCalendar.MONTH));
+            
+        }else{
+            custoFinal = custoMensal * this.duracao;
+        }
         return custoFinal;
     }
     
