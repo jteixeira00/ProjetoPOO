@@ -379,7 +379,7 @@ public class GUI{
                 frameAdicionarPessoa.addMouseListener(new MouseAdapter(){
                     public void mouseClicked(MouseEvent e) {
                         infoPessoasText.setText("");
-                        cisuc.getInfo(listaPessoas.getSelectedValue());
+                        infoPessoasText.setText(;cisuc.getInfo(cisuc.PessoaGetter(listaPessoas.getSelectedValue())));
                     }
                 
                 });
@@ -505,30 +505,7 @@ public class GUI{
                 
                 
             }
-            else if(e.getSource() == infoPessoa){
-                String printInfo = new String();
-                Bolseiro tempBolseiro;
-                frameInfoPessoa = new JFrame("Informações");
-                frameInfoPessoa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                frameInfoPessoa.setResizable(false);
-                frameInfoPessoa.setSize(600,400);
-                
-                JPanel panelInfoPessoa  = new JPanel();
-                
-                infoPessoasText = new JTextArea();
-                List<String> lista = listaPessoas.getSelectedValuesList();
-                List<String> listaDoc = listaDocentes.getSelectedValuesList();
-                ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
-                ArrayList<String> listaNomesDocentes = new ArrayList<>(listaDoc.size());
-                printInfo += "Bolseiros selecionados: \n";
-                for(String nome: listaNomesPessoas){
-                    tempBolseiro = cisuc.BolseiroGetter(nome);
-                    
-                    
-                    
-                }
-                
-            }
+            
             
             
         }

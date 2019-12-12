@@ -84,6 +84,8 @@ public class CISUC extends JFrame implements Serializable {
                   
          return null;
         }
+    
+    
     public Docente DocenteGetter(String nome){
         Docente D_Null = new Docente(null,null,0,null);
          for(Docente d:docente){
