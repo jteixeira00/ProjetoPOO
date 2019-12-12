@@ -33,11 +33,12 @@ import javax.swing.*;
  * @author dinis
  */
 public class CISUC extends JFrame implements Serializable {
-    private GregorianCalendar dataAtual;
-    ArrayList<Projeto> projeto = new ArrayList<>();
-    ArrayList<Docente> docente = new ArrayList<>();
-    ArrayList<Bolseiro> bolseiro = new ArrayList<>();
-    ArrayList<Pessoa> pessoas = new ArrayList<>();
+    private GregorianCalendar dataAtual = new GregorianCalendar();
+    protected ArrayList<Projeto> projeto = new ArrayList<>();
+    protected ArrayList<Docente> docente = new ArrayList<>();
+    protected ArrayList<Bolseiro> bolseiro = new ArrayList<>();
+    protected ArrayList<Pessoa> pessoas = new ArrayList<>();
+
     
     
    
@@ -167,7 +168,7 @@ public void leFicheiroProjetos(){
             FileReader fr = new FileReader(f); 
             BufferedReader br = new BufferedReader(fr);
             String line;
-            Projeto p = new Projeto(null,null,0,null,null);
+            Projeto p = new Projeto(null,null,0,null,null,null);
             while((line = br.readLine()) != null) {
                 switch (line.split("/")[0]) {
                     case "PROJ":{
@@ -175,11 +176,11 @@ public void leFicheiroProjetos(){
                         DataF = (line.split("/")[4]).split("-");
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         if(line.split("/")[4].equals("null") == true){
-                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5]);
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),line.split("/")[5],this);
                         }
                         else{
                             GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
-                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5]);
+                            p = new Projeto(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,line.split("/")[5],this);
                         }
                         projeto.add(p);
 
@@ -189,6 +190,8 @@ public void leFicheiroProjetos(){
                         for(Docente doc:docente){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
                                 p.setIP(doc);
+                                p.addPessoa(doc);
+                                p.addDocente(doc);
                             }
                         }
                         break;
@@ -197,6 +200,7 @@ public void leFicheiroProjetos(){
                         for(Docente doc:docente){
                             if(doc.getNumM()==Integer.parseInt(line.split("/")[1])){
                                 p.addDocente(doc);
+                                p.addPessoa(doc);
                             }
                         }                        
                         break;
@@ -205,6 +209,7 @@ public void leFicheiroProjetos(){
                         for(Bolseiro b:bolseiro){
                             if(b.getEmail().equals(line.split("/")[1])==true){
                                 p.addBolseiro(b);
+                                p.addPessoa(b);
                             }
                         }
                         break;
@@ -500,6 +505,30 @@ public void SaveObjectFilesDocentes(){
     
 }
 
+    public GregorianCalendar getDataAtual() {
+        return dataAtual;
+    }
+    
+    
+
+    public ArrayList<Projeto> getProjeto() {
+        return projeto;
+    }
+
+    public ArrayList<Docente> getDocente() {
+        return docente;
+    }
+
+    public ArrayList<Bolseiro> getBolseiro() {
+        return bolseiro;
+    }
+
+    public ArrayList<Pessoa> getPessoas() {
+        return pessoas;
+    }
+    
+    
+    
 
     /**
      * @param args the command line arguments
@@ -524,7 +553,12 @@ public void SaveObjectFilesDocentes(){
             System.out.println("IOException caught; Main");
         }
         
+
+        
+        System.out.println(cisuc.projeto.get(0).CustoP());
+        System.out.println(cisuc.projeto.get(1).CustoP());
         GUI gui = new GUI(cisuc);
+
         cisuc.SaveObjectFilesBolseiros();
         cisuc.SaveObjectFilesDocentes();
         cisuc.SaveObjectFilesProjetos();
