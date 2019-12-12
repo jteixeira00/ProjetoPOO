@@ -147,7 +147,10 @@ public class GUI{
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 frameGerirProjeto.setResizable(false);
                 
-                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray());
+                
+
+                
+                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetos().toArray());
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
                 
                 
@@ -220,13 +223,10 @@ public class GUI{
                 panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));                
                 gerirTarefas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                
-                if(currentProjeto.getNomesTarefas().size()<1){
-                    System.out.println("VIM AQUI");
-                    listaTarefas = new JList();
-                }
-                else{
-                    listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
-                    }
+                
+                
+                listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
+                   
                 JScrollPane listScroller = new JScrollPane(listaTarefas);
                 
                 eliminaTarefa = new JButton("Eliminar Tarefa");
@@ -299,6 +299,8 @@ public class GUI{
             }
             
             else if(e.getSource() == ComboBoxProjetos){
+                
+                
                 currentProjeto = cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem());
             }
             

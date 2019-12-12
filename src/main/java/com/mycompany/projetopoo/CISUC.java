@@ -343,7 +343,7 @@ public ArrayList<Projeto> getListaProjeto(){
 
 
 public ArrayList<String> getNomesPessoas(){
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
     
     for(Pessoa temp: pessoas){
         list.add(temp.getNome());
@@ -499,7 +499,7 @@ public void SaveObjectFilesDocentes(){
         CISUC cisuc = new CISUC();
         
         try {
-            GUI gui = new GUI(cisuc);
+            
            if(cisuc.ObjectCheck() == false){
                 cisuc.leFicheiroPessoas();
                 cisuc.leFicheiroProjetos();  
@@ -512,6 +512,8 @@ public void SaveObjectFilesDocentes(){
         } catch (IOException ex) {
             System.out.println("IOException caught; Main");
         }
+        
+        GUI gui = new GUI(cisuc);
         cisuc.SaveObjectFilesBolseiros();
         cisuc.SaveObjectFilesDocentes();
         cisuc.SaveObjectFilesProjetos();

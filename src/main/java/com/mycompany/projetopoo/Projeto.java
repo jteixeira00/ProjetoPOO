@@ -38,7 +38,6 @@ public class Projeto extends CISUC implements Serializable{
         this.acronimo = acronimo;
         this.data_final = data_final;
         this.investigadorP = null;
-        System.out.println("vim aqui");
         this.setCompleto();
        
     }
@@ -47,7 +46,7 @@ public class Projeto extends CISUC implements Serializable{
         this.data_inicio = data_inicio;
         this.duracao = duracao;
         this.acronimo = acronimo;
-         
+        
         this.investigadorP = null;        
     }
    
