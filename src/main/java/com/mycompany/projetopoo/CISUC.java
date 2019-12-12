@@ -47,6 +47,12 @@ public class CISUC extends JFrame implements Serializable {
         
     }
     
+    public void AlterarDataAtual(int dia,int mes,int ano){
+        dataAtual.set(GregorianCalendar.YEAR,ano);
+        dataAtual.set(GregorianCalendar.MONTH,mes);
+        dataAtual.set(GregorianCalendar.DAY_OF_MONTH,dia);        
+    }
+    
     
       
     public int BolseiroInProjetos(Pessoa b){
@@ -527,6 +533,12 @@ public void SaveObjectFilesDocentes(){
                 System.out.println("-------------------");
             }
         }
+        
+        //cisuc.AlterarDataAtual(30,12,2000);
+        GregorianCalendar dataAtual = cisuc.getDataAtual();
+        String info = String.format("Dia: %s\nMes: %s\nAno: %s",dataAtual.get(GregorianCalendar.DAY_OF_MONTH),dataAtual.get(GregorianCalendar.MONTH),dataAtual.get(GregorianCalendar.YEAR));
+        System.out.println(info);
+        
         GUI gui = new GUI(cisuc);
 
         cisuc.SaveObjectFilesBolseiros();
