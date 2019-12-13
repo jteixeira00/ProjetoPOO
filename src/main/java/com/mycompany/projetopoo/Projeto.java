@@ -68,6 +68,21 @@ public class Projeto implements Serializable{
         return nomes;
     }
     
+    public void EliminaTarefa(Tarefa t){
+        for(Pessoa p:pessoa){
+            for(Tarefa tar:p.listarTarefas()){
+            if(t.getNome().equals(tar.getNome())==true){
+                p.listarTarefas().remove(tar);
+            }                
+            }
+        }
+        for(Tarefa tar:tarefa){
+            if(t.getNome().equals(tar.getNome())==true){
+                tarefa.remove(tar);
+            }
+        }                
+    }
+    
     public ArrayList<String> NomesTarefasCompletas(){
         ArrayList<String> nomes = null;
         for(Tarefa t:tarefa){
@@ -174,16 +189,6 @@ public class Projeto implements Serializable{
 
     
 
-    public int EliminarTarefa(Tarefa temp){
-        if (tarefa.indexOf(temp) == -1){
-            return 0;                       
-        }      
-        else{
-            tarefa.remove(temp);
-            return 1;
-        }
-        
-    }
     public ArrayList<String> getNomesPessoas(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Pessoa b:pessoa){
