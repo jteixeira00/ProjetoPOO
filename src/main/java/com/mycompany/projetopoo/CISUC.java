@@ -564,6 +564,10 @@ public class CISUC extends JFrame implements Serializable {
     }
     return info;
 }
+    public void addProjeto(Projeto p){
+        
+        projeto.add(p);
+    }
 
     /**
      * Devolve uma string com a informação de uma tarefa
@@ -606,6 +610,7 @@ public class CISUC extends JFrame implements Serializable {
     }
     return 1;
 }
+    
 
     /**
      *Insere a informação existente no object file "Docentes.obj" na lista de pessoas

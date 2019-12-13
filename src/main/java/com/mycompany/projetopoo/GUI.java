@@ -306,7 +306,7 @@ public class GUI{
                 int etaT = Integer.parseInt((String)eta.getText());
                 GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
                 Projeto temp = new Projeto(nomeText, dataIT, etaT, acronimoText,cisuc);
-                cisuc.projeto.add(temp);
+                cisuc.addProjeto(temp);
                 
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
  
@@ -634,35 +634,41 @@ public class GUI{
             if(e.getSource() == selecionarPessoas){
                 
                 
-                List<String> lista = listaPessoas.getSelectedValuesList();                
-                
+                List<String> lista = listaPessoas.getSelectedValuesList();     
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
                 listaNomesPessoas.addAll(lista);
-                
-                
-
                   ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
                 for(String bolseiro:listaNomesPessoas){
+                    System.out.println("1");
                     if(cisuc.PessoaGetter(bolseiro).getCusto() != 0)
+                        System.out.println("2");
                         listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
                 for(String docente:listaNomesPessoas){
-                    if(cisuc.PessoaGetter(docente).getCusto() == 0)
+                    System.out.println("3");
+                    if(cisuc.PessoaGetter(docente).getCusto() == 0){
+                        System.out.println("4");
                         listaPessoa.add(cisuc.PessoaGetter(docente));
+                    }
                 }
                 
-                
                 for(Pessoa bol:listaPessoa){
+                    System.out.println("5");
                     if(bol.getCusto() != 0){
+                        System.out.println("6");
                         if(cisuc.BolseiroInProjetos(bol) == 1){
+                            System.out.println("7");
                             System.out.println("Bolseiro já tem um Projeto atribuido");
                         }
                         else{
+                            System.out.println("8");
                             currentProjeto.addPessoa(bol);
                         }
                     }else{
+                        System.out.println("9");
                         if(currentProjeto.addPessoa(bol)==1){
+                            System.out.println("10");
                             System.out.println("Docente já existe neste projeto");
                         }          
                     }
