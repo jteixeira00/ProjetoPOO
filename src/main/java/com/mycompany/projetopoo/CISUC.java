@@ -223,7 +223,7 @@ public int leFicheiroProjetos(){
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
                         
-                        Double taxa = Double.parseDouble(line.split("/")[6]);
+                        
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         if(CheckdataGregorian(datai)==1){
                             System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DOCUMENTACAO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
@@ -235,6 +235,7 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+                            int taxa = Integer.parseInt(line.split("/")[6]);
                             Tarefa t = new Documentacao(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
@@ -252,7 +253,7 @@ public int leFicheiroProjetos(){
                     case "DESI":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
-                        double taxa = Double.parseDouble(line.split("/")[6]);
+                        
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         if(CheckdataGregorian(datai)==1){
                             System.out.println("DATA INICIAL INVALIDA NA TAREFA DE Design "+line.split("/")[1]+": LEITURA DO FICHEIRO");
@@ -264,6 +265,7 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+                            int taxa = Integer.parseInt(line.split("/")[6]);
                             Tarefa t = new Design(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
@@ -281,7 +283,7 @@ public int leFicheiroProjetos(){
                     case "DESE":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
-                        double taxa = Double.parseDouble(line.split("/")[6]);
+                        
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         if(CheckdataGregorian(datai)==1){
                             System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DESENVOLVIMENTO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
@@ -293,6 +295,7 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+                            int taxa = Integer.parseInt(line.split("/")[6]);
                             Tarefa t = new Desenvolvimento(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
