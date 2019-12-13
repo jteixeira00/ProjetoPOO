@@ -58,6 +58,16 @@ public class Projeto implements Serializable{
         return null;
     }
     
+    public ArrayList<String> NomesTarefasInicializadas(){
+        ArrayList<String> nomes = null;
+        for(Tarefa t:tarefa){
+            if(t.getTaxa() == 0){
+                nomes.add(t.getNome());
+            }
+        }
+        return nomes;
+    }
+    
     public void setTarefaCompleta(Tarefa t){
         t.setCompleto();
         t.setDataF(cisuc.getDataAtual());
