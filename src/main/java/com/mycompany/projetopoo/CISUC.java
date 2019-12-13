@@ -260,6 +260,7 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+
                             int taxa = Integer.parseInt(line.split("/")[6]);
                             Tarefa t = new Documentacao(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
@@ -290,8 +291,11 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+
                             int taxa = Integer.parseInt(line.split("/")[6]);
+
                             Tarefa t = new Design(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
+                            
                             p.addTarefa(t);
                         }
                         else{
@@ -320,7 +324,9 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
+
                             int taxa = Integer.parseInt(line.split("/")[6]);
+
                             Tarefa t = new Desenvolvimento(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
