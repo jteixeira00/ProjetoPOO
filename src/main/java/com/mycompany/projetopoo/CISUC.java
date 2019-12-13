@@ -71,7 +71,6 @@ public class CISUC extends JFrame implements Serializable {
         ano = data.get(GregorianCalendar.YEAR) + 1;
         mes = data.get(GregorianCalendar.MONTH);
         dia = data.get(GregorianCalendar.DAY_OF_MONTH);
-        System.out.println(dia);
         if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0) || (mes == 2 && ano > 0 && dia > 0 && dia < 30 && mes > 0 && mes < 13 )){
             return 0;
         }
@@ -105,8 +104,16 @@ public class CISUC extends JFrame implements Serializable {
             if(nome.equals(p.getNome()) == true){
                 return p;
             }
+        }                  
+         return null;
         }
-                  
+    
+    public Pessoa EmailGetter(String email){
+         for(Pessoa p:pessoas){
+            if(email.equals(p.getEmail()) == true){
+                return p;
+            }
+        }                  
          return null;
         }
 
@@ -215,6 +222,20 @@ public int leFicheiroProjetos(){
                         for(Pessoa b:pessoas){
                             if(b.getEmail().equals(line.split("/")[1])==true){
                                 p.addPessoa(b);
+                                if(b.getCusto() == 800 || b.getCusto() == 1200){
+                                   for(String coor:line.split("/")[2].split("-")){
+                                       if(this.EmailGetter(coor) == null){
+                                           System.out.println("ERRO NO FICHEIRO: EMAIL DE COORDENADOR NÃO EXISTE");
+                                       }else if(this.EmailGetter(coor).getCusto() != 0){
+                                           System.out.println("ERRO NO FICHEIRO: EMAIL DE COORDENADOR NÃO PERTENCE A UM DOCENTE");
+
+                                       }else{
+                                            b.setCoordenador(this.EmailGetter(coor));
+                                       }            
+                                        
+                                   }
+                                    
+                                }
                             }
                         }
                         break;
@@ -676,8 +697,8 @@ public void SaveObjectFilesDocentes(){
         GUI gui = new GUI(cisuc);
 
         
-        if(ErroFichPessoas == 0 && ErroFichProjetos == 0)
-            Exit(cisuc);
+        //if(ErroFichPessoas == 0 && ErroFichProjetos == 0)
+            //Exit(cisuc);
         
     }
     

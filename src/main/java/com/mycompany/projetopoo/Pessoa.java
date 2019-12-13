@@ -90,4 +90,7 @@ public abstract class Pessoa implements Serializable{
     public String getArea(){
         return null;
     }
+    
+    public abstract void setCoordenador(Pessoa D);          
+    
 }

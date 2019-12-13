@@ -31,4 +31,8 @@ public class Doutorado extends Bolseiro implements Serializable{
         return "Doutorado";
     }
     
+    @Override
+    public void setCoordenador(Pessoa D){
+        System.out.println("Doutorados não tem Coordenadores");             
+    }
 }

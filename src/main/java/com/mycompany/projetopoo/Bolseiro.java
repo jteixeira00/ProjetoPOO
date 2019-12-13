@@ -39,4 +39,5 @@ public abstract class Bolseiro extends Pessoa implements Serializable {
     public GregorianCalendar getFim(){
         return FimB;
     }
+    public abstract void setCoordenador(Pessoa D); 
 }
