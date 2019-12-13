@@ -38,8 +38,8 @@ import javax.swing.text.NumberFormatter;
 import net.miginfocom.swing.MigLayout;
 
 /**
- *
- * @author User
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class GUI{
     JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, redirecionaTarefa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;
@@ -305,10 +305,11 @@ public class GUI{
                 int anoT = Integer.parseInt((String)ano.getText());
                 int etaT = Integer.parseInt((String)eta.getText());
                 GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
+                String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
                 Projeto temp = new Projeto(nomeText, dataIT, etaT, acronimoText,cisuc);
                 cisuc.addProjeto(temp);
-                
-                String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
+                temp.setIP(cisuc.PessoaGetter(nomeIPT));
+
  
             }
             else if(e.getSource()==terminaProjeto){
@@ -662,21 +663,20 @@ public class GUI{
                   ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
                 for(String bolseiro:listaNomesPessoas){
-                    System.out.println("1");
+                   // System.out.println("1");
                     if(cisuc.PessoaGetter(bolseiro).getCusto() != 0)
-                        System.out.println("2");
+                        //System.out.println("2");
                         listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
                 for(String docente:listaNomesPessoas){
-                    System.out.println("3");
+                   // System.out.println("3");
                     if(cisuc.PessoaGetter(docente).getCusto() == 0){
-                        System.out.println("4");
+                       // System.out.println("4");
                         listaPessoa.add(cisuc.PessoaGetter(docente));
                     }
                 }
                 
                 for(Pessoa bol:listaPessoa){
-                    System.out.println("5");
                     if(bol.getCusto() != 0){
                         System.out.println("6");
                         if(cisuc.BolseiroInProjetos(bol) == 1){

@@ -11,8 +11,8 @@ import java.util.GregorianCalendar;
 
 
 /**
- *
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class Doutorado extends Bolseiro implements Serializable{
     

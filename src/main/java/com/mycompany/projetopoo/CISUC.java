@@ -29,8 +29,8 @@ import javax.swing.*;
         
 
 /**
- *
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class CISUC extends JFrame implements Serializable {
     private GregorianCalendar dataAtual = new GregorianCalendar();
@@ -82,8 +82,10 @@ public class CISUC extends JFrame implements Serializable {
         if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0)){
             if((mes==2 && dia<=29))
                 return 0;
-            else
-                return 1;
+            else{
+                System.out.println("DATA INCORRETA");
+                return 1;                
+            }
         }
         return 1;
     }
@@ -101,6 +103,7 @@ public class CISUC extends JFrame implements Serializable {
         if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0) || (mes == 2 && ano > 0 && dia > 0 && dia < 30 && mes > 0 && mes < 13 )){
             return 0;
         }
+        System.out.println("DATA INCORRETA");
         return 1;
     }
     

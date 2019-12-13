@@ -6,8 +6,8 @@
 package com.mycompany.projetopoo;
 
 /**
- *
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class Docente extends Pessoa{
     private int numM;

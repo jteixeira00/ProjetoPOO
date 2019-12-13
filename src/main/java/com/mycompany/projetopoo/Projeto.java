@@ -12,8 +12,8 @@ import java.util.Set;
 
 
 /**
- * 
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class Projeto implements Serializable{
     private String nome;
@@ -185,12 +185,17 @@ public class Projeto implements Serializable{
      * @param d Docente
      * @return 1 se tiver investigador principal
      */
-    public int setIP(Docente d){
+    public int setIP(Pessoa d){
         if(investigadorP == null){
             this.investigadorP = d;
-            System.out.println("Já tem um ivestigador principal");
+            pessoa.add(d);
+        
+        }else{
+            System.out.println("Já tem um ivnestigador principal");
             return 1;
+                
         }
+        
         return 0;               
     }
     
@@ -235,22 +240,29 @@ public class Projeto implements Serializable{
             for(Projeto proj: cisuc.getProjeto()){
                 for(Pessoa pess: proj.getPessoas()){
                     if(pess.getNome().equals(p.getNome())){
+         
                         return 1;
+                        
                     }
                 }
             }
+
             pessoa.add(p);
         }else{
-            for(Pessoa pess:pessoa){
-                    if(pess.getNome()==p.getNome()){
+            System.out.println("LLLLLLL");
+                    if(pessoa.contains(p)){
                         return 1;
+                        
                     }
                     else{
                         pessoa.add(p);
+                        System.out.println(pessoa.get(0).getNome());
+                        System.out.println("ADICONADO");
                         return 0;
                     }
             }
-        }       
+        
+        
         return 0;
      }
      
