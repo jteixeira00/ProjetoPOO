@@ -23,10 +23,10 @@ public class Design extends Tarefa{
         return 0.5;
     } 
 
-    
-   
-    /*public double esforço(){
-    return 0.5;*/
+    @Override
+    public String getTipo(){
+        return "Design";
+    }
 }
     
 

@@ -22,6 +22,11 @@ public class Desenvolvimento extends Tarefa{
     @Override
     public double getEsforco() {
         return 1;
-    } 
+    }
+    
+    @Override
+    public String getTipo(){
+        return "Desenvolvimento";
+    }
     
 }

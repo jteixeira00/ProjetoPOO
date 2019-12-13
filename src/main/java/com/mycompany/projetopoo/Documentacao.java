@@ -24,4 +24,9 @@ public class Documentacao extends Tarefa implements Serializable{
         return 0.25;
     } 
     
+    @Override
+    public String getTipo(){
+        return "Documentação";
+    }
+    
 }

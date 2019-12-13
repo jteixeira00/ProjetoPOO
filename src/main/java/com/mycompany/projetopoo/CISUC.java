@@ -447,16 +447,16 @@ public String getInfoProjetos(Projeto p){
     return info;
 }
 
-//public String getInfoTarefas(Tarefa p){
-//    String info;
-//    if(p.getTaxa() == 1){
-//        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH)+1,p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH)+1,p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
-//    }
-//    else{
-//        info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nNúmero Mecanográfico: %d\nÁrea de investigação: %s\n",p.getNome(),p.getEstatuto(),p.getEmail(),p.getNumM(),p.getArea());
-//    }    
-//    return info;
-//}
+public String getInfoTarefas(Tarefa p){
+    String info;
+    if(p.getTaxa() == 1){
+        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: 100\nEsforço: %f\nData Final: %d-%d-%d\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getEsforco(),p.getFinalD().get(GregorianCalendar.DAY_OF_MONTH),p.getFinalD().get(GregorianCalendar.MONTH)+1,p.getFinalD().get(GregorianCalendar.YEAR),p.getResponsavel().getNome());
+    }
+    else{
+        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: %f\nEsforço: %f\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getTaxa(),p.getEsforco(),p.getResponsavel().getNome());
+    }    
+    return info;
+}
     
 
 public int leObjectFilesBolseiros(){
