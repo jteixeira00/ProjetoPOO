@@ -343,6 +343,7 @@ public class Projeto implements Serializable{
     }
     
     public int getCusto() {
+        custo = this.CustoP();
         return custo;
     }
     
