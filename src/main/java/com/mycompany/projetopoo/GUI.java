@@ -594,9 +594,9 @@ public class GUI{
                 panelCriarTarefa.add(responsavelT);
                 panelCriarTarefa.add(confirm2, "cell 1 5");
                 frameCriarTarefa.add(panelCriarTarefa);
-                redirecionaTarefa.setVisible(false);
+                
                 frameCriarTarefa.setVisible(true);
-                gerirTarefas.setVisible(false);
+                
                 
                 
                 
@@ -759,8 +759,9 @@ public class GUI{
                 }
                 
                 
-               
-                listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
+                mainFrame.setVisible(true);
+                frameCriarTarefa.setVisible(false);
+                //listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
             }
        
         }
