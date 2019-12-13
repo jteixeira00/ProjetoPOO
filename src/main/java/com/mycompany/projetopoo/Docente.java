@@ -12,6 +12,14 @@ package com.mycompany.projetopoo;
 public class Docente extends Pessoa{
     private int numM;
     private String area;
+
+    /**
+     *Construtor Docente
+     * @param nome
+     * @param email
+     * @param numM
+     * @param area
+     */
     public Docente(String nome,String email,int numM,String area){
         super(nome,email);
         this.numM = numM;

@@ -17,6 +17,13 @@ public class Mestre extends Bolseiro implements Serializable{
     
     
     ArrayList<Pessoa> Coordenadores = new ArrayList<>();
+    /**
+     *Construtor Licenciado
+     * @param nome
+     * @param email
+     * @param InicioB
+     * @param FimB
+     */
     Mestre(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);
     }

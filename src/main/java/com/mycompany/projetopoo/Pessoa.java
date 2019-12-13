@@ -17,20 +17,32 @@ public abstract class Pessoa implements Serializable{
     private String nome;
     private String email;
     private int custo;
+
+    /**
+     *Array List tarefa
+     */
     protected ArrayList<Tarefa> tarefa = new ArrayList<Tarefa>();
     
        
-    
+     /**
+     *Construtor Pessoa
+     * @param nome
+     * @param email
+     */
     Pessoa(String nome,String email){
         this.nome = nome;
         this.email = email;
         
     }
+
+    /**
+     *Adiciona tarefa à lista de tarefas
+     * @param t
+     */
     public void addTarefa(Tarefa t){
        tarefa.add(t);
        
     }
-    
     
 
     public String getNome() {
@@ -41,25 +53,20 @@ public abstract class Pessoa implements Serializable{
         return email;
     }
     
+    /**
+     *Devolve lista de tarefas do projeto
+     * @return ArrayList de tarefas do projeto
+     */
     public ArrayList<Tarefa> listarTarefas(){
         return tarefa;
     }
-    void adicionarTarefa(Tarefa temp){
-        tarefa.add(temp);
-    }
+     
     
-    public int removerTarefa(Tarefa temp){
-        
-        if (tarefa.indexOf(temp) == -1){
-            return 0;                       
-        }
-
-        else{
-            tarefa.remove(temp);
-            return 1;
-        }
-    }
     
+    /**
+     *Devolve a carga total do projeto
+     * @return carga 
+     */
     public double getCarga(){
         double carga = 0;
         for(Tarefa temp: tarefa){
@@ -68,29 +75,37 @@ public abstract class Pessoa implements Serializable{
         return carga;
     }
 
+
     public int getCusto() {
         return 0;
     }
+
 
     public int getNumM() {
         return 0;
     }
     
+
     public String getEstatuto(){
         return null;
     }
     
+
     public GregorianCalendar getInicio(){
         return null;
     }
+
+
     public GregorianCalendar getFim(){
         return null;
     }
     
+
     public String getArea(){
         return null;
     }
     
+
     public abstract void setCoordenador(Pessoa D);          
     
 }

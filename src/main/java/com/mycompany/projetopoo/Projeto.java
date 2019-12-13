@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 
 
 /**
- *
+ * 
  * @author dinis
  */
 public class Projeto implements Serializable{
@@ -27,7 +27,7 @@ public class Projeto implements Serializable{
     private boolean fPrazo = false;
     private int custo;
     CISUC cisuc;
-    //FALTA ACRONIMO
+  
     
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final,String acronimo,CISUC cisuc){
         this.nome = nome;
