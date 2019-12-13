@@ -289,8 +289,9 @@ public class Projeto implements Serializable{
         return custo;
     }
     
-    
-    
+    public boolean getCompleto(){
+        return completo;
+    }  
     
     
 }
