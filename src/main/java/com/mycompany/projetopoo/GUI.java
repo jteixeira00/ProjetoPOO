@@ -141,7 +141,7 @@ public class GUI{
                 newPanel.add(eta);                
                 newPanel.add(labelIP);
                 newPanel.add(listaInvestigadoresPrinc);
-                newPanel.add(text);
+                
                 frameCreateProject.add(newPanel);               
                 
                 frameCreateProject.add(newPanel);
@@ -180,7 +180,7 @@ public class GUI{
                 ComboBoxProjetos.addMouseListener(new MouseAdapter(){
                             public void mouseClicked(MouseEvent e) {
                                 
-                                infoProjetoText.setText("OLA ORA BOLAS");
+                                infoProjetoText.setText(cisuc.getInfoProjeto(cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem())));
                                 
                                 //infoProjetoText.setText(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
                                
@@ -465,7 +465,7 @@ public class GUI{
             
             else if(e.getSource() == atualizaTaxa){
                 
-                
+            
             }
             
             else if(e.getSource() == regressaMainDaGestao){
