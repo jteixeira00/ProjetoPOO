@@ -83,6 +83,8 @@ public class Projeto implements Serializable{
         }                
     }
     
+    
+    
     public ArrayList<String> NomesTarefasCompletas(){
         ArrayList<String> nomes = null;
         for(Tarefa t:tarefa){
@@ -163,7 +165,14 @@ public class Projeto implements Serializable{
             }
             pessoa.add(p);
         }else{
-            pessoa.add(p);
+            for(Pessoa pess:pessoa){
+                    if(pess.getNome().equals(p.getNome())){
+                        return 1;
+                    }
+                    else{
+                        pessoa.add(p);
+                    }
+            }
         }       
         return 0;
      }
