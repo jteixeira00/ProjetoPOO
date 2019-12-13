@@ -57,6 +57,35 @@ public class Projeto implements Serializable{
         }        
         return null;
     }
+    
+    public ArrayList<String> NomesTarefasInicializadas(){
+        ArrayList<String> nomes = null;
+        for(Tarefa t:tarefa){
+            if(t.getTaxa() == 0){
+                nomes.add(t.getNome());
+            }
+        }
+        return nomes;
+    }
+    
+    public ArrayList<String> NomesTarefasCompletas(){
+        ArrayList<String> nomes = null;
+        for(Tarefa t:tarefa){
+            if(t.getTaxa() == 100){
+                nomes.add(t.getNome());
+            }
+        }
+        return nomes;
+    }
+    
+    public void setTarefaCompleta(Tarefa t){
+        t.setCompleto();
+        t.setDataF(cisuc.getDataAtual());
+    }
+    
+    public void setProjetoCompleto(){
+        data_final = cisuc.getDataAtual();
+    }
    
     
     public void addTarefa(Tarefa t){
@@ -85,6 +114,25 @@ public class Projeto implements Serializable{
             System.out.println(temp);
         }
         return tarefa;
+    }
+    
+    public ArrayList<String> ForaPrazo(){
+        ArrayList<String> nomes = null;
+        for(Tarefa t:tarefa){
+            if(t.getTaxa() != 100){
+                if((t.getInicioD().get(GregorianCalendar.MONTH) + 1 + (t.getInicioD().get(GregorianCalendar.YEAR)*12)  + t.getDuracaoEstimada() < cisuc.getDataAtual().get(GregorianCalendar.MONTH) + 1 + (cisuc.getDataAtual().get(GregorianCalendar.YEAR)*12)))
+                    nomes.add(t.getNome());
+                }
+            else{
+                if((t.getInicioD().get(GregorianCalendar.MONTH) + 1 + (t.getInicioD().get(GregorianCalendar.YEAR)*12)  + t.getDuracaoEstimada() < t.getFinalD().get(GregorianCalendar.MONTH) + (t.getFinalD().get(GregorianCalendar.YEAR)*12))){
+                   nomes.add(t.getNome()); 
+                }
+            }
+           
+        
+        }
+        
+        return nomes;
     }
     
     
@@ -210,8 +258,8 @@ public class Projeto implements Serializable{
             if(b.getCusto()!=0)
                 custoMensal += b.getCusto();
         }
-        if((data_inicio.get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12  + duracao <= cisuc.getDataAtual().get(GregorianCalendar.MONTH) + (cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)){
-            custoFinal = custoMensal * (((cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)+cisuc.getDataAtual().get(GregorianCalendar.MONTH)-data_inicio.get(GregorianCalendar.MONTH));
+        if((data_inicio.get(GregorianCalendar.MONTH) + (data_inicio.get(GregorianCalendar.YEAR)*12)  + duracao <= cisuc.getDataAtual().get(GregorianCalendar.MONTH) + 1 + (cisuc.getDataAtual().get(GregorianCalendar.YEAR)*12))){
+            custoFinal = custoMensal * (((cisuc.getDataAtual().get(GregorianCalendar.YEAR) - data_inicio.get(GregorianCalendar.YEAR))*12)+cisuc.getDataAtual().get(GregorianCalendar.MONTH) + 1 - data_inicio.get(GregorianCalendar.MONTH) + 1);
             
         }else{
             custoFinal = custoMensal * this.duracao;
@@ -295,6 +343,7 @@ public class Projeto implements Serializable{
     }
     
     public int getCusto() {
+        custo = this.CustoP();
         return custo;
     }
     

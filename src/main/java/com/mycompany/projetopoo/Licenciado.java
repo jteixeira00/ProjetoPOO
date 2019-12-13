@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
  */
 public class Licenciado extends Bolseiro implements Serializable{
     
-    
+    ArrayList<Pessoa> Coordenadores = new ArrayList<>();
     public Licenciado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);
     }
@@ -27,6 +27,11 @@ public class Licenciado extends Bolseiro implements Serializable{
     @Override 
     public String getEstatuto(){
         return "Licenciado";
+    }
+    
+
+    public void setCoordenador(Pessoa D){
+        Coordenadores.add(D);             
     }
         
 }

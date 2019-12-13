@@ -19,7 +19,7 @@ public abstract class Tarefa implements Serializable{
     private GregorianCalendar inicioD;
     private GregorianCalendar finalD;
     private int duracaoEstimada;
-    private double taxa;
+    private int taxa;
     private String nome;
     private Pessoa responsavel;
     private double esforco;
@@ -35,7 +35,7 @@ public abstract class Tarefa implements Serializable{
         setCompleto();
     }
     
-    public Tarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,double taxa){
+    public Tarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
         this.nome=nome;
         this.inicioD = inicioD;
         this.duracaoEstimada = duracaoEstimada;
@@ -51,12 +51,16 @@ public abstract class Tarefa implements Serializable{
         taxa = 100;
     }
     
+    public void setDataF(GregorianCalendar data){
+        finalD = data;
+    }
+    
     public void atualizarTaxa(int i){
         taxa = i;
         
     }
     
-    public double getTaxa(){
+    public int getTaxa(){
         return taxa;
     }
 
@@ -91,6 +95,7 @@ public abstract class Tarefa implements Serializable{
     public String getTipo(){
         return null;
     }
-    //abstract double esforço();
+    
+
     
 }

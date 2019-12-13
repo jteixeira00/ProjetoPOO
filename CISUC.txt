@@ -1,18 +1,18 @@
 PROJ/ProjetoPoo/12-10-2019/4/13-11-2019/PP
 INV/111111111
 DOC/222222222
-EST/ek@sapo.pt
-EST/bd@sapo.pt
-EST/mz@sapo.pt
-DOCU/banana/20-5-2021/5/null/ek@sapo.pt/0.25
+EST/ek@sapo.pt/md@sapo.pt-ernesto@inforestudante.uc.pt
+EST/bd@sapo.pt/vt@inforestudante.uc.pt-nuno@inforestudante.uc.pt
+EST/mz@sapo.pt/ernesto@inforestudante.uc.pt-nuno@inforestudante.uc.pt
+DOCU/banana/20-5-2021/5/null/ek@sapo.pt/0
 DESI/batata/05-8-2020/7/16-11-2021/bd@sapo.pt
 DESE/palalilo/28-10-2019/2/2-7-2020/mz@sapo.pt
 PROJ/Projeto Teste/01-02-2018/24/null/LaLa
 INV/123541875
 DOC/157478549
-EST/jc@sapo.pt
-EST/jm@sapo.pt
-EST/mj@sapo.pt
+EST/jc@sapo.pt/md@sapo.pt-ernesto@inforestudante.uc.pt
+EST/jm@sapo.pt/ernesto@inforestudante.uc.pt-nuno@inforestudante.uc.pt
+EST/mj@sapo.pt/vt@inforestudante.uc.pt-nuno@inforestudante.uc.pt
 DOCU/Tarefa/20-5-2021/5/4-7-2022/jc@sapo.pt
 DESI/LALALA/05-8-2020/7/16-11-2021/jm@sapo.pt
 DESE/UUUUUUU/28-10-2019/2/2-7-2020/mj@sapo.pt

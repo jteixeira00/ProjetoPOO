@@ -18,7 +18,7 @@ public class Desenvolvimento extends Tarefa{
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);   
         
     }
-    public Desenvolvimento(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,double taxa){
+    public Desenvolvimento(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
         super(nome,inicioD,duracaoEstimada,responsavel,taxa);     
     }
     

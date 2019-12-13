@@ -445,7 +445,6 @@ public class GUI{
                             public void mouseClicked(MouseEvent e) {
                                 
                                 
-                                System.out.println(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
                                 infoPessoasText.setText(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
                                
                                 

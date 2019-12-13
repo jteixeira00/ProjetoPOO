@@ -32,6 +32,11 @@ public class Docente extends Pessoa{
         return "Docente";
     }
     
+    @Override
+    public void setCoordenador(Pessoa D){
+        System.out.println("Docentes não tem Coordenadores");             
+    }
+    
     
     
     

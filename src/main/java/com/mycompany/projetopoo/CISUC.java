@@ -47,12 +47,16 @@ public class CISUC extends JFrame implements Serializable {
         
     }
     
-    public void AlterarDataAtual(int dia,int mes,int ano){
+    public int AlterarDataAtual(int dia,int mes,int ano){
         if(Checkdata(dia,mes,ano) == 0){
             mes = mes - 1;
             dataAtual.set(GregorianCalendar.YEAR,ano);
             dataAtual.set(GregorianCalendar.MONTH,mes);
             dataAtual.set(GregorianCalendar.DAY_OF_MONTH,dia);
+            return 0;
+        }
+        else{
+            return 1;
         }
     }
     
@@ -71,7 +75,6 @@ public class CISUC extends JFrame implements Serializable {
         ano = data.get(GregorianCalendar.YEAR) + 1;
         mes = data.get(GregorianCalendar.MONTH);
         dia = data.get(GregorianCalendar.DAY_OF_MONTH);
-        System.out.println(dia);
         if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0) || (mes == 2 && ano > 0 && dia > 0 && dia < 30 && mes > 0 && mes < 13 )){
             return 0;
         }
@@ -105,8 +108,16 @@ public class CISUC extends JFrame implements Serializable {
             if(nome.equals(p.getNome()) == true){
                 return p;
             }
+        }                  
+         return null;
         }
-                  
+    
+    public Pessoa EmailGetter(String email){
+         for(Pessoa p:pessoas){
+            if(email.equals(p.getEmail()) == true){
+                return p;
+            }
+        }                  
          return null;
         }
 
@@ -215,6 +226,20 @@ public int leFicheiroProjetos(){
                         for(Pessoa b:pessoas){
                             if(b.getEmail().equals(line.split("/")[1])==true){
                                 p.addPessoa(b);
+                                if(b.getCusto() == 800 || b.getCusto() == 1200){
+                                   for(String coor:line.split("/")[2].split("-")){
+                                       if(this.EmailGetter(coor) == null){
+                                           System.out.println("ERRO NO FICHEIRO: EMAIL DE COORDENADOR NÃO EXISTE");
+                                       }else if(this.EmailGetter(coor).getCusto() != 0){
+                                           System.out.println("ERRO NO FICHEIRO: EMAIL DE COORDENADOR NÃO PERTENCE A UM DOCENTE");
+
+                                       }else{
+                                            b.setCoordenador(this.EmailGetter(coor));
+                                       }            
+                                        
+                                   }
+                                    
+                                }
                             }
                         }
                         break;
@@ -235,7 +260,8 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
-                            Double taxa = Double.parseDouble(line.split("/")[6]);
+
+                            int taxa = Integer.parseInt(line.split("/")[6]);
                             Tarefa t = new Documentacao(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
@@ -265,7 +291,9 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
-                            double taxa = Double.parseDouble(line.split("/")[6]);
+
+                            int taxa = Integer.parseInt(line.split("/")[6]);
+
                             Tarefa t = new Design(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             
                             p.addTarefa(t);
@@ -296,7 +324,9 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
-                            double taxa = Double.parseDouble(line.split("/")[6]);
+
+                            int taxa = Integer.parseInt(line.split("/")[6]);
+
                             Tarefa t = new Desenvolvimento(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
@@ -476,7 +506,7 @@ public String getInfoTarefas(Tarefa p){
         info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: 100\nEsforço: %f\nData Final: %d-%d-%d\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getEsforco(),p.getFinalD().get(GregorianCalendar.DAY_OF_MONTH),p.getFinalD().get(GregorianCalendar.MONTH)+1,p.getFinalD().get(GregorianCalendar.YEAR),p.getResponsavel().getNome());
     }
     else{
-        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: %f\nEsforço: %f\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getTaxa(),p.getEsforco(),p.getResponsavel().getNome());
+        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: %d\nEsforço: %f\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getTaxa(),p.getEsforco(),p.getResponsavel().getNome());
     }    
     return info;
 }
@@ -669,16 +699,13 @@ public void SaveObjectFilesDocentes(){
             }
         }
         
-        //cisuc.AlterarDataAtual(30,14,2000);
-        GregorianCalendar dataAtual = cisuc.getDataAtual();
-        String info = String.format("Dia: %s\nMes: %s\nAno: %s",dataAtual.get(GregorianCalendar.DAY_OF_MONTH),dataAtual.get(GregorianCalendar.MONTH),dataAtual.get(GregorianCalendar.YEAR));
-        System.out.println(info);
+        System.out.println(cisuc.projeto.get(0).getCusto());
         
         GUI gui = new GUI(cisuc);
 
         
-        if(ErroFichPessoas == 0 && ErroFichProjetos == 0)
-            Exit(cisuc);
+        //if(ErroFichPessoas == 0 && ErroFichProjetos == 0)
+            //Exit(cisuc);
         
     }
     
