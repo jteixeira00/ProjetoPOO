@@ -18,6 +18,9 @@ public class Desenvolvimento extends Tarefa{
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);   
         
     }
+    public Desenvolvimento(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+        super(nome,inicioD,duracaoEstimada,responsavel);       
+    }
     
     @Override
     public double getEsforco() {
