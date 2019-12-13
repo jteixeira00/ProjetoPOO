@@ -68,7 +68,7 @@ public class Projeto implements Serializable{
         return nomes;
     }
     
-    public void EliminaTarefa(Tarefa t){
+    public void EliminarTarefa(Tarefa t){
         for(Pessoa p:pessoa){
             for(Tarefa tar:p.listarTarefas()){
             if(t.getNome().equals(tar.getNome())==true){
