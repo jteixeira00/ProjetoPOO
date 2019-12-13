@@ -13,5 +13,6 @@
                 <exec.args>-classpath %classpath com.mycompany.projetopoo.CISUC</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
+            
         </action>
     </actions>
