@@ -497,6 +497,7 @@ public String getInfoProjetos(Projeto p){
     else{
         info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\n",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getDuracao());
     }
+    info = info + "Pessoas Associadas: \n";
     for(Pessoa ps:p.getPessoas()){
         info = info + "\n" + ps.getNome();
     }

@@ -68,20 +68,22 @@ public class GUI{
         this.cisuc = cisuc;
         mainFrame = new JFrame("CISUC");
         
-        mainFrame.setSize(800, 600);
+        mainFrame.setSize(420, 370);
         
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(2,3));
+        mainPanel.setLayout(new MigLayout("align 50% 50%, wrap 1"));
         
         criarProjeto = new JButton("Criar Projeto");
+        criarProjeto.setPreferredSize(new Dimension(230, 40));
         criarProjeto.addActionListener(new botaoListener());
         mainPanel.add(criarProjeto);
         
         
         
         gerirProjeto = new JButton("Gerir Projeto");
+        gerirProjeto.setPreferredSize(new Dimension(230, 40));
         gerirProjeto.addActionListener(new botaoListener());
         mainPanel.add(gerirProjeto);  
         
@@ -90,11 +92,13 @@ public class GUI{
         
         
         listaConcluidos = new JButton("Listar Projetos Concluídos");
+        listaConcluidos.setPreferredSize(new Dimension(230, 40));
         listaConcluidos.addActionListener(new botaoListener());
         mainPanel.add(listaConcluidos);
         
         
         guardarFechar = new JButton("Guardar e Fechar");
+        guardarFechar.setPreferredSize(new Dimension(230, 40));
         guardarFechar.addActionListener(new botaoListener());
         mainPanel.add(guardarFechar);
         mainFrame.add(mainPanel);
@@ -176,7 +180,7 @@ public class GUI{
                 
                 
                 frameGerirProjeto = new JFrame("Gerir Projeto");
-                frameGerirProjeto.setSize(600,800);
+                frameGerirProjeto.setSize(420, 370);
                 frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 JPanel panelGerirProjeto = new JPanel();
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 2"));
@@ -191,6 +195,7 @@ public class GUI{
                 */
                 
                 nomesProjetos = new DefaultComboBoxModel(cisuc.getNomesProjetosIncompletos().toArray());
+                currentProjeto = cisuc.ProjetoGetter(cisuc.getNomesProjetosIncompletos().get(0));
                 ComboBoxProjetos = new JComboBox(nomesProjetos);
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
                 ComboBoxProjetos.addItemListener(new ItemListener() {
@@ -201,20 +206,7 @@ public class GUI{
                 
             }
               });
-                        //infoTarefaText.setText(cisuc.getInfoTarefas(currentProjeto.tarefaGetter((String)currentProjeto.getNomesTarefas().get(0))));
                         
-                        /*.addMouseListener(new MouseAdapter(){
-                            public void mouseClicked(MouseEvent e) {
-                                
-                                infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem())));
-                                
-                                //infoProjetoText.setText(cisuc.getInfo(cisuc.pessoas.get(listaPessoas.getSelectedIndex())));
-                               
-                                
-                            }
-                        });
-                        */
-
                 infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)cisuc.getNomesProjetosIncompletos().get(0))));
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
@@ -249,7 +241,7 @@ public class GUI{
             else if(e.getSource() == listaConcluidos){
                 frameConcluidos = new JFrame("Projetos Concluídos");
                 JPanel panelConcluidos = new JPanel();
-                frameConcluidos.setSize(600,800);
+                frameConcluidos.setSize(420, 370);
                 frameConcluidos.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 regressaMainDosConcluidos = new JButton("Regressar");
                 regressaMainDosConcluidos.addActionListener(new botaoListenerEcras());
@@ -342,7 +334,7 @@ public class GUI{
                 
                 gerirTarefas = new JFrame("Gerir Tarefas");
                 gerirTarefas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gerirTarefas.setSize(600,800);
+                gerirTarefas.setSize(420, 370);
                 JPanel panelTarefas= new JPanel();
                 panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));                
                 
@@ -460,7 +452,7 @@ public class GUI{
                
                 infoPessoasText = new JTextArea();
                 infoPessoasText.setEditable(false);
-                 infoPessoasText.setText(cisuc.getInfo(cisuc.pessoas.get(0)));
+                infoPessoasText.setText(cisuc.getInfo(cisuc.pessoas.get(0)));
                 newPanel2.add(infoPessoasText);
                 newPanel2.add(listaPessoas);
                 newPanel2.add(selecionarPessoas, "cell 1 2");
@@ -516,7 +508,7 @@ public class GUI{
             
             else if(e.getSource() == criaTarefa){
                 frameCriarTarefa = new JFrame("Criar Tarefa");
-                frameCriarTarefa.setSize(400,300);
+                frameCriarTarefa.setSize(420, 370);
                 frameCriarTarefa.setResizable(false);
                 JPanel panelCriarTarefa = new JPanel();
                 confirm2 = new JButton("Confirmar");
