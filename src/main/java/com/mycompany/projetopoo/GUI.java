@@ -45,23 +45,23 @@ public class GUI{
     JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaConcluidos;
-    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa, confirm2, confirmarTaxa;
-    JButton addPessoa, listTarefas,eliminaTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
-    JTextField nome, acronimo, nomeT;
-    JTextField dia, diaT;
-    JTextField mes, mesT ;
-    JTextField ano, anoT;
-    JTextField eta, etaT;
-    JFormattedTextField novaTaxa;
-    JComboBox tipoT;
-    JTextArea infoPessoasText, infoProjetoText, infoTarefaText;
-    JComboBox listaInvestigadoresPrinc;
-    JComboBox ComboBoxProjetos, responsavelT, ComboBoxTarefas;
-    JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
-    Projeto currentProjeto;
+    private JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa, confirm2, confirmarTaxa;
+    private JButton addPessoa, listTarefas,eliminaTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
+    private JTextField nome, acronimo, nomeT;
+    private JTextField dia, diaT;
+    private JTextField mes, mesT ;
+    private JTextField ano, anoT;
+    private JTextField eta, etaT;
+    private JFormattedTextField novaTaxa;
+    private JComboBox tipoT;
+    private JTextArea infoPessoasText, infoProjetoText, infoTarefaText;
+    private JComboBox listaInvestigadoresPrinc;
+    private JComboBox ComboBoxProjetos, responsavelT, ComboBoxTarefas;
+    private JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
+    private Projeto currentProjeto;
     Tarefa currentTarefa;
     CISUC cisuc;
-    DefaultComboBoxModel nomesTarefas;
+    private DefaultComboBoxModel nomesTarefas, nomesProjetos;
     
     
     GUI(CISUC cisuc){
@@ -183,9 +183,27 @@ public class GUI{
                 frameGerirProjeto.setResizable(false);
                 infoProjetoText = new JTextArea();
                 infoProjetoText.setEditable(false);
-                ComboBoxProjetos = new JComboBox(cisuc.getNomesProjetosIncompletos().toArray());
+                
+                /*
+                nomesTarefas = new DefaultComboBoxModel(currentProjeto.getNomesTarefas().toArray());
+                
+                ComboBoxTarefas = new JComboBox(nomesTarefas);
+                */
+                
+                nomesProjetos = new DefaultComboBoxModel(cisuc.getNomesProjetosIncompletos().toArray());
+                ComboBoxProjetos = new JComboBox(nomesProjetos);
                 ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
-                ComboBoxProjetos.addMouseListener(new MouseAdapter(){
+                ComboBoxProjetos.addItemListener(new ItemListener() {
+            // Listening if a new items of the combo box has been selected.
+            public void itemStateChanged(ItemEvent event) {
+                
+                infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem())));
+                
+            }
+              });
+                        //infoTarefaText.setText(cisuc.getInfoTarefas(currentProjeto.tarefaGetter((String)currentProjeto.getNomesTarefas().get(0))));
+                        
+                        /*.addMouseListener(new MouseAdapter(){
                             public void mouseClicked(MouseEvent e) {
                                 
                                 infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem())));
@@ -195,8 +213,9 @@ public class GUI{
                                 
                             }
                         });
+                        */
 
-                
+                infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)cisuc.getNomesProjetosIncompletos().get(0))));
                 addPessoa = new JButton("Associar Pessoa");
                 addPessoa.addActionListener(new botaoListenerEcras2());
                 
@@ -279,10 +298,19 @@ public class GUI{
             }
             else if(e.getSource()==terminaProjeto){
                 currentProjeto.TerminarP();
-                ComboBoxProjetos.removeAllItems();
-                for(String nome: cisuc.getNomesProjetosIncompletos()){
-                    ComboBoxProjetos.addItem(nome);
-                }
+                
+                nomesProjetos.removeElement(ComboBoxProjetos.getSelectedItem());
+                ComboBoxProjetos.revalidate();
+                ComboBoxProjetos.repaint();
+                
+                /*
+                nomeTarefa = (String)ComboBoxTarefas.getSelectedItem();
+                System.out.println(nomeTarefa);
+                currentProjeto.EliminarTarefa(currentProjeto.tarefaGetter(nomeTarefa));
+                nomesTarefas.removeElement(ComboBoxTarefas.getSelectedItem());
+                ComboBoxTarefas.revalidate();
+                ComboBoxTarefas.repaint();
+                */
                 
                 
                 
@@ -459,6 +487,12 @@ public class GUI{
                 frameGerirProjeto.setVisible(true);
             }
             
+            else if(e.getSource() == regressaMainDasTarefas){
+                frameGerirProjeto.setVisible(true);
+                gerirTarefas.setVisible(false);
+                
+            }
+            
             else if(e.getSource() == ComboBoxProjetos){
                 
                 
@@ -468,7 +502,7 @@ public class GUI{
             else if(e.getSource() == eliminaTarefa){
                 
                 String nomeTarefa;
-                System.out.println("AQUI");
+                
                 nomeTarefa = (String)ComboBoxTarefas.getSelectedItem();
                 System.out.println(nomeTarefa);
                 currentProjeto.EliminarTarefa(currentProjeto.tarefaGetter(nomeTarefa));
@@ -498,7 +532,7 @@ public class GUI{
                 anoT = new JTextField(4);
                 JLabel labelETA = new JLabel("Duração Estimada: (meses)");
                 etaT = new JTextField(10);
-                JLabel labelIP = new JLabel("Tipo de Tarefa");
+                
                 String[] array = {"Design", "Desenvolvimento", "Documentação"};
                 tipoT = new JComboBox(array);
                 responsavelT = new JComboBox(currentProjeto.getNomesPessoas().toArray());
@@ -589,7 +623,7 @@ public class GUI{
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
                 listaNomesPessoas.addAll(lista);
                 
-                //CODIGO PARA ADICIONAR A PESSOA(definir listaBolseiro,definir listaDocentes e defnir projeto)
+                
 
                   ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
@@ -601,9 +635,6 @@ public class GUI{
                     if(cisuc.PessoaGetter(docente).getCusto() == 0)
                         listaPessoa.add(cisuc.PessoaGetter(docente));
                 }
-                
-
-                
                 
                 
                 for(Pessoa bol:listaPessoa){
@@ -659,13 +690,18 @@ public class GUI{
                 if(nomeTipo == "Documentação"){
                     
                     Documentacao taref = new Documentacao((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
-                    currentProjeto.addTarefa(taref);
+                    if((currentProjeto.CriarTarefa(taref, cisuc.PessoaGetter((String)responsavelT.getSelectedItem())) == 1)){
+                        System.out.println("Pessoa Sobrecarregada, por favor escolher outra");
+                        
+                    }
                 }
                 
                 if(nomeTipo == "Desenvolvimento"){
                     
                     Desenvolvimento taref = new Desenvolvimento((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
-                    currentProjeto.addTarefa(taref);
+                    if(currentProjeto.CriarTarefa(taref, cisuc.PessoaGetter((String)responsavelT.getSelectedItem()))==1){
+                        System.out.println("Pessoa Sobrecarregada, por favor escolher outra");
+                    }
                 }
                 
                 else{
@@ -673,7 +709,10 @@ public class GUI{
                     
                     Design taref = new Design((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
                     
-                    currentProjeto.addTarefa(taref);
+                    if(currentProjeto.CriarTarefa(taref, cisuc.PessoaGetter((String)responsavelT.getSelectedItem()))==1){
+                        System.out.println("Pessoa Sobrecarregada, por favor escolher outra");
+                    
+                    }
                 }
                 
                 /*
@@ -693,8 +732,8 @@ public class GUI{
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
                 */
                 
-                frameCriarTarefa.setVisible(false);
-                gerirTarefas.setVisible(true);
+                //frameCriarTarefa.setVisible(false);
+                //gerirTarefas.setVisible(true);
                 listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
             }
             

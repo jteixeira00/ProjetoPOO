@@ -689,16 +689,6 @@ public void SaveObjectFilesDocentes(){
             System.out.println("IOException caught: Main");
         }
         
-
-        for(Projeto p:cisuc.projeto){
-            System.out.println("Projeto "+p.getNome());
-            System.out.println("++++++++++++++++++");
-            for(Pessoa pessoa:p.getPessoas()){
-                System.out.println(cisuc.getInfo(pessoa));
-                System.out.println("-------------------");
-            }
-        }
-        
         
         GUI gui = new GUI(cisuc);
 
