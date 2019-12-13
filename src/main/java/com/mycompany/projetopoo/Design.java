@@ -18,8 +18,8 @@ public class Design extends Tarefa{
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);        
     }
-    public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
-        super(nome,inicioD,duracaoEstimada,responsavel);       
+    public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
+        super(nome,inicioD,duracaoEstimada,responsavel,taxa);       
     }
     @Override
     public double getEsforco() {
