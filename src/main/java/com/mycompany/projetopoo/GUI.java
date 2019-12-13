@@ -42,11 +42,11 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, redirecionaTarefa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaConcluidos;
     private JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa, confirm2, confirmarTaxa;
-    private JButton addPessoa, listTarefas,eliminaTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
+    private JButton addPessoa, redirec, listTarefas,eliminaTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
     private JTextField nome, acronimo, nomeT;
     private JTextField dia, diaT;
     private JTextField mes, mesT ;
@@ -354,7 +354,25 @@ public class GUI{
             }
             
             else if(e.getSource() == listTarefas){
+                if(currentProjeto.getNomesTarefas().toArray().length == 0){
+                    
+                    redirecionaTarefa = new JFrame();
+                    JPanel panelRedirec = new JPanel();
+                   
+                    panelRedirec.setLayout(new MigLayout("align 50% 50%, wrap 1"));
+                    redirecionaTarefa.setSize(420,370);
+                    redirecionaTarefa.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    redirecionaTarefa.setResizable(false);
+                    redirec = new JButton("Criar Tarefa");
+                    redirec.addActionListener(new botaoListenerEcras2());
+                    
+                    panelRedirec.add(redirec);
+                    redirecionaTarefa.add(panelRedirec);
+                    redirecionaTarefa.setVisible(true);
+                    
+                }
                 
+                else{
                 gerirTarefas = new JFrame("Gerir Tarefas");
                 gerirTarefas.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 gerirTarefas.setResizable(false);
@@ -411,6 +429,7 @@ public class GUI{
                 gerirTarefas.add(panelTarefas);
                 frameGerirProjeto.setVisible(false);
                 gerirTarefas.setVisible(true);
+                }
                 
             }
             
@@ -499,6 +518,8 @@ public class GUI{
 
             }
             
+            
+            
             else if(e.getSource() == fecharCusto){
                 
                 frameCusto.setVisible(false);
@@ -532,7 +553,7 @@ public class GUI{
             
             
             
-            else if(e.getSource() == criaTarefa){
+            else if((e.getSource() == criaTarefa) || (e.getSource() == redirec)){
                 frameCriarTarefa = new JFrame("Criar Tarefa");
                 frameCriarTarefa.setSize(420, 370);
                 frameCriarTarefa.setResizable(false);
@@ -572,6 +593,7 @@ public class GUI{
                 panelCriarTarefa.add(responsavelT);
                 panelCriarTarefa.add(confirm2, "cell 1 5");
                 frameCriarTarefa.add(panelCriarTarefa);
+                redirecionaTarefa.setVisible(false);
                 frameCriarTarefa.setVisible(true);
                 gerirTarefas.setVisible(false);
                 
