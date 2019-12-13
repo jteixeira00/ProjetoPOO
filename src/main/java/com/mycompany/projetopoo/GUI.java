@@ -36,10 +36,10 @@ import net.miginfocom.swing.MigLayout;
  * @author User
  */
 public class GUI{
-    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa;
+    JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;
     JPanel mainPanel;
     final JButton criarProjeto, gerirProjeto,listaConcluidos;
-    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa, confirm2;
+    JButton confirm, selecionarPessoas, regressaGerirDasPessoas, fecharCusto, regressaMainDosConcluidos, ver, infoPessoa, confirm2, confirmarTaxa;
     JButton addPessoa, listTarefas,eliminaTarefa, atualizaTaxa,calculaCusto, terminaProjeto, regressaMainDaGestao, regressaMainDasTarefas, criaTarefa, guardarFechar;
     JTextField nome, acronimo, nomeT;
     JTextField dia, diaT;
@@ -504,6 +504,14 @@ public class GUI{
             }
             
             else if(e.getSource() == atualizaTaxa){
+                atualizarTaxa = new JFrame("Atualizar Taxa");
+                atualizarTaxa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                atualizarTaxa.setSize(200,300);
+                atualizarTaxa.setVisible(true);
+                
+                confirmarTaxa = new JButton("Confirmar Taxa");
+                
+                
                 
             
             }

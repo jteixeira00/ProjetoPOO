@@ -18,7 +18,7 @@ public class Design extends Tarefa{
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);        
     }
-    public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
+    public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,double taxa){
         super(nome,inicioD,duracaoEstimada,responsavel,taxa);       
     }
     @Override

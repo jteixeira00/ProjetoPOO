@@ -18,7 +18,7 @@ public class Documentacao extends Tarefa implements Serializable{
     public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
     }
-    public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
+    public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,double taxa){
         super(nome,inicioD,duracaoEstimada,responsavel,taxa);       
     }
     

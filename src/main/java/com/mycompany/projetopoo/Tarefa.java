@@ -35,7 +35,7 @@ public abstract class Tarefa implements Serializable{
         setCompleto();
     }
     
-    public Tarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
+    public Tarefa(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,double taxa){
         this.nome=nome;
         this.inicioD = inicioD;
         this.duracaoEstimada = duracaoEstimada;
