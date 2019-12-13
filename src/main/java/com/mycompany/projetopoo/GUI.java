@@ -645,10 +645,9 @@ public class GUI{
                         else{
                             currentProjeto.addPessoa(bol);
                         }
-                    }
-                    else{
-                        for(Pessoa dol:listaPessoa){
-                            currentProjeto.addPessoa(dol);
+                    }else{
+                        if(currentProjeto.addPessoa(bol)==1){
+                            System.out.println("Docente já existe neste projeto");
                         }          
                     }
                 

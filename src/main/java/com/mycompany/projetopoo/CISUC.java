@@ -492,11 +492,14 @@ public String getInfo(Pessoa p){
 public String getInfoProjetos(Projeto p){
     String info;
     if(p.getCompleto() == true){
-        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nData Final: %d-%d-%d\n",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getData_final().get(GregorianCalendar.DAY_OF_MONTH),p.getData_final().get(GregorianCalendar.MONTH)+1,p.getData_final().get(GregorianCalendar.YEAR),p.getDuracao());
+        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nData Final: %d-%d-%d\nPessoas:",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getData_final().get(GregorianCalendar.DAY_OF_MONTH),p.getData_final().get(GregorianCalendar.MONTH)+1,p.getData_final().get(GregorianCalendar.YEAR),p.getDuracao());
     }
     else{
         info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\n",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getDuracao());
-    }    
+    }
+    for(Pessoa ps:p.getPessoas()){
+        info = info + "\n" + ps.getNome();
+    }
     return info;
 }
 
