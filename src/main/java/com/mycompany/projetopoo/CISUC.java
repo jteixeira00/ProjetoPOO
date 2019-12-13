@@ -693,7 +693,6 @@ public void SaveObjectFilesDocentes(){
             }
         }
         
-        System.out.println(cisuc.projeto.get(0).getCusto());
         
         GUI gui = new GUI(cisuc);
 
