@@ -26,8 +26,8 @@ public abstract class Pessoa implements Serializable{
        
      /**
      *Construtor Pessoa
-     * @param nome
-     * @param email
+     * @param nome nome Pessoa
+     * @param email email Pessoa
      */
     Pessoa(String nome,String email){
         this.nome = nome;
@@ -36,8 +36,8 @@ public abstract class Pessoa implements Serializable{
     }
 
     /**
-     *Adiciona tarefa à lista de tarefas
-     * @param t
+     * Adiciona tarefa à lista de tarefas
+     * @param t tarefa
      */
     public void addTarefa(Tarefa t){
        tarefa.add(t);

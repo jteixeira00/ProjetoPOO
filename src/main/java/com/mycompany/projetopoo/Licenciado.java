@@ -19,10 +19,10 @@ public class Licenciado extends Bolseiro implements Serializable{
 
     /**
      *Construtor Licenciado
-     * @param nome
-     * @param email
-     * @param InicioB
-     * @param FimB
+     * @param nome Nome Licenciado
+     * @param email Email Licenciado
+     * @param InicioB Data de Incio de Bolsa Licenciado
+     * @param FimB Data Final de Bolsa Licenciado
      */
     public Licenciado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);

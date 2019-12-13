@@ -17,6 +17,14 @@ public abstract class Bolseiro extends Pessoa implements Serializable {
     private GregorianCalendar FimB;
     private int custo;
     
+    /**
+     * Construtor Bolseiro
+     * @param nome Nome Bolseiro
+     * @param email Email Bolseiro
+     * @param InicioB Data de Inicio Bolseiro
+     * @param FimB Data Final Bolseiro
+     */
+    
     Bolseiro(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email);
         this.InicioB = InicioB; 

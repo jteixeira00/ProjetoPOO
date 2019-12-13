@@ -39,12 +39,12 @@ public class Projeto implements Serializable{
   
     /**
      *Construtor do Projeto
-     * @param nome
-     * @param data_inicio
-     * @param duracao
-     * @param data_final
-     * @param acronimo
-     * @param cisuc
+     * @param nome Nome Projeto
+     * @param data_inicio Data Inicio Projeto
+     * @param duracao Duração Projeto
+     * @param data_final Data Final Projeto
+     * @param acronimo Acrónimo Projeto
+     * @param cisuc CISUC Projeto
      */
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,GregorianCalendar data_final,String acronimo,CISUC cisuc){
         this.nome = nome;
@@ -61,11 +61,11 @@ public class Projeto implements Serializable{
 
     /**
      * Construtor do Projeto caso não seja indicada a data final
-     * @param nome
-     * @param data_inicio
-     * @param duracao
-     * @param acronimo
-     * @param cisuc
+     * @param nome Nome Projeto
+     * @param data_inicio Data Inicio Projeto
+     * @param duracao Duração Projeto
+     * @param acronimo Acrónimo Projeto
+     * @param cisuc CISUC Projeto
      */
     public Projeto(String nome,GregorianCalendar data_inicio,int duracao,String acronimo,CISUC cisuc){
         this.nome = nome;
@@ -79,7 +79,7 @@ public class Projeto implements Serializable{
 
     /**
      * Devolve a tarefa com o mesmo nome
-     * @param nome
+     * @param nome Nome Tarefa
      * @return Tarefa
      */
     public Tarefa tarefaGetter(String nome){
@@ -107,7 +107,7 @@ public class Projeto implements Serializable{
     
     /**
      * Elimina a tarefa da arraylist do projeto e da arraylist da pessoa correspondente
-     * @param t
+     * @param t Tarefa 
      */
     public void EliminarTarefa(Tarefa t){
         for(Pessoa p:pessoa){
@@ -140,7 +140,7 @@ public class Projeto implements Serializable{
     
     /**
      * Coloca a tarefa como completa na arraylist do projeto e na arraylist da pessoa correspondente
-     * @param t
+     * @param t Tarefa
      */
     public void setTarefaCompleta(Tarefa t){
         t.setCompleto();
@@ -182,7 +182,7 @@ public class Projeto implements Serializable{
     
     /**
      *Se tiver investigador principal não o adiciona
-     * @param d
+     * @param d Docente
      * @return 1 se tiver investigador principal
      */
     public int setIP(Docente d){
@@ -203,7 +203,7 @@ public class Projeto implements Serializable{
     }
     
     /**
-     * Cria uma array list de strings com os nomes dos projetos em fora de brazo 
+     * Cria uma array list de strings com os nomes das tarefas fora de prazo 
      * @return ArrayList de Strings
      */
     public ArrayList<String> ForaPrazo(){
@@ -226,9 +226,9 @@ public class Projeto implements Serializable{
     }
     
     /**
-     * 
-     * @param p
-     * @return
+     * Adiciona pessoa, tendo em conta se já existem em algum projeto se for bolseiro, ou se já existe no projeto atual se for docente
+     * @param p Pessoa
+     * @return 1 em caso de erro
      */
     public int addPessoa(Pessoa p){
         if(p.getCusto() != 0){
@@ -254,10 +254,10 @@ public class Projeto implements Serializable{
      }
      
     /**
-     *
-     * @param T
-     * @param p
-     * @return
+     * Cria tarefa numa pessoa, tendo em conta a carga
+     * @param T Tarefa
+     * @param p Pessoa
+     * @return 1 em caso de erro
      */
     public int CriarTarefa(Tarefa T,Pessoa p){
         double carga = T.getEsforco();
@@ -273,8 +273,8 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     *Devolve uma array list de strings com os nomes das pessoas
+     * @return Array List de strings
      */
     public ArrayList<String> getNomesPessoas(){
         ArrayList<String> nomes = new ArrayList<>();
@@ -285,8 +285,8 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     *Devolve uma array list de strings com os nomes das tarefas
+     * @return Array List de strings
      */
     public ArrayList<String> getNomesTarefas(){
         ArrayList<String> nomes = new ArrayList<>();
@@ -297,8 +297,8 @@ public class Projeto implements Serializable{
     }
 
     /**
-     *
-     * @return
+     *Devolve uma array list de strings com os nomes das tarefas não começadas
+     * @return Array List de strings
      */
     public ArrayList<Tarefa> ListarNaoIniciadas(){
         ArrayList<Tarefa> nIniciadas = new ArrayList<>();
@@ -312,8 +312,8 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     *Cria uma array list de strings com os nomes das tarefas fora de prazo 
+     * @return Array List de strings
      */
     public ArrayList<Tarefa> ListarFPrazo(){
         ArrayList<Tarefa> fprazo = new ArrayList<>();
@@ -331,15 +331,15 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
+     *Coloca completo a true
      */
     public void setCompleto(){
         completo = true;
     }
     
     /**
-     *
-     * @return
+     * Listar as tarefas concluidas
+     * @return ArrayList de tarefas
      */
     public ArrayList<Tarefa> ListarConcluidas(){
         ArrayList<Tarefa> Concluidas = new ArrayList<>();
@@ -353,8 +353,8 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     * Listar as tarefas não concluidas
+     * @return ArrayList de tarefas
      */
     public ArrayList<Tarefa> NaoConcluidas(){
         ArrayList<Tarefa> nConcluida = new ArrayList<>();
@@ -367,8 +367,8 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     * Calcula o custo do projeto tendo em conta se está fora de prazo
+     * @return custo final
      */
     public int CustoP(){
         int custoMensal =0;
@@ -385,8 +385,10 @@ public class Projeto implements Serializable{
         }
         return custoFinal;
     }
-    
-    void TerminarP(){
+     /**
+     * Termina o projeto colocando a data final igual à data atual
+     */   
+    public void TerminarP(){
         GregorianCalendar dataHoje = new GregorianCalendar();
         this.data_final = dataHoje;
         this.completo = true;     
@@ -394,82 +396,47 @@ public class Projeto implements Serializable{
         
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getNome() {
         return nome;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getAcronimo() {
         return acronimo;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public GregorianCalendar getData_inicio() {
         return data_inicio;
     }
 
-    /**
-     *
-     * @return
-     */
     public GregorianCalendar getData_final() {
         return data_final;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getDuracao() {
         return duracao;
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<Tarefa> getTarefas() {
         return tarefa;
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<Pessoa> getPessoas() {
         return pessoa;
     }
     
-    /**
-     *
-     * @return
-     */
+
     public Pessoa getInvestigadorP() {
         return investigadorP;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public boolean isCompleto() {
         return completo;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public GregorianCalendar getDataEstimada(){
         GregorianCalendar data;
         data = (GregorianCalendar)data_inicio.clone();
@@ -482,8 +449,8 @@ public class Projeto implements Serializable{
     }
 
     /**
-     *
-     * @return
+     *Calcula se o projeto está fora de prazo
+     * @return true se estiver fora de prazo
      */
     public boolean isfPrazo() {
         
@@ -507,18 +474,14 @@ public class Projeto implements Serializable{
     }
     
     /**
-     *
-     * @return
+     *Calcula e devolve custo
+     * @return Custo
      */
     public int getCusto() {
         custo = this.CustoP();
         return custo;
     }
     
-    /**
-     *
-     * @return
-     */
     public boolean getCompleto(){
         return completo;
     }  

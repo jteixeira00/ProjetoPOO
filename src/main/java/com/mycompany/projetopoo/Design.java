@@ -14,24 +14,24 @@ import java.util.GregorianCalendar;
 public class Design extends Tarefa{
 
     /**
-     *
-     * @param nome
-     * @param inicioD
-     * @param duracaoEstimada
-     * @param finalD
-     * @param responsavel
+     * Construtor Design
+     * @param nome Nome Design
+     * @param inicioD Data Inicial Design
+     * @param duracaoEstimada Duração Design
+     * @param finalD Data Final Design
+     * @param responsavel Pessoa Responsavel Design
      */
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD,Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);        
     }
 
     /**
-     * Construtor caso não seja dada a data final, tem de ser introduzida a taxa
-     * @param nome
-     * @param inicioD
-     * @param duracaoEstimada
-     * @param responsavel
-     * @param taxa
+     * Construtor Design, caso não seja dada a data final, tem de ser introduzida a taxa
+     * @param nome Nome Design
+     * @param inicioD Data Inicial Design
+     * @param duracaoEstimada Duração Design
+     * @param responsavel Pessoa Responsavel Design
+     * @param taxa Taxa Design
      */
     public Design(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel,int taxa){
         super(nome,inicioD,duracaoEstimada,responsavel,taxa);       

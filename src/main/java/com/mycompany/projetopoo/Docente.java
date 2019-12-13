@@ -15,10 +15,10 @@ public class Docente extends Pessoa{
 
     /**
      *Construtor Docente
-     * @param nome
-     * @param email
-     * @param numM
-     * @param area
+     * @param nome Nome Docente
+     * @param email Email Docente
+     * @param numM Número Mecanográfico Docente
+     * @param area Área de Investigação Docente
      */
     public Docente(String nome,String email,int numM,String area){
         super(nome,email);

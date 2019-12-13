@@ -17,11 +17,11 @@ import java.util.GregorianCalendar;
 public class Doutorado extends Bolseiro implements Serializable{
     
     /**
-     *
-     * @param nome
-     * @param email
-     * @param InicioB
-     * @param FimB
+     *Construtor Doutorado
+     * @param nome Nome Doutorado
+     * @param email Email Doutorado
+     * @param InicioB Data Inicial de Bolsa Doutorado
+     * @param FimB Data Final de Bolsa Doutorado
      */
     public Doutorado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);

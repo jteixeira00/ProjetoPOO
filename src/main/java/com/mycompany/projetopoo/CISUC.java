@@ -53,9 +53,9 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      *Altera Data Atual
-     * @param dia
-     * @param mes
-     * @param ano
+     * @param dia data dia
+     * @param mes data mes
+     * @param ano data ano
      * @return 1 se data estiver mal, 0 se estiver bem
      */
     public int AlterarDataAtual(int dia,int mes,int ano){
@@ -73,9 +73,9 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Verifica se a data está bem(aceita dia,mes,ano)
-     * @param dia
-     * @param mes
-     * @param ano
+     * @param dia data dia
+     * @param mes data mes
+     * @param ano data ano
      * @return 1 se data estiver mal, 0 se estiver bem
      */
     public int Checkdata(int dia,int mes,int ano){
@@ -90,7 +90,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Verifica se a data está bem(aceita uma data em GregorianCalendar)
-     * @param data
+     * @param data GregorianCalendar
      * @return 1 se data estiver mal, 0 se estiver bem
      */
     public int CheckdataGregorian(GregorianCalendar data){
@@ -106,7 +106,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Verifica se um bolseiro existe nos projetos
-     * @param b
+     * @param b Pessoa
      * @return 0 se não estiver em nenhum projeto, 1 se existir noutro
      */
     public int BolseiroInProjetos(Pessoa b){
@@ -122,7 +122,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Ao receber uma string com um nome do projeto, procura na lista de projetos o objeto associado. Devolve este projeto
-     * @param nome
+     * @param nome Nome projeto
      * @return devolve o projeto
      */
     public Projeto ProjetoGetter(String nome){
@@ -137,7 +137,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Ao receber uma string com um nome de uma pessoa, procura na lista de pessoas o objeto associado. Devolve esta pessoa
-     * @param nome
+     * @param nome Nome Pessoa
      * @return Pessoa
      */
     public Pessoa PessoaGetter(String nome){
@@ -151,7 +151,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Ao receber uma string com um email de uma pessoa, procura na lista de pessoas o objeto associado. Devolve esta pessoa
-     * @param email
+     * @param email Email Pessoa
      * @return Pessoa
      */
     public Pessoa EmailGetter(String email){
@@ -177,7 +177,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      *Devolve uma ArrayList de Strings com os nomes dos projetos incompletos, para ser utilizado no GUI
-     * @return
+     * @return ArrayList de Strings
      */
     public ArrayList<String> getNomesProjetosIncompletos(){
         ArrayList<String> nomes = new ArrayList<>();
@@ -191,7 +191,7 @@ public class CISUC extends JFrame implements Serializable {
         
     /**
      *Devolve uma ArrayList de Strings com os nomes dos projetos concluidos, para ser utilizado no GUI
-     * @return
+     * @return Array List de Strings
      */
     public ArrayList<String> listaNomesConcluidos(){
         ArrayList<String> ret = new ArrayList<>();
@@ -516,7 +516,7 @@ public class CISUC extends JFrame implements Serializable {
     /**
      * Verifica se existem object files no directório
      * @return boolean, false se os object files não existirem e true caso existam
-     * @throws IOException
+     * @throws IOException Trata da IOException
      */
     public boolean ObjectCheck() throws IOException{
     File bol = new File("Bolseiros.OBJ");
@@ -531,7 +531,7 @@ public class CISUC extends JFrame implements Serializable {
 
     /**
      * Devolve uma string com a informação de uma pessoa
-     * @param p
+     * @param p Pessoa
      * @return string
      */
     public String getInfo(Pessoa p){
@@ -547,7 +547,7 @@ public class CISUC extends JFrame implements Serializable {
 
     /**
      * Devolve uma string com a informação de um projeto
-     * @param p
+     * @param p Projeto
      * @return string
      */
     public String getInfoProjetos(Projeto p){
@@ -567,7 +567,7 @@ public class CISUC extends JFrame implements Serializable {
 
     /**
      * Devolve uma string com a informação de uma tarefa
-     * @param p
+     * @param p Tarefa
      * @return string
      */
     public String getInfoTarefas(Tarefa p){
@@ -583,7 +583,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      * Insere a informação existente no object file "Bolseiro.obj" na lista de pessoas
-     * @return
+     * @return 1 em caso de erro, imprimindo mensagem de erro
      */
     public int leObjectFilesBolseiros(){
     try {
@@ -609,7 +609,7 @@ public class CISUC extends JFrame implements Serializable {
 
     /**
      *Insere a informação existente no object file "Docentes.obj" na lista de pessoas
-     * @return
+     * @return 1 em caso de erro, imprimindo mensagem de erro
      */
     public int leObjectFilesDocentes(){
     try {
@@ -638,7 +638,7 @@ public class CISUC extends JFrame implements Serializable {
     
     /**
      *Insere a informação existente no object file "Projetos.obj" na lista de projetos
-     * @return
+     * @return 1 em caso de erro, imprimindo mensagem de erro
      */
     public int leObjectFilesProjetos(){
     try {
