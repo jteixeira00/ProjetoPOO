@@ -460,10 +460,12 @@ public class GUI{
                 frameCriarTarefa.setResizable(false);
                 JPanel panelCriarTarefa = new JPanel();
                 confirm2 = new JButton("Confirmar");
+                
                 confirm2.addActionListener(new botaoListenerEcras3());
                 panelCriarTarefa.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 JLabel labelNome = new JLabel("Nome:");
                 JLabel labelDataInicio = new JLabel("Data Inicio (dia/mes/ano):");
+                
                 nomeT = new JTextField(10);
                 diaT = new JTextField(2);
                 mesT = new JTextField(2);
@@ -473,73 +475,30 @@ public class GUI{
                 JLabel labelIP = new JLabel("Tipo de Tarefa");
                 String[] array = {"Design", "Desenvolvimento", "Documentação"};
                 tipoT = new JComboBox(array);
-                responsavelT = new JComboBox();
+                responsavelT = new JComboBox(currentProjeto.getNomesPessoas().toArray());
                 
-                //pila
+                
                 panelCriarTarefa.add(labelNome);
                 panelCriarTarefa.add(nomeT);
                 panelCriarTarefa.add(labelDataInicio);
                 panelCriarTarefa.add(diaT, "split 3");
                 panelCriarTarefa.add(mesT);
-                panelCriarTarefa.add(ano);
+                panelCriarTarefa.add(anoT);
+                
                 panelCriarTarefa.add(labelETA);
                 panelCriarTarefa.add(etaT);
-                panelCriarTarefa.add(new JLabel("Tipo de Tarefa"));
+                panelCriarTarefa.add(new JLabel("Tipo de Tarefa:"));
                 panelCriarTarefa.add(tipoT);
+                panelCriarTarefa.add(new JLabel("Responsável: "));
+                panelCriarTarefa.add(responsavelT);
                 panelCriarTarefa.add(confirm2, "cell 1 5");
+                frameCriarTarefa.add(panelCriarTarefa);
+                frameCriarTarefa.setVisible(true);
+                gerirTarefas.setVisible(false);
                 
                 
                 
-                /*
-                confirm = new JButton("Confirmar");
-                confirm.addActionListener(new botaoListenerEcras());
-                newPanel.setLayout(new MigLayout("align 50% 50%, wrap 2"));
-                JLabel labelNome = new JLabel("Nome:");
-                nome = new JTextField(10);
-                JLabel labelAcronimo = new JLabel("Acronimo:");
-                acronimo = new JTextField(10);
-                JLabel labelDataInicio = new JLabel("Data Inicio (dia/mes/ano):");
-                dia = new JTextField(2);
-                mes = new JTextField(2);
-                ano = new JTextField(4);
-                JLabel labelETA = new JLabel("Duração Estimada: (meses)");
-                eta = new JTextField(10); 
-                JLabel labelIP = new JLabel("Investigador Principal:");  
-                ArrayList<String> lista;
-                lista = new ArrayList();
-                JTextField text = new JTextField();
                 
-                for(Pessoa temp: cisuc.pessoas){
-                    if(temp.getCusto() == 0)
-                        lista.add(temp.getNome());
-                }
-             
-                listaInvestigadoresPrinc = new JComboBox(lista.toArray());
-                
-                       
-                newPanel.add(labelNome);
-                newPanel.add(nome);
-                newPanel.add(labelAcronimo);
-                newPanel.add(acronimo);
-                newPanel.add(labelDataInicio);
-                newPanel.add(dia, "split 3");
-                newPanel.add(mes);
-                newPanel.add(ano);
-                newPanel.add(labelETA);
-                newPanel.add(eta);                
-                newPanel.add(labelIP);
-                newPanel.add(listaInvestigadoresPrinc);
-                
-                frameCreateProject.add(newPanel);               
-                
-                frameCreateProject.add(newPanel);
-                newPanel.add(confirm, "cell 1 6");
-                mainFrame.setVisible(false);
-                frameCreateProject.setVisible(true);
-                
-                frameCreateProject.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                
-                */
                 
                 
             }
@@ -623,12 +582,27 @@ public class GUI{
                 
                 int etaA = Integer.parseInt((String)etaT.getText());
                 GregorianCalendar dataIT = new GregorianCalendar(Integer.parseInt((String)anoT.getText()), Integer.parseInt((String)diaT.getText()), Integer.parseInt((String)mesT.getText()));
-                if(nomeTipo == "Design"){
+                
+                
+                if(nomeTipo == "Documentação"){
                     
-                    
-                    Design taref = new Design((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()),);
+                    Documentacao taref = new Documentacao((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    currentProjeto.addTarefa(taref);
                 }
                 
+                if(nomeTipo == "Desenvolvimento"){
+                    
+                    Desenvolvimento taref = new Desenvolvimento((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    currentProjeto.addTarefa(taref);
+                }
+                
+                else{
+                    
+                    
+                    Design taref = new Design((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    
+                    currentProjeto.addTarefa(taref);
+                }
                 
                 /*
                 mainFrame.setVisible(true);
@@ -647,8 +621,9 @@ public class GUI{
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
                 */
                 
-                
-                
+                frameCriarTarefa.setVisible(false);
+                gerirTarefas.setVisible(true);
+                listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
             }
 
         }

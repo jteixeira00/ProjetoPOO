@@ -136,6 +136,14 @@ public class Projeto implements Serializable{
         }
         
     }
+    public ArrayList<String> getNomesPessoas(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for(Pessoa b:pessoa){
+            nomes.add(b.getNome());
+        }
+        return nomes;
+    }
+    
     public ArrayList<String> getNomesTarefas(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Tarefa b:tarefa){
