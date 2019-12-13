@@ -166,11 +166,12 @@ public class Projeto implements Serializable{
             pessoa.add(p);
         }else{
             for(Pessoa pess:pessoa){
-                    if(pess.getNome().equals(p.getNome())){
+                    if(pess.getNome()==p.getNome()){
                         return 1;
                     }
                     else{
                         pessoa.add(p);
+                        return 0;
                     }
             }
         }       
