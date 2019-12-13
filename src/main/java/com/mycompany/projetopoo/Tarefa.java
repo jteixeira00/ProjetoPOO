@@ -95,6 +95,7 @@ public abstract class Tarefa implements Serializable{
     public String getTipo(){
         return null;
     }
-    //abstract double esforço();
+    
+
     
 }
