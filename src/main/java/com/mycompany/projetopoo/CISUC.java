@@ -160,7 +160,6 @@ public int leFicheiroProjetos(){
 
     String DataI[];
     String DataF[];
-    int count = 0;
     Pessoa responsavel = null;
    
    
@@ -223,6 +222,7 @@ public int leFicheiroProjetos(){
                     case "DOCU":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
+                        int taxa = Integer.parseInt(line.split("/")[6]);
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
                         if(CheckdataGregorian(datai)==1){
                             System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DOCUMENTACAO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
@@ -234,7 +234,7 @@ public int leFicheiroProjetos(){
                             }
                         }
                         if(line.split("/")[4].equals("null") == true){
-                            Tarefa t = new Documentacao(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel);
+                            Tarefa t = new Documentacao(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
                             p.addTarefa(t);
                         }
                         else{
@@ -251,14 +251,10 @@ public int leFicheiroProjetos(){
                     case "DESI":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
+                        int taxa = Integer.parseInt(line.split("/")[6]);
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
-                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         if(CheckdataGregorian(datai)==1){
-                            System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DESIGN "+line.split("/")[1]+": LEITURA DO FICHEIRO");
-                            return 1;
-                        }
-                        if(CheckdataGregorian(dataf)==1){
-                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESIGN"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            System.out.println("DATA INICIAL INVALIDA NA TAREFA DE Design "+line.split("/")[1]+": LEITURA DO FICHEIRO");
                             return 1;
                         }
                         for(Pessoa ps:pessoas){
@@ -266,21 +262,28 @@ public int leFicheiroProjetos(){
                                 responsavel = ps;
                             }
                         }
+                        if(line.split("/")[4].equals("null") == true){
+                            Tarefa t = new Design(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
+                            p.addTarefa(t);
+                        }
+                        else{
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));                        
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESIGN"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         Tarefa t = new Design(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,responsavel);
                         p.addTarefa(t);
+                        }
                         break;
                     }                     
                     case "DESE":{
                         DataI = (line.split("/")[2]).split("-");
                         DataF = (line.split("/")[4]).split("-");
+                        int taxa = Integer.parseInt(line.split("/")[6]);
                         GregorianCalendar datai = new GregorianCalendar(Integer.parseInt(DataI[2]),Integer.parseInt(DataI[1]),Integer.parseInt(DataI[0]));
-                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));
                         if(CheckdataGregorian(datai)==1){
                             System.out.println("DATA INICIAL INVALIDA NA TAREFA DE DESENVOLVIMENTO "+line.split("/")[1]+": LEITURA DO FICHEIRO");
-                            return 1;
-                        }
-                        if(CheckdataGregorian(dataf)==1){
-                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESENVOLVIMENTO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
                             return 1;
                         }
                         for(Pessoa ps:pessoas){
@@ -288,12 +291,21 @@ public int leFicheiroProjetos(){
                                 responsavel = ps;
                             }
                         }
+                        if(line.split("/")[4].equals("null") == true){
+                            Tarefa t = new Desenvolvimento(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),responsavel,taxa);
+                            p.addTarefa(t);
+                        }
+                        else{
+                        GregorianCalendar dataf = new GregorianCalendar(Integer.parseInt(DataF[2]),Integer.parseInt(DataF[1]),Integer.parseInt(DataF[0]));                        
+                        if(CheckdataGregorian(dataf)==1){
+                            System.out.println("DATA FINAL INVALIDA NA TAREFA DE DESENVOLVIMENTO"+line.split("/")[1]+": LEITURA DO FICHEIRO");
+                            return 1;
+                        }
                         Tarefa t = new Desenvolvimento(line.split("/")[1],datai,Integer.parseInt(line.split("/")[3]),dataf,responsavel);
                         p.addTarefa(t);
+                        }
                         break;
                     }
-                    default:
-                        break;
                 }
                    
             }
