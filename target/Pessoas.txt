@@ -1,0 +1,10 @@
+DOC/Joacine/md@sapo.pt/111111111/Politica
+DOC/Ernesto/ernesto@inforestudante.uc.pt/222222222/Informatica
+DOC/Vitor/vt@inforestudante.uc.pt/123541875/Informatica
+DOC/Nuno/nuno@inforestudante.uc.pt/157478549/Informatica
+LIC/Glora Duffy/bd@sapo.pt/12-02-2018/12-05-2018
+MES/Evelyn Koch/ek@sapo.pt/12-02-2018/12-05-2018
+DOU/Mandy Zimmerman/mz@sapo.pt/12-02-2018/12-05-2018
+MES/Joao Carnide/jc@sapo.pt/12-02-2018/12-05-2018
+DOU/Joaquim Maria/jm@sapo.pt/12-02-2018/12-05-2018
+LIC/Maria Julia/mj@sapo.pt/12-02-2018/12-05-2018
