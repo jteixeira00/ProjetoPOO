@@ -556,17 +556,21 @@ public class CISUC extends JFrame implements Serializable {
     public String getInfoProjetos(Projeto p){
     String info;
     if(p.getCompleto() == true){
-        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nData Final: %d-%d-%d\nPessoas:",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getData_final().get(GregorianCalendar.DAY_OF_MONTH),p.getData_final().get(GregorianCalendar.MONTH)+1,p.getData_final().get(GregorianCalendar.YEAR),p.getDuracao());
+        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nData Final: %d-%d-%d\nPessoas Associadas:",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getData_final().get(GregorianCalendar.DAY_OF_MONTH),p.getData_final().get(GregorianCalendar.MONTH)+1,p.getData_final().get(GregorianCalendar.YEAR),p.getDuracao());
     }
     else{
-        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\n",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getDuracao());
+        info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nPessoas Associadas:",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getDuracao());
     }
-    info = info + "Pessoas Associadas: \n";
+    
     for(Pessoa ps:p.getPessoas()){
         info = info + "\n" + ps.getNome();
     }
     return info;
 }
+    public void addProjeto(Projeto p){
+        
+        projeto.add(p);
+    }
 
     /**
      * Devolve uma string com a informação de uma tarefa
@@ -609,6 +613,7 @@ public class CISUC extends JFrame implements Serializable {
     }
     return 1;
 }
+    
 
     /**
      *Insere a informação existente no object file "Docentes.obj" na lista de pessoas

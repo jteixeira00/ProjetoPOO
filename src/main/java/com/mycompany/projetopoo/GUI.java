@@ -54,7 +54,7 @@ public class GUI{
     private JTextField eta, etaT;
     private JFormattedTextField novaTaxa;
     private JComboBox tipoT;
-    private JTextArea infoPessoasText, infoProjetoText, infoTarefaText;
+    private JTextArea infoPessoasText, infoProjetoText, infoTarefaText, infoProjetosAcabadosText;
     private JComboBox listaInvestigadoresPrinc;
     private JComboBox ComboBoxProjetos, responsavelT, ComboBoxTarefas;
     private JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
@@ -114,7 +114,7 @@ public class GUI{
                 frameCreateProject = new JFrame();   
                 frameCreateProject.setSize(400,300);
                 frameCreateProject.setResizable(false);
-                
+                frameCreateProject.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 confirm = new JButton("Confirmar");
                 confirm.addActionListener(new botaoListenerEcras());
                 newPanel.setLayout(new MigLayout("align 50% 50%, wrap 2"));
@@ -182,6 +182,7 @@ public class GUI{
                 frameGerirProjeto = new JFrame("Gerir Projeto");
                 frameGerirProjeto.setSize(420, 370);
                 frameGerirProjeto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                frameGerirProjeto.setResizable(false);
                 JPanel panelGerirProjeto = new JPanel();
                 panelGerirProjeto.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 frameGerirProjeto.setResizable(false);
@@ -243,25 +244,47 @@ public class GUI{
                 JPanel panelConcluidos = new JPanel();
                 frameConcluidos.setSize(420, 370);
                 frameConcluidos.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                frameConcluidos.setResizable(false);
                 regressaMainDosConcluidos = new JButton("Regressar");
                 regressaMainDosConcluidos.addActionListener(new botaoListenerEcras());
-                ver = new JButton("Ver +");
-                ver.addActionListener(new botaoListenerEcras());
-                
                 panelConcluidos.setLayout(new MigLayout("align 50% 50%, wrap 1"));
                 
-                listaProjConcluidos = new JList(cisuc.listaNomesConcluidos().toArray());
-                   
-                JScrollPane listScrollerConcluidos = new JScrollPane(listaProjConcluidos);
+                infoProjetosAcabadosText = new JTextArea();
+                infoProjetosAcabadosText.setEditable(false);
+                infoProjetosAcabadosText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter(cisuc.listaNomesConcluidos().get(0))));
+                JComboBox ComboBoxProjetosAcabados = new JComboBox(cisuc.listaNomesConcluidos().toArray());
+                ComboBoxProjetosAcabados.addItemListener(new ItemListener() {
+            // Listening if a new items of the combo box has been selected.
+            public void itemStateChanged(ItemEvent event) {
                 
+                infoProjetosAcabadosText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)ComboBoxProjetosAcabados.getSelectedItem())));
                 
-                panelConcluidos.add(listScrollerConcluidos);
-                panelConcluidos.add(ver, "split 2");
+            }
+            }); 
+                
+                panelConcluidos.add(infoProjetosAcabadosText, "span 1 6");
+                panelConcluidos.add(ComboBoxProjetosAcabados);
                 panelConcluidos.add(regressaMainDosConcluidos);
                 frameConcluidos.add(panelConcluidos);
                 mainFrame.setVisible(false);
                 frameConcluidos.setVisible(true);
                 
+                /*
+                infoProjetoText = new JTextArea();
+                infoProjetoText.setEditable(false);
+                nomesProjetos = new DefaultComboBoxModel(cisuc.getNomesProjetosIncompletos().toArray());
+                currentProjeto = cisuc.ProjetoGetter(cisuc.getNomesProjetosIncompletos().get(0));
+                ComboBoxProjetos = new JComboBox(nomesProjetos);
+                ComboBoxProjetos.addActionListener(new botaoListenerEcras2());
+                ComboBoxProjetos.addItemListener(new ItemListener() {
+            // Listening if a new items of the combo box has been selected.
+            public void itemStateChanged(ItemEvent event) {
+                
+                infoProjetoText.setText(cisuc.getInfoProjetos(cisuc.ProjetoGetter((String)ComboBoxProjetos.getSelectedItem())));
+                
+            }
+              
+                */
                 
             }
           
@@ -283,7 +306,7 @@ public class GUI{
                 int etaT = Integer.parseInt((String)eta.getText());
                 GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
                 Projeto temp = new Projeto(nomeText, dataIT, etaT, acronimoText,cisuc);
-                cisuc.projeto.add(temp);
+                cisuc.addProjeto(temp);
                 
                 String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
  
@@ -333,7 +356,8 @@ public class GUI{
             else if(e.getSource() == listTarefas){
                 
                 gerirTarefas = new JFrame("Gerir Tarefas");
-                gerirTarefas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gerirTarefas.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                gerirTarefas.setResizable(false);
                 gerirTarefas.setSize(420, 370);
                 JPanel panelTarefas= new JPanel();
                 panelTarefas.setLayout(new MigLayout("align 50% 50%, wrap 2"));                
@@ -400,7 +424,7 @@ public class GUI{
             
             else if(e.getSource() == calculaCusto){
                 frameCusto = new JFrame("Custo");
-                frameCusto.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                frameCusto.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frameCusto.setResizable(false);
                 frameCusto.setSize(300, 200);
                 fecharCusto = new JButton("Fechar");
@@ -439,6 +463,8 @@ public class GUI{
                 
                 
                 frameAdicionarPessoa.setSize(600,400);
+                frameAdicionarPessoa.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                frameAdicionarPessoa.setResizable(false);
                 newPanel2.setLayout(new MigLayout("align 50% 50%, wrap 2"));
                 
                 regressaGerirDasPessoas = new JButton("Gerir Projeto");
@@ -510,6 +536,7 @@ public class GUI{
                 frameCriarTarefa = new JFrame("Criar Tarefa");
                 frameCriarTarefa.setSize(420, 370);
                 frameCriarTarefa.setResizable(false);
+                frameCriarTarefa.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 JPanel panelCriarTarefa = new JPanel();
                 confirm2 = new JButton("Confirmar");
                 
@@ -559,7 +586,7 @@ public class GUI{
                 
                 currentTarefa = currentProjeto.tarefaGetter((String)ComboBoxTarefas.getSelectedItem());
                 atualizarTaxa = new JFrame("Atualizar Taxa");
-                atualizarTaxa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                atualizarTaxa.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 atualizarTaxa.setSize(300,250);
                 atualizarTaxa.setVisible(true);
                 
@@ -594,10 +621,7 @@ public class GUI{
             
             }
             
-            else if(e.getSource() == regressaMainDaGestao){
-                
-                
-            }
+            
             
         } 
         
@@ -610,35 +634,41 @@ public class GUI{
             if(e.getSource() == selecionarPessoas){
                 
                 
-                List<String> lista = listaPessoas.getSelectedValuesList();                
-                
+                List<String> lista = listaPessoas.getSelectedValuesList();     
                 ArrayList<String> listaNomesPessoas = new ArrayList<>(lista.size());
                 listaNomesPessoas.addAll(lista);
-                
-                
-
                   ArrayList<Pessoa> listaPessoa = new ArrayList<>();
                 
                 for(String bolseiro:listaNomesPessoas){
+                    System.out.println("1");
                     if(cisuc.PessoaGetter(bolseiro).getCusto() != 0)
+                        System.out.println("2");
                         listaPessoa.add(cisuc.PessoaGetter(bolseiro));
                 }
                 for(String docente:listaNomesPessoas){
-                    if(cisuc.PessoaGetter(docente).getCusto() == 0)
+                    System.out.println("3");
+                    if(cisuc.PessoaGetter(docente).getCusto() == 0){
+                        System.out.println("4");
                         listaPessoa.add(cisuc.PessoaGetter(docente));
+                    }
                 }
                 
-                
                 for(Pessoa bol:listaPessoa){
+                    System.out.println("5");
                     if(bol.getCusto() != 0){
+                        System.out.println("6");
                         if(cisuc.BolseiroInProjetos(bol) == 1){
+                            System.out.println("7");
                             System.out.println("Bolseiro já tem um Projeto atribuido");
                         }
                         else{
+                            System.out.println("8");
                             currentProjeto.addPessoa(bol);
                         }
                     }else{
+                        System.out.println("9");
                         if(currentProjeto.addPessoa(bol)==1){
+                            System.out.println("10");
                             System.out.println("Docente já existe neste projeto");
                         }          
                     }
@@ -706,30 +736,11 @@ public class GUI{
                     }
                 }
                 
-                /*
-                mainFrame.setVisible(true);
-                frameCreateProject.setVisible(false);
                 
-                String nomeText =  (String)nome.getText();
-                String acronimoText = (String)acronimo.getText();
-                int diaT = Integer.parseInt((String)dia.getText());
-                int mesT = Integer.parseInt((String)mes.getText());  
-                int anoT = Integer.parseInt((String)ano.getText());
-                int etaT = Integer.parseInt((String)eta.getText());
-                GregorianCalendar dataIT = new GregorianCalendar(anoT, diaT, mesT);
-                Projeto temp = new Projeto(nomeText, dataIT, etaT, acronimoText,cisuc);
-                cisuc.projeto.add(temp);
-                
-                String nomeIPT =(String)listaInvestigadoresPrinc.getSelectedItem().toString();
-                */
-                
-                //frameCriarTarefa.setVisible(false);
-                //gerirTarefas.setVisible(true);
+               
                 listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
             }
-            
-            
-
+       
         }
  
       }
