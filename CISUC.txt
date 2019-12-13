@@ -5,14 +5,14 @@ EST/ek@sapo.pt
 EST/bd@sapo.pt
 EST/mz@sapo.pt
 DOCU/banana/20-5-2021/5/null/ek@sapo.pt/0.25
-DESI/batata/05-8-2020/7/16-11-2021/bd@sapo.pt/0.5
-DESE/palalilo/28-10-2019/2/2-7-2020/mz@sapo.pt/1
+DESI/batata/05-8-2020/7/16-11-2021/bd@sapo.pt
+DESE/palalilo/28-10-2019/2/2-7-2020/mz@sapo.pt
 PROJ/Projeto Teste/01-02-2018/24/null/LaLa
 INV/123541875
 DOC/157478549
 EST/jc@sapo.pt
 EST/jm@sapo.pt
 EST/mj@sapo.pt
-DOCU/Tarefa/20-5-2021/5/4-7-2022/Joao Carnide/jc@sapo.pt/0.25
-DESI/LALALA/05-8-2020/7/16-11-2021/Glora Duffy/jm@sapo.pt/0.5
-DESE/UUUUUUU/28-10-2019/2/2-7-2020/Evelyn Koch/mj@sapo.pt/1
+DOCU/Tarefa/20-5-2021/5/4-7-2022/jc@sapo.pt
+DESI/LALALA/05-8-2020/7/16-11-2021/jm@sapo.pt
+DESE/UUUUUUU/28-10-2019/2/2-7-2020/mj@sapo.pt

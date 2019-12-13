@@ -11,15 +11,20 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -29,6 +34,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.text.NumberFormatter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -46,14 +52,16 @@ public class GUI{
     JTextField mes, mesT ;
     JTextField ano, anoT;
     JTextField eta, etaT;
+    JFormattedTextField novaTaxa;
     JComboBox tipoT;
-    JTextArea infoPessoasText, infoProjetoText;
+    JTextArea infoPessoasText, infoProjetoText, infoTarefaText;
     JComboBox listaInvestigadoresPrinc;
-    JComboBox ComboBoxProjetos, responsavelT;
+    JComboBox ComboBoxProjetos, responsavelT, ComboBoxTarefas;
     JList listaPessoas, listaDocentes, listaTarefas, listaProjConcluidos;
     Projeto currentProjeto;
+    Tarefa currentTarefa;
     CISUC cisuc;
-    
+    DefaultComboBoxModel nomesTarefas;
     
     
     GUI(CISUC cisuc){
@@ -312,7 +320,27 @@ public class GUI{
                 
                 listaTarefas = new JList(currentProjeto.getNomesTarefas().toArray());
                    
-                JScrollPane listScroller = new JScrollPane(listaTarefas);
+                
+                infoTarefaText = new JTextArea();
+                infoTarefaText.setEditable(false);
+                nomesTarefas = new DefaultComboBoxModel(currentProjeto.getNomesTarefas().toArray());
+                
+                ComboBoxTarefas = new JComboBox(nomesTarefas);
+                infoTarefaText.setText(cisuc.getInfoTarefas(currentProjeto.tarefaGetter((String)currentProjeto.getNomesTarefas().get(0))));
+                
+               
+                
+                
+                
+                ComboBoxTarefas.addItemListener(new ItemListener() {
+            // Listening if a new items of the combo box has been selected.
+            public void itemStateChanged(ItemEvent event) {
+                
+                infoTarefaText.setText(cisuc.getInfoTarefas(currentProjeto.tarefaGetter((String)ComboBoxTarefas.getSelectedItem())));
+                
+            }
+              });
+                
                 
                 eliminaTarefa = new JButton("Eliminar Tarefa");
                 eliminaTarefa.addActionListener(new botaoListenerEcras2());
@@ -329,13 +357,13 @@ public class GUI{
                 regressaMainDasTarefas.addActionListener(new botaoListenerEcras2());
                 
                 
-                
-                panelTarefas.add(listScroller, "span 0 6");
-                panelTarefas.add(eliminaTarefa, "cell 1 0");
+                panelTarefas.add(infoTarefaText, "span 1 6");
+                panelTarefas.add(ComboBoxTarefas, "cell 1 0");
+                panelTarefas.add(eliminaTarefa, "cell 1 1");
                
-                panelTarefas.add(atualizaTaxa, "cell 1 1");
-                panelTarefas.add(criaTarefa, "cell 1 2");
-                panelTarefas.add(regressaMainDasTarefas, "cell 1 6");
+                panelTarefas.add(atualizaTaxa, "cell 1 2");
+                panelTarefas.add(criaTarefa, "cell 1 3");
+                panelTarefas.add(regressaMainDasTarefas, "cell 1 4");
                 gerirTarefas.add(panelTarefas);
                 frameGerirProjeto.setVisible(false);
                 gerirTarefas.setVisible(true);
@@ -440,11 +468,14 @@ public class GUI{
             
             else if(e.getSource() == eliminaTarefa){
                 
-                String nomeTarefa = new String();
-                
-                nomeTarefa = (String)listaTarefas.getSelectedValue();
+                String nomeTarefa;
+                System.out.println("AQUI");
+                nomeTarefa = (String)ComboBoxTarefas.getSelectedItem();
+                System.out.println(nomeTarefa);
                 currentProjeto.EliminarTarefa(currentProjeto.tarefaGetter(nomeTarefa));
-                listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
+                nomesTarefas.removeElement(ComboBoxTarefas.getSelectedItem());
+                ComboBoxTarefas.revalidate();
+                ComboBoxTarefas.repaint();
                 
                 
                 
@@ -504,12 +535,38 @@ public class GUI{
             }
             
             else if(e.getSource() == atualizaTaxa){
+                
+                currentTarefa = currentProjeto.tarefaGetter((String)ComboBoxTarefas.getSelectedItem());
                 atualizarTaxa = new JFrame("Atualizar Taxa");
                 atualizarTaxa.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                atualizarTaxa.setSize(200,300);
+                atualizarTaxa.setSize(300,250);
                 atualizarTaxa.setVisible(true);
                 
+                JPanel panelAtualizarTaxa =  new JPanel();
+                panelAtualizarTaxa.setLayout(new MigLayout("align 50% 50%, wrap 2"));
+                NumberFormat format = NumberFormat.getInstance();
+                NumberFormatter formatter = new NumberFormatter(format);
+                formatter.setValueClass(Integer.class);
+                formatter.setAllowsInvalid(false);
+                formatter.setMinimum(0);
+                formatter.setMaximum(100);
+                
+                
+                novaTaxa = new JFormattedTextField(formatter);
+                novaTaxa.setColumns(3);
                 confirmarTaxa = new JButton("Confirmar Taxa");
+                confirmarTaxa.addActionListener(new botaoListenerEcras3());
+                
+                panelAtualizarTaxa.add(new JLabel("Taxa atual:"));
+                panelAtualizarTaxa.add(new JLabel(Double.toString(currentTarefa.getTaxa())));
+                panelAtualizarTaxa.add(new JLabel("Nova taxa:"));
+                panelAtualizarTaxa.add(novaTaxa);
+                
+                panelAtualizarTaxa.add(confirmarTaxa, "cell 1 3");
+                
+                atualizarTaxa.add(panelAtualizarTaxa);
+                atualizarTaxa.setVisible(true);
+                
                 
                 
                 
@@ -583,6 +640,18 @@ public class GUI{
                 
                 
             }
+            else if(e.getSource()==confirmarTaxa){
+                
+                if((Integer)novaTaxa.getValue() == 100){
+                    currentTarefa.setCompleto();
+                    
+                }
+                else{
+                    currentTarefa.atualizarTaxa((Integer)novaTaxa.getValue());
+                }
+                atualizarTaxa.setVisible(false);
+            }
+            
             else if(e.getSource() == confirm2){
                 
                 String nomeTipo = (String)tipoT.getSelectedItem().toString();
@@ -633,11 +702,12 @@ public class GUI{
                 gerirTarefas.setVisible(true);
                 listaTarefas.setListData(currentProjeto.getNomesTarefas().toArray());
             }
+            
+            
 
         }
  
       }
       
 
-        
-}
+      }
