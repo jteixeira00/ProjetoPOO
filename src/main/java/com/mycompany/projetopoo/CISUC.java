@@ -34,19 +34,30 @@ import javax.swing.*;
  */
 public class CISUC extends JFrame implements Serializable {
     private GregorianCalendar dataAtual = new GregorianCalendar();
+
+    /**
+     * Array List de projetos
+     */
     protected ArrayList<Projeto> projeto = new ArrayList<>();
+
+    /**
+     * Array List de pessoas
+     */
     protected ArrayList<Pessoa> pessoas = new ArrayList<>();
     
-       
-    
-   
 
-    
     public CISUC(){
 
         
     }
     
+    /**
+     *Altera Data Atual
+     * @param dia data dia
+     * @param mes data mes
+     * @param ano data ano
+     * @return 1 se data estiver mal, 0 se estiver bem
+     */
     public int AlterarDataAtual(int dia,int mes,int ano){
         if(Checkdata(dia,mes,ano) == 0){
             mes = mes - 1;
@@ -60,6 +71,13 @@ public class CISUC extends JFrame implements Serializable {
         }
     }
     
+    /**
+     * Verifica se a data está bem(aceita dia,mes,ano)
+     * @param dia data dia
+     * @param mes data mes
+     * @param ano data ano
+     * @return 1 se data estiver mal, 0 se estiver bem
+     */
     public int Checkdata(int dia,int mes,int ano){
         if((0<mes && mes<13) && (dia>0 & dia<32) && (ano > 0)){
             if((mes==2 && dia<=29))
@@ -70,6 +88,11 @@ public class CISUC extends JFrame implements Serializable {
         return 1;
     }
     
+    /**
+     * Verifica se a data está bem(aceita uma data em GregorianCalendar)
+     * @param data GregorianCalendar
+     * @return 1 se data estiver mal, 0 se estiver bem
+     */
     public int CheckdataGregorian(GregorianCalendar data){
         int ano,mes,dia;
         ano = data.get(GregorianCalendar.YEAR) + 1;
@@ -81,7 +104,11 @@ public class CISUC extends JFrame implements Serializable {
         return 1;
     }
     
-      
+    /**
+     * Verifica se um bolseiro existe nos projetos
+     * @param b Pessoa
+     * @return 0 se não estiver em nenhum projeto, 1 se existir noutro
+     */
     public int BolseiroInProjetos(Pessoa b){
          for(Projeto proj:projeto){
              for(Pessoa bol: proj.getPessoas()){
@@ -93,6 +120,11 @@ public class CISUC extends JFrame implements Serializable {
          return 0;         
     }
     
+    /**
+     * Ao receber uma string com um nome do projeto, procura na lista de projetos o objeto associado. Devolve este projeto
+     * @param nome Nome projeto
+     * @return devolve o projeto
+     */
     public Projeto ProjetoGetter(String nome){
         Projeto P_Null = new Projeto(null,null,0,null,null);
          for(Projeto p:projeto){
@@ -103,6 +135,11 @@ public class CISUC extends JFrame implements Serializable {
         return P_Null;              
     }
     
+    /**
+     * Ao receber uma string com um nome de uma pessoa, procura na lista de pessoas o objeto associado. Devolve esta pessoa
+     * @param nome Nome Pessoa
+     * @return Pessoa
+     */
     public Pessoa PessoaGetter(String nome){
          for(Pessoa p:pessoas){
             if(nome.equals(p.getNome()) == true){
@@ -112,6 +149,11 @@ public class CISUC extends JFrame implements Serializable {
          return null;
         }
     
+    /**
+     * Ao receber uma string com um email de uma pessoa, procura na lista de pessoas o objeto associado. Devolve esta pessoa
+     * @param email Email Pessoa
+     * @return Pessoa
+     */
     public Pessoa EmailGetter(String email){
          for(Pessoa p:pessoas){
             if(email.equals(p.getEmail()) == true){
@@ -121,7 +163,10 @@ public class CISUC extends JFrame implements Serializable {
          return null;
         }
 
-    
+    /**
+     * Devolve uma ArrayList de Strings com os nomes dos projetos, para ser utilizado no GUI
+     * @return ArrayList de Strings
+     */
     public ArrayList<String> getNomesProjetos(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Projeto p:projeto){
@@ -130,6 +175,10 @@ public class CISUC extends JFrame implements Serializable {
         return nomes;
     }
     
+    /**
+     *Devolve uma ArrayList de Strings com os nomes dos projetos incompletos, para ser utilizado no GUI
+     * @return ArrayList de Strings
+     */
     public ArrayList<String> getNomesProjetosIncompletos(){
         ArrayList<String> nomes = new ArrayList<>();
         for(Projeto p:projeto){
@@ -139,17 +188,11 @@ public class CISUC extends JFrame implements Serializable {
         }
         return nomes;
     }
-    
- 
-
-   
-    public void foraPrazo(){
-        for(Projeto temp:projeto){
-            if(temp.isfPrazo() == true)
-                System.out.println(temp.getNome());
-        }    
-    }
-    
+        
+    /**
+     *Devolve uma ArrayList de Strings com os nomes dos projetos concluidos, para ser utilizado no GUI
+     * @return Array List de Strings
+     */
     public ArrayList<String> listaNomesConcluidos(){
         ArrayList<String> ret = new ArrayList<>();
         for(Projeto temp:projeto){
@@ -159,14 +202,12 @@ public class CISUC extends JFrame implements Serializable {
         return ret;
     }
     
-    public void listaNaoConcluidos(){
-        for(Projeto temp:projeto){
-            if(temp.isCompleto() == false)
-                System.out.println(temp.getNome());
-        }  
-    }
-        
-public int leFicheiroProjetos(){
+       
+    /**
+     *Lê o ficheiro de projetos que contém: os projetos, as tarefas e as pessoas associadas, introduzindo-as na lista de projetos
+     * @return 1 se existir algum erro, ditando na consola o problema
+     */
+    public int leFicheiroProjetos(){
     File f = new File("CISUC.txt");
 
     String DataI[];
@@ -358,7 +399,11 @@ public int leFicheiroProjetos(){
     return 0;
    }
 
-public int leFicheiroPessoas(){
+    /**
+     *Lê o ficheiro de pessoa que contém: as pessoas, introduzindo-as na lista de pessoas
+     * @return 1 se existir algum erro, ditando na consola o problema
+     */
+    public int leFicheiroPessoas(){
     File f = new File("Pessoas.txt");
     String DataI[];
     String DataF[];
@@ -443,13 +488,20 @@ public int leFicheiroPessoas(){
     return 0;
 }
 
-public ArrayList<Projeto> getListaProjeto(){
+    /**
+     *
+     * @return lista de projetos
+     */
+    public ArrayList<Projeto> getListaProjeto(){
     
     return projeto;
 }
 
-
-public ArrayList<String> getNomesPessoas(){
+    /**
+     *
+     * @return lista de strings de pessoas
+     */
+    public ArrayList<String> getNomesPessoas(){
     ArrayList<String> list = new ArrayList<>();
     
     for(Pessoa temp: pessoas){
@@ -461,24 +513,28 @@ public ArrayList<String> getNomesPessoas(){
     return list;
 }
     
-    
-
-
-  
-public boolean ObjectCheck() throws IOException{
+    /**
+     * Verifica se existem object files no directório
+     * @return boolean, false se os object files não existirem e true caso existam
+     * @throws IOException Trata da IOException
+     */
+    public boolean ObjectCheck() throws IOException{
     File bol = new File("Bolseiros.OBJ");
     File doc = new File("Docentes.OBJ");
     File proj = new File("Projetos.OBJ");
     
     if(bol.exists() && doc.exists() && proj.exists()){
-        return true;
-        
+        return true;     
     }
-    
     return false;
 }
 
-public String getInfo(Pessoa p){
+    /**
+     * Devolve uma string com a informação de uma pessoa
+     * @param p Pessoa
+     * @return string
+     */
+    public String getInfo(Pessoa p){
     String info;
     if(p.getCusto() != 0){
         info = String.format("Nome: %s\nEstatuto: %s\nEmail: %s\nInicio da Bolsa: %d-%d-%d\nFim da Bolsa: %d-%d-%d\nCusto: %d",p.getNome(),p.getEstatuto(),p.getEmail(),p.getInicio().get(GregorianCalendar.DAY_OF_MONTH),p.getInicio().get(GregorianCalendar.MONTH)+1,p.getInicio().get(GregorianCalendar.YEAR),p.getFim().get(GregorianCalendar.DAY_OF_MONTH),p.getFim().get(GregorianCalendar.MONTH)+1,p.getFim().get(GregorianCalendar.YEAR),p.getCusto());
@@ -489,7 +545,12 @@ public String getInfo(Pessoa p){
     return info;
 }
 
-public String getInfoProjetos(Projeto p){
+    /**
+     * Devolve uma string com a informação de um projeto
+     * @param p Projeto
+     * @return string
+     */
+    public String getInfoProjetos(Projeto p){
     String info;
     if(p.getCompleto() == true){
         info = String.format("Nome: %s\nAcrónimo: %s\nData de Inicio: %d-%d-%d\nDuração: %d\nData Final: %d-%d-%d\nPessoas Associadas:",p.getNome(),p.getAcronimo(),p.getData_inicio().get(GregorianCalendar.DAY_OF_MONTH),p.getData_inicio().get(GregorianCalendar.MONTH)+1,p.getData_inicio().get(GregorianCalendar.YEAR),p.getData_final().get(GregorianCalendar.DAY_OF_MONTH),p.getData_final().get(GregorianCalendar.MONTH)+1,p.getData_final().get(GregorianCalendar.YEAR),p.getDuracao());
@@ -504,7 +565,12 @@ public String getInfoProjetos(Projeto p){
     return info;
 }
 
-public String getInfoTarefas(Tarefa p){
+    /**
+     * Devolve uma string com a informação de uma tarefa
+     * @param p Tarefa
+     * @return string
+     */
+    public String getInfoTarefas(Tarefa p){
     String info;
     if(p.getTaxa() == 1){
         info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: 100\nEsforço: %f\nData Final: %d-%d-%d\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getEsforco(),p.getFinalD().get(GregorianCalendar.DAY_OF_MONTH),p.getFinalD().get(GregorianCalendar.MONTH)+1,p.getFinalD().get(GregorianCalendar.YEAR),p.getResponsavel().getNome());
@@ -515,8 +581,11 @@ public String getInfoTarefas(Tarefa p){
     return info;
 }
     
-
-public int leObjectFilesBolseiros(){
+    /**
+     * Insere a informação existente no object file "Bolseiro.obj" na lista de pessoas
+     * @return 1 em caso de erro, imprimindo mensagem de erro
+     */
+    public int leObjectFilesBolseiros(){
     try {
             FileInputStream fis = new FileInputStream("Bolseiros.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -538,7 +607,11 @@ public int leObjectFilesBolseiros(){
     return 1;
 }
 
-public int leObjectFilesDocentes(){
+    /**
+     *Insere a informação existente no object file "Docentes.obj" na lista de pessoas
+     * @return 1 em caso de erro, imprimindo mensagem de erro
+     */
+    public int leObjectFilesDocentes(){
     try {
             FileInputStream fis = new FileInputStream("Docentes.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -563,8 +636,11 @@ public int leObjectFilesDocentes(){
     return 1;
 }
     
-
-public int leObjectFilesProjetos(){
+    /**
+     *Insere a informação existente no object file "Projetos.obj" na lista de projetos
+     * @return 1 em caso de erro, imprimindo mensagem de erro
+     */
+    public int leObjectFilesProjetos(){
     try {
             FileInputStream fis = new FileInputStream("Projetos.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -587,7 +663,10 @@ public int leObjectFilesProjetos(){
     return 1;
 }
 
-public void SaveObjectFilesProjetos(){
+    /**
+     *Guarda os objectos de tipo projeto existentes na lista de projetos e insere no object file
+     */
+    public void SaveObjectFilesProjetos(){
     File f = new File("Projetos.obj");
     try { 
         FileOutputStream fos = new FileOutputStream(f);
@@ -603,7 +682,10 @@ public void SaveObjectFilesProjetos(){
     }    
 }
 
-public void SaveObjectFilesBolseiros(){
+    /**
+     *Guarda os objectos de tipo bolseiro existentes na lista de pessoas e insere no object file
+     */
+    public void SaveObjectFilesBolseiros(){
     File f = new File("Bolseiros.obj");
     try { 
         FileOutputStream fos = new FileOutputStream(f);
@@ -621,7 +703,10 @@ public void SaveObjectFilesBolseiros(){
     
 }
 
-public void SaveObjectFilesDocentes(){
+    /**
+     *Guarda os objectos de tipo docente existentes na lista de pessoas e insere no object file
+     */
+    public void SaveObjectFilesDocentes(){
     File f = new File("Docentes.obj");
     try { 
         FileOutputStream fos = new FileOutputStream(f);
@@ -638,36 +723,27 @@ public void SaveObjectFilesDocentes(){
     }     
 }
 
+    /**
+     *Devolve a data Atual
+     * @return dataAtual
+     */
     public GregorianCalendar getDataAtual() {
         return dataAtual;
     }
-    
     
 
     public ArrayList<Projeto> getProjeto() {
         return projeto;
     }
 
-//    public ArrayList<Docente> getDocente() {
-//        return docente;
-//    }
 
-//    public ArrayList<Bolseiro> getBolseiro() {
-//        return bolseiro;
-//    }
+
 
     public ArrayList<Pessoa> getPessoas() {
         return pessoas;
     }
     
-    public static void Exit(CISUC cisuc){
-        cisuc.SaveObjectFilesBolseiros();
-        cisuc.SaveObjectFilesDocentes();
-        cisuc.SaveObjectFilesProjetos();
-    }
-    
-    
-    
+   
 
     /**
      * @param args the command line arguments

@@ -16,6 +16,14 @@ import java.util.GregorianCalendar;
 public class Licenciado extends Bolseiro implements Serializable{
     
     ArrayList<Pessoa> Coordenadores = new ArrayList<>();
+
+    /**
+     *Construtor Licenciado
+     * @param nome Nome Licenciado
+     * @param email Email Licenciado
+     * @param InicioB Data de Incio de Bolsa Licenciado
+     * @param FimB Data Final de Bolsa Licenciado
+     */
     public Licenciado(String nome,String email,GregorianCalendar InicioB,GregorianCalendar FimB){
         super(nome,email,InicioB,FimB);
     }
