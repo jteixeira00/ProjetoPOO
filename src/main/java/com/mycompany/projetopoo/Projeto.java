@@ -57,6 +57,15 @@ public class Projeto implements Serializable{
         }        
         return null;
     }
+    
+    public void setTarefaCompleta(Tarefa t){
+        t.setCompleto();
+        t.setDataF(cisuc.getDataAtual());
+    }
+    
+    public void setProjetoCompleto(){
+        data_final = cisuc.getDataAtual();
+    }
    
     
     public void addTarefa(Tarefa t){

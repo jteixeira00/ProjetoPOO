@@ -51,6 +51,10 @@ public abstract class Tarefa implements Serializable{
         taxa = 100;
     }
     
+    public void setDataF(GregorianCalendar data){
+        finalD = data;
+    }
+    
     public void atualizarTaxa(int i){
         taxa = i;
         

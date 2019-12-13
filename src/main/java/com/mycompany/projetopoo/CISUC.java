@@ -475,7 +475,7 @@ public String getInfoTarefas(Tarefa p){
         info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: 100\nEsforço: %f\nData Final: %d-%d-%d\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getEsforco(),p.getFinalD().get(GregorianCalendar.DAY_OF_MONTH),p.getFinalD().get(GregorianCalendar.MONTH)+1,p.getFinalD().get(GregorianCalendar.YEAR),p.getResponsavel().getNome());
     }
     else{
-        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: %f\nEsforço: %f\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getTaxa(),p.getEsforco(),p.getResponsavel().getNome());
+        info = String.format("Nome: %s\nTipo: %s\nData de Inicio: %d-%d-%d\nTaxa: %d\nEsforço: %f\nResponsavel: %s\n",p.getNome(),p.getTipo(),p.getInicioD().get(GregorianCalendar.DAY_OF_MONTH),p.getInicioD().get(GregorianCalendar.MONTH)+1,p.getInicioD().get(GregorianCalendar.YEAR),p.getTaxa(),p.getEsforco(),p.getResponsavel().getNome());
     }    
     return info;
 }
