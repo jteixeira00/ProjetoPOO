@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
- *
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class Documentacao extends Tarefa implements Serializable{
     

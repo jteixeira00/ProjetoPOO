@@ -38,8 +38,8 @@ import javax.swing.text.NumberFormatter;
 import net.miginfocom.swing.MigLayout;
 
 /**
- *
- * @author User
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class GUI{
     JFrame mainFrame, frameCreateProject, frameGerirProjeto, frameAdicionarPessoa, gerirTarefas, frameInfoPessoa, frameListaIncompletos, frameCusto, frameConcluidos, frameCriarTarefa, atualizarTaxa;

@@ -8,8 +8,8 @@ package com.mycompany.projetopoo;
 import java.util.GregorianCalendar;
 
 /**
- *
- * @author dinis
+ * @author Dinis Carvalho 2018278118
+ * @author João Teixeira 2018278532
  */
 public class Desenvolvimento extends Tarefa{
     
