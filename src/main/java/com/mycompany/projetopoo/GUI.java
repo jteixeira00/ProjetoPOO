@@ -586,20 +586,20 @@ public class GUI{
                 
                 if(nomeTipo == "Documentação"){
                     
-                    Documentacao taref = new Documentacao((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    Documentacao taref = new Documentacao((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
                     currentProjeto.addTarefa(taref);
                 }
                 
                 if(nomeTipo == "Desenvolvimento"){
                     
-                    Desenvolvimento taref = new Desenvolvimento((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    Desenvolvimento taref = new Desenvolvimento((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
                     currentProjeto.addTarefa(taref);
                 }
                 
                 else{
                     
                     
-                    Design taref = new Design((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()));
+                    Design taref = new Design((String)nomeT.getText(), dataIT,Integer.parseInt((String)etaT.getText()), cisuc.PessoaGetter((String)responsavelT.getSelectedItem()),0);
                     
                     currentProjeto.addTarefa(taref);
                 }
