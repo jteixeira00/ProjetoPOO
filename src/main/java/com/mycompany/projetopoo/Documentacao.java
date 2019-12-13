@@ -18,10 +18,18 @@ public class Documentacao extends Tarefa implements Serializable{
     public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,GregorianCalendar finalD, Pessoa responsavel){
         super(nome,inicioD,duracaoEstimada,finalD,responsavel);       
     }
+    public Documentacao(String nome,GregorianCalendar inicioD,int duracaoEstimada,Pessoa responsavel){
+        super(nome,inicioD,duracaoEstimada,responsavel);       
+    }
     
     @Override
     public double getEsforco() {
         return 0.25;
     } 
+    
+    @Override
+    public String getTipo(){
+        return "Documentação";
+    }
     
 }

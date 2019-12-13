@@ -110,15 +110,16 @@ public class Projeto implements Serializable{
 
 
     public int CriarTarefa(Tarefa T,Pessoa p){
-        double carga = 0;
+        double carga = T.getEsforco();
         for(Tarefa t:p.listarTarefas()){
            carga += t.getEsforco();
            if(carga > 1){
-               return 0;
+               return 1;
            }
         }
         p.listarTarefas().add(T);
-        return 1;
+        this.tarefa.add(T);
+        return 0;
     }
     
     
@@ -155,7 +156,7 @@ public class Projeto implements Serializable{
     
     public ArrayList<Tarefa> ListarFPrazo(){
         ArrayList<Tarefa> fprazo = new ArrayList<>();
-        GregorianCalendar dataHoje = new GregorianCalendar();
+        GregorianCalendar dataHoje = cisuc.getDataAtual();
         
         for(Tarefa temp: tarefa){
             if(dataHoje.after(temp.getDataEstimada()) && (temp.getTaxa()!=100)){
