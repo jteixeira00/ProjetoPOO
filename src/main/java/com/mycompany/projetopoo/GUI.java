@@ -475,11 +475,7 @@ public class GUI{
                 nomesTarefas.removeElement(ComboBoxTarefas.getSelectedItem());
                 ComboBoxTarefas.revalidate();
                 ComboBoxTarefas.repaint();
-                
-                
-                
-                
-                
+               
             }
             
             
